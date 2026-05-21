@@ -823,8 +823,8 @@ def _setup_worktree(repo_root: str = None) -> Optional[Dict[str, str]]:
 
     repo_root = repo_root or _git_repo_root()
     if not repo_root:
-        print("\033[31m✗ --worktree requires being inside a git repository.\033[0m")
-        print("  cd into your project repo first, then run hermes -w")
+        print(t("CLI_MESSAGES.worktree_requires_repo", "✗ --worktree requires being inside a git repository."))
+        print(t("CLI_MESSAGES.cd_into_repo_first", "  cd into your project repo first, then run hermes -w"))
         return None
 
     short_id = uuid.uuid4().hex[:8]
@@ -856,10 +856,10 @@ def _setup_worktree(repo_root: str = None) -> Optional[Dict[str, str]]:
             capture_output=True, text=True, timeout=30, cwd=repo_root,
         )
         if result.returncode != 0:
-            print(f"\033[31m✗ Failed to create worktree: {result.stderr.strip()}\033[0m")
+            print(t("CLI_MESSAGES.worktree_failed", "\033[31m✗ Не удалось создать worktree: {error}\033[0m").format(error=result.stderr.strip()))
             return None
     except Exception as e:
-        print(f"\033[31m✗ Failed to create worktree: {e}\033[0m")
+        print(t("CLI_MESSAGES.worktree_failed", "\033[31m✗ Не удалось создать worktree: {error}\033[0m").format(error=str(e)))
         return None
 
     # Copy files listed in .worktreeinclude (gitignored files the agent needs)
@@ -935,8 +935,8 @@ def _setup_worktree(repo_root: str = None) -> Optional[Dict[str, str]]:
         "repo_root": repo_root,
     }
 
-    print(f"\033[32m✓ Worktree created:\033[0m {wt_path}")
-    print(f"  Branch: {branch_name}")
+    print(t("CLI_MESSAGES.worktree_created", "\033[32m✓ Worktree создан:\033[0m {path}").format(path=wt_path))
+    print(t("CLI_MESSAGES.worktree_branch", "  Ветка: {branch}").format(branch=branch_name))
 
     return info
 
@@ -1002,7 +1002,7 @@ def _cleanup_worktree(info: Dict[str, str] = None) -> None:
         logger.debug("Failed to delete branch %s: %s", branch, e)
 
     _active_worktree = None
-    print(f"\033[32m✓ Worktree cleaned up: {wt_path}\033[0m")
+    print(t("CLI_MESSAGES.worktree_cleaned", "\033[32m✓ Worktree очищен: {path}\033[0m").format(path=wt_path))
 
 
 def _run_state_db_auto_maintenance(session_db) -> None:
@@ -4936,14 +4936,14 @@ class HermesCLI:
         from tools.checkpoint_manager import format_checkpoint_list
 
         if not hasattr(self, 'agent') or not self.agent:
-            print("  No active agent session.")
+            t("CLI_MESSAGES.no_active_agent_session", "  No active agent session.")
             return
 
         mgr = self.agent._checkpoint_mgr
         if not mgr.enabled:
-            print("  Checkpoints are not enabled.")
-            print("  Enable with: hermes --checkpoints")
-            print("  Or in config.yaml: checkpoints: { enabled: true }")
+            t("CLI_MESSAGES.checkpoints_are_not_enabled", "  Checkpoints are not enabled.")
+            t("CLI_MESSAGES.enable_with_hermes_checkpoints", "  Enable with: hermes --checkpoints")
+            t("CLI_MESSAGES.or_in_configyaml_checkpoints_enabled_true", "  Or in config.yaml: checkpoints: { enabled: true }")
             return
 
         cwd = os.getenv("TERMINAL_CWD", os.getcwd())
@@ -4959,7 +4959,7 @@ class HermesCLI:
         # Handle /rollback diff <N>
         if args[0].lower() == "diff":
             if len(args) < 2:
-                print("  Usage: /rollback diff <N>")
+                t("CLI_MESSAGES.usage_rollback_diff_n", "  Usage: /rollback diff <N>")
                 return
             checkpoints = mgr.list_checkpoints(cwd)
             if not checkpoints:
@@ -4973,7 +4973,7 @@ class HermesCLI:
                 stat = result.get("stat", "")
                 diff = result.get("diff", "")
                 if not stat and not diff:
-                    print("  No changes since this checkpoint.")
+                    t("CLI_MESSAGES.no_changes_since_this_checkpoint", "  No changes since this checkpoint.")
                 else:
                     if stat:
                         print(f"\n{stat}")
@@ -5008,13 +5008,13 @@ class HermesCLI:
                 print(f"  ✅ Restored {file_path} from checkpoint {result['restored_to']}: {result['reason']}")
             else:
                 print(f"  ✅ Restored to checkpoint {result['restored_to']}: {result['reason']}")
-            print("  A pre-rollback snapshot was saved automatically.")
+            t("CLI_MESSAGES.a_prerollback_snapshot_was_saved_automatically", "  A pre-rollback snapshot was saved automatically.")
 
             # Also undo the last conversation turn so the agent's context
             # matches the restored filesystem state
             if self.conversation_history:
                 self.undo_last()
-                print("  Chat turn undone to match restored file state.")
+                t("CLI_MESSAGES.chat_turn_undone_to_match_restored_file_state", "  Chat turn undone to match restored file state.")
         else:
             print(f"  ❌ {result['error']}")
 
@@ -5052,8 +5052,8 @@ class HermesCLI:
         if subcmd in {"list", "ls"}:
             snaps = list_quick_snapshots()
             if not snaps:
-                print("  No state snapshots yet.")
-                print("  Create one: /snapshot create [label]")
+                t("CLI_MESSAGES.no_state_snapshots_yet", "  No state snapshots yet.")
+                t("CLI_MESSAGES.create_one_snapshot_create_label", "  Create one: /snapshot create [label]")
                 return
             print(f"  State snapshots ({display_hermes_home()}/state-snapshots/):\n")
             print(f"  {'#':>3}  {'ID':<35} {'Files':>5} {'Size':>10} {'Label'}")
@@ -5075,11 +5075,11 @@ class HermesCLI:
             if snap_id:
                 print(f"  Snapshot created: {snap_id}")
             else:
-                print("  No state files found to snapshot.")
+                t("CLI_MESSAGES.no_state_files_found_to_snapshot", "  No state files found to snapshot.")
 
         elif subcmd in {"restore", "rewind"}:
             if len(parts) < 3:
-                print("  Usage: /snapshot restore <snapshot-id>")
+                t("CLI_MESSAGES.usage_snapshot_restore_snapshotid", "  Usage: /snapshot restore <snapshot-id>")
                 # Show hint with most recent snapshot
                 snaps = list_quick_snapshots(limit=1)
                 if snaps:
@@ -5099,7 +5099,7 @@ class HermesCLI:
                 pass
             if restore_quick_snapshot(snap_id):
                 print(f"  Restored state from: {snap_id}")
-                print("  Restart recommended for state.db changes to take effect.")
+                t("CLI_MESSAGES.restart_recommended_for_statedb_changes_to_take_ef", "  Restart recommended for state.db changes to take effect.")
             else:
                 print(f"  Snapshot not found: {snap_id}")
 
@@ -5109,14 +5109,14 @@ class HermesCLI:
                 try:
                     keep = int(parts[2])
                 except ValueError:
-                    print("  Usage: /snapshot prune [keep-count]")
+                    t("CLI_MESSAGES.usage_snapshot_prune_keepcount", "  Usage: /snapshot prune [keep-count]")
                     return
             deleted = prune_quick_snapshots(keep=keep)
             print(f"  Pruned {deleted} old snapshot(s) (keeping {keep}).")
 
         else:
             print(f"  Unknown subcommand: {subcmd}")
-            print("  Usage: /snapshot [list|create [label]|restore <id>|prune [N]]")
+            t("CLI_MESSAGES.usage_snapshot_listcreate_labelrestore_idprune_n", "  Usage: /snapshot [list|create [label]|restore <id>|prune [N]]")
 
     def _handle_stop_command(self):
         """Handle /stop — kill all running background processes.
@@ -5130,7 +5130,7 @@ class HermesCLI:
         running = [p for p in processes if p.get("status") == "running"]
 
         if not running:
-            print("  No running background processes.")
+            t("CLI_MESSAGES.no_running_background_processes", "  No running background processes.")
             return
 
         print(f"  Stopping {len(running)} background process(es)...")
@@ -5237,14 +5237,14 @@ class HermesCLI:
 
         assistant = [m for m in self.conversation_history if m.get("role") == "assistant"]
         if not assistant:
-            _cprint("  Nothing to copy yet.")
+            _ct("CLI_MESSAGES.nothing_to_copy_yet", "  Nothing to copy yet.")
             return
 
         if arg:
             try:
                 idx = int(arg) - 1
             except ValueError:
-                _cprint("  Usage: /copy [number]")
+                _ct("CLI_MESSAGES.usage_copy_number", "  Usage: /copy [number]")
                 return
             if idx < 0 or idx >= len(assistant):
                 _cprint(f"  Invalid response number. Use 1-{len(assistant)}.")
@@ -5254,12 +5254,12 @@ class HermesCLI:
             while idx >= 0 and not _assistant_copy_text(assistant[idx].get("content")):
                 idx -= 1
             if idx < 0:
-                _cprint("  Nothing to copy in assistant responses yet.")
+                _ct("CLI_MESSAGES.nothing_to_copy_in_assistant_responses_yet", "  Nothing to copy in assistant responses yet.")
                 return
 
         text = _assistant_copy_text(assistant[idx].get("content"))
         if not text:
-            _cprint("  Nothing to copy in that assistant response.")
+            _ct("CLI_MESSAGES.nothing_to_copy_in_that_assistant_response", "  Nothing to copy in that assistant response.")
             return
 
         try:
@@ -5370,13 +5370,13 @@ class HermesCLI:
             
             if api_key_missing:
                 self._console_print()
-                self._console_print("[yellow]⚠️  Some tools disabled (missing API keys):[/]")
+                self._console_t("CLI_MESSAGES.yellow_some_tools_disabled_missing_api_keys", "[yellow]⚠️  Some tools disabled (missing API keys):[/]")
                 for item in api_key_missing:
                     tools_str = ", ".join(item["tools"][:2])  # Show first 2 tools
                     if len(item["tools"]) > 2:
                         tools_str += f", +{len(item['tools'])-2} more"
                     self._console_print(f"   [dim]• {item['name']}[/] [dim italic]({', '.join(item['missing_vars'])})[/]")
-                self._console_print("[dim]   Run 'hermes setup' to configure[/]")
+                self._console_t("CLI_MESSAGES.dim_run_hermes_setup_to_configure", "[dim]   Run 'hermes setup' to configure[/]")
         except Exception:
             pass  # Don't crash on import errors
     
@@ -5549,7 +5549,7 @@ class HermesCLI:
         tools = get_tool_definitions(enabled_toolsets=self.enabled_toolsets, quiet_mode=True)
         
         if not tools:
-            print("(;_;) No tools available")
+            t("CLI_MESSAGES.__no_tools_available", "(;_;) No tools available")
             return
         
         # Header
@@ -5690,10 +5690,10 @@ class HermesCLI:
                 print(f"  {marker} {name:<18} [{tool_count:>2} tools] - {desc}")
         
         print()
-        print("  (*) = currently enabled")
+        t("CLI_MESSAGES.currently_enabled", "  (*) = currently enabled")
         print()
-        print("  Tip: Use 'all' or '*' to enable all toolsets")
-        print("  Example: python cli.py --toolsets web,terminal")
+        t("CLI_MESSAGES.tip_use_all_or_to_enable_all_toolsets", "  Tip: Use 'all' or '*' to enable all toolsets")
+        t("CLI_MESSAGES.example_python_clipy_toolsets_webterminal", "  Example: python cli.py --toolsets web,terminal")
         print()
     
     def _handle_profile_command(self):
@@ -5734,12 +5734,12 @@ class HermesCLI:
         print("|" + " " * (pad // 2) + title + " " * (pad - pad // 2) + "|")
         print("+" + "-" * width + "+")
         print()
-        print("  -- Model --")
+        t("CLI_MESSAGES.model", "  -- Model --")
         print(f"  Model:     {self.model}")
         print(f"  Base URL:  {self.base_url}")
         print(f"  API Key:   {api_key_display}")
         print()
-        print("  -- Terminal --")
+        t("CLI_MESSAGES.terminal", "  -- Terminal --")
         print(f"  Environment:  {terminal_env}")
         if terminal_env == "ssh":
             ssh_host = os.getenv("TERMINAL_SSH_HOST", "not set")
@@ -5749,12 +5749,12 @@ class HermesCLI:
         print(f"  Working Dir:  {terminal_cwd}")
         print(f"  Timeout:      {terminal_timeout}s")
         print()
-        print("  -- Agent --")
+        t("CLI_MESSAGES.agent", "  -- Agent --")
         print(f"  Max Turns:  {self.max_turns}")
         print(f"  Toolsets:   {', '.join(self.enabled_toolsets) if self.enabled_toolsets else 'all'}")
         print(f"  Verbose:    {self.verbose}")
         print()
-        print("  -- Session --")
+        t("CLI_MESSAGES.session", "  -- Session --")
         print(f"  Started:     {self.session_start.strftime('%Y-%m-%d %H:%M:%S')}")
         print(f"  Config File: {config_path} {config_status}")
         print()
@@ -5786,9 +5786,9 @@ class HermesCLI:
 
         print()
         if reason == "history":
-            print("(._.) No messages in the current chat yet — here are recent sessions you can resume:")
+            t("CLI_MESSAGES.__no_messages_in_the_current_chat_yet_here_are_rec", "(._.) No messages in the current chat yet — here are recent sessions you can resume:")
         else:
-            print("  Recent sessions:")
+            t("CLI_MESSAGES.recent_sessions", "  Recent sessions:")
         print()
         print(f"  {'Title':<32} {'Preview':<40} {'Last Active':<13} {'ID'}")
         print(f"  {'─' * 32} {'─' * 40} {'─' * 13} {'─' * 24}")
@@ -5798,7 +5798,7 @@ class HermesCLI:
             last_active = _relative_time(session.get("last_active"))
             print(f"  {title:<32} {preview:<40} {last_active:<13} {session['id']}")
         print()
-        print("  Use /resume <session id or title> to continue where you left off.")
+        t("CLI_MESSAGES.use_resume_session_id_or_title_to_continue_where_y", "  Use /resume <session id or title> to continue where you left off.")
         print()
         return True
 
@@ -5806,7 +5806,7 @@ class HermesCLI:
         """Display conversation history."""
         if not self.conversation_history:
             if not self._show_recent_sessions(reason="history"):
-                print("(._.) No conversation history yet.")
+                t("CLI_MESSAGES.__no_conversation_history_yet", "(._.) No conversation history yet.")
             return
 
         preview_limit = 400
@@ -5819,7 +5819,7 @@ class HermesCLI:
                 return
 
             noun = "message" if hidden_tool_messages == 1 else "messages"
-            print("\n  [Tools]")
+            t("CLI_MESSAGES.n_tools", "\\n  [Tools]")
             print(f"    ({hidden_tool_messages} tool {noun} hidden)")
             hidden_tool_messages = 0
 
@@ -5960,7 +5960,7 @@ class HermesCLI:
                             title = None
                     elif title is not None:
                         # sanitize_title returned empty (whitespace-only / unprintable)
-                        _cprint("  Title is empty after cleanup — session started untitled.")
+                        _ct("CLI_MESSAGES.title_is_empty_after_cleanup_session_started_untit", "  Title is empty after cleanup — session started untitled.")
                         title = None
             # Notify memory providers that session_id rotated to a fresh
             # conversation. reset=True signals providers to flush accumulated
@@ -5984,7 +5984,7 @@ class HermesCLI:
             if title:
                 print(f"(^_^)v New session started: {title}")
             else:
-                print("(^_^)v New session started!")
+                t("CLI_MESSAGES._v_new_session_started", "(^_^)v New session started!")
 
     def _handle_handoff_command(self, cmd_original: str) -> bool:
         """Handle ``/handoff <platform>`` — transfer this CLI session to a gateway platform.
@@ -6007,9 +6007,9 @@ class HermesCLI:
 
         parts = cmd_original.split(maxsplit=1)
         if len(parts) < 2 or not parts[1].strip():
-            _cprint("  Usage: /handoff <platform>")
-            _cprint("  Hands the current session off to that platform's home channel.")
-            _cprint("  The CLI session ends here; resume it later with /resume.")
+            _ct("CLI_MESSAGES.usage_handoff_platform", "  Usage: /handoff <platform>")
+            _ct("CLI_MESSAGES.hands_the_current_session_off_to_that_platforms_ho", "  Hands the current session off to that platform's home channel.")
+            _ct("CLI_MESSAGES.the_cli_session_ends_here_resume_it_later_with_res", "  The CLI session ends here; resume it later with /resume.")
             return True
 
         platform_name = parts[1].strip().lower()
@@ -6047,7 +6047,7 @@ class HermesCLI:
         # Refuse mid-turn: an in-flight agent run would race with the
         # gateway's switch_session and the synthetic turn dispatch.
         if getattr(self, "_agent_running", False):
-            _cprint("  Agent is busy. Wait for the current turn to finish, then retry /handoff.")
+            _ct("CLI_MESSAGES.agent_is_busy_wait_for_the_current_turn_to_finish_", "  Agent is busy. Wait for the current turn to finish, then retry /handoff.")
             return True
 
         # Make sure we have a SessionDB handle.
@@ -6092,7 +6092,7 @@ class HermesCLI:
         # Mark pending — gateway watcher will pick this up.
         ok = self._session_db.request_handoff(self.session_id, platform_name)
         if not ok:
-            _cprint("  Session is already in flight for handoff. Wait for it to settle, then retry.")
+            _ct("CLI_MESSAGES.session_is_already_in_flight_for_handoff_wait_for_", "  Session is already in flight for handoff. Wait for it to settle, then retry.")
             return True
 
         _cprint(f"  Queued handoff of '{session_title}' → {platform_name} (home: {home.name}).")
@@ -6110,7 +6110,7 @@ class HermesCLI:
             current = (state_row or {}).get("state") or "pending"
             if current != last_state:
                 if current == "running":
-                    _cprint("  Gateway picked it up; transferring...")
+                    _ct("CLI_MESSAGES.gateway_picked_it_up_transferring", "  Gateway picked it up; transferring...")
                 last_state = current
             if current == "completed":
                 _cprint("")
@@ -6123,7 +6123,7 @@ class HermesCLI:
             if current == "failed":
                 err = (state_row or {}).get("error") or "unknown error"
                 _cprint(f"  Handoff failed: {err}")
-                _cprint("  Your CLI session is intact. Try /handoff again, or /resume on the platform manually.")
+                _ct("CLI_MESSAGES.your_cli_session_is_intact_try_handoff_again_or_re", "  Your CLI session is intact. Try /handoff again, or /resume on the platform manually.")
                 return True
             _time.sleep(0.5)
 
@@ -6132,8 +6132,8 @@ class HermesCLI:
             self._session_db.fail_handoff(self.session_id, "timed out waiting for gateway")
         except Exception:
             pass
-        _cprint("  Timed out waiting for the gateway. Is `hermes gateway` running?")
-        _cprint("  Your CLI session is intact.")
+        _ct("CLI_MESSAGES.timed_out_waiting_for_the_gateway_is_hermes_gatewa", "  Timed out waiting for the gateway. Is `hermes gateway` running?")
+        _ct("CLI_MESSAGES.your_cli_session_is_intact", "  Your CLI session is intact.")
         return True
 
     def _handle_resume_command(self, cmd_original: str) -> None:
@@ -6142,10 +6142,10 @@ class HermesCLI:
         target = parts[1].strip() if len(parts) > 1 else ""
 
         if not target:
-            _cprint("  Usage: /resume <session_id_or_title>")
+            _ct("CLI_MESSAGES.usage_resume_session_id_or_title", "  Usage: /resume <session_id_or_title>")
             if self._show_recent_sessions(reason="resume"):
                 return
-            _cprint("  Tip:   Use /history or `hermes sessions list` to find sessions.")
+            _ct("CLI_MESSAGES.tip_use_history_or_hermes_sessions_list_to_find_se", "  Tip:   Use /history or `hermes sessions list` to find sessions.")
             return
 
         if not self._session_db:
@@ -6161,7 +6161,7 @@ class HermesCLI:
         session_meta = self._session_db.get_session(target_id)
         if not session_meta:
             _cprint(f"  Session not found: {target}")
-            _cprint("  Use /history or `hermes sessions list` to see available sessions.")
+            _ct("CLI_MESSAGES.use_history_or_hermes_sessions_list_to_see_availab", "  Use /history or `hermes sessions list` to see available sessions.")
             return
 
         # If the target is the empty head of a compression chain, redirect to
@@ -6181,7 +6181,7 @@ class HermesCLI:
                 session_meta = resolved_meta
 
         if target_id == self.session_id:
-            _cprint("  Already on that session.")
+            _ct("CLI_MESSAGES.already_on_that_session", "  Already on that session.")
             return
 
         old_session_id = self.session_id
@@ -6275,7 +6275,7 @@ class HermesCLI:
                 _cprint(f"  {format_session_db_unavailable()}")
                 return
             if not self._show_recent_sessions(reason="sessions"):
-                _cprint("  (._.) No previous sessions yet.")
+                _ct("CLI_MESSAGES.__no_previous_sessions_yet", "  (._.) No previous sessions yet.")
             return
 
         # /sessions <id_or_title> behaves the same as /resume <id_or_title>.
@@ -6289,7 +6289,7 @@ class HermesCLI:
         Inspired by Claude Code's /branch command.
         """
         if not self.conversation_history:
-            _cprint("  No conversation to branch — send a message first.")
+            _ct("CLI_MESSAGES.no_conversation_to_branch_send_a_message_first", "  No conversation to branch — send a message first.")
             return
 
         if not self._session_db:
@@ -6424,7 +6424,7 @@ class HermesCLI:
         regardless of whether the user ever runs ``/save``.
         """
         if not self.conversation_history:
-            print("(;_;) No conversation to save.")
+            t("CLI_MESSAGES.__no_conversation_to_save", "(;_;) No conversation to save.")
             return
 
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -6458,7 +6458,7 @@ class HermesCLI:
         Returns the message to re-send, or None if there's nothing to retry.
         """
         if not self.conversation_history:
-            print("(._.) No messages to retry.")
+            t("CLI_MESSAGES.__no_messages_to_retry", "(._.) No messages to retry.")
             return None
         
         # Walk backwards to find the last user message
@@ -6469,7 +6469,7 @@ class HermesCLI:
                 break
         
         if last_user_idx is None:
-            print("(._.) No user message found to retry.")
+            t("CLI_MESSAGES.__no_user_message_found_to_retry", "(._.) No user message found to retry.")
             return None
         
         # Extract the message text and remove everything from that point forward
@@ -6486,7 +6486,7 @@ class HermesCLI:
         onward (including assistant responses, tool calls, etc.).
         """
         if not self.conversation_history:
-            print("(._.) No messages to undo.")
+            t("CLI_MESSAGES.__no_messages_to_undo", "(._.) No messages to undo.")
             return
         
         # Walk backwards to find the last user message
@@ -6497,7 +6497,7 @@ class HermesCLI:
                 break
         
         if last_user_idx is None:
-            print("(._.) No user message found to undo.")
+            t("CLI_MESSAGES.__no_user_message_found_to_undo", "(._.) No user message found to undo.")
             return
         
         # Count how many messages we're removing
@@ -6894,16 +6894,16 @@ class HermesCLI:
             or result.api_mode == "anthropic_messages"
         )
         if cache_enabled:
-            _cprint("    Prompt caching: enabled")
+            _ct("CLI_MESSAGES.prompt_caching_enabled", "    Prompt caching: enabled")
         if result.warning_message:
             _cprint(f"    ⚠ {result.warning_message}")
         if persist_global:
             save_config_value("model.default", result.new_model)
             if result.provider_changed:
                 save_config_value("model.provider", result.target_provider)
-            _cprint("    Saved to config.yaml (--global)")
+            _ct("CLI_MESSAGES.saved_to_configyaml_global", "    Saved to config.yaml (--global)")
         else:
-            _cprint("    (session only — add --global to persist)")
+            _ct("CLI_MESSAGES.session_only_add_global_to_persist", "    (session only — add --global to persist)")
 
     def _handle_model_picker_selection(self, persist_global: bool = False) -> None:
         state = self._model_picker_state
@@ -7021,10 +7021,10 @@ class HermesCLI:
                 providers = []
 
             if not providers:
-                _cprint("  No authenticated providers found.")
+                _ct("CLI_MESSAGES.no_authenticated_providers_found", "  No authenticated providers found.")
                 _cprint("")
-                _cprint("  /model <name>                        switch model")
-                _cprint("  /model --provider <slug>             switch provider")
+                _ct("CLI_MESSAGES.model_name_switch_model", "  /model <name>                        switch model")
+                _ct("CLI_MESSAGES.model_provider_slug_switch_provider", "  /model --provider <slug>             switch provider")
                 return
 
             self._open_model_picker(
@@ -7127,7 +7127,7 @@ class HermesCLI:
             or result.api_mode == "anthropic_messages"
         )
         if cache_enabled:
-            _cprint("    Prompt caching: enabled")
+            _ct("CLI_MESSAGES.prompt_caching_enabled", "    Prompt caching: enabled")
 
         # Warning from validation
         if result.warning_message:
@@ -7138,9 +7138,9 @@ class HermesCLI:
             save_config_value("model.default", result.new_model)
             if result.provider_changed:
                 save_config_value("model.provider", result.target_provider)
-            _cprint("    Saved to config.yaml (--global)")
+            _ct("CLI_MESSAGES.saved_to_configyaml_global", "    Saved to config.yaml (--global)")
         else:
-            _cprint("    (session only — add --global to persist)")
+            _ct("CLI_MESSAGES.session_only_add_global_to_persist", "    (session only — add --global to persist)")
 
     def _handle_codex_runtime(self, cmd_original: str) -> None:
         """Handle /codex-runtime — toggle the codex app-server runtime opt-in.
@@ -7180,7 +7180,7 @@ class HermesCLI:
             _cprint(f"  {prefix} {line}" if line.startswith("openai_runtime")
                     else f"    {line}")
         if result.success and result.requires_new_session:
-            _cprint("    Tip: `/reset` starts a new session immediately.")
+            _ct("CLI_MESSAGES.tip_reset_starts_a_new_session_immediately", "    Tip: `/reset` starts a new session immediately.")
 
     def _should_handle_model_command_inline(self, text: str, has_images: bool = False) -> bool:
         """Return True when /model should be handled immediately on the UI thread."""
@@ -7253,7 +7253,7 @@ class HermesCLI:
             access_token = get_valid_access_token()
         except GoogleOAuthError as exc:
             self._console_print(f"  [yellow]{exc}[/]")
-            self._console_print("  Run [bold]/model[/] and pick 'Google Gemini (OAuth)' to sign in.")
+            self._console_t("CLI_MESSAGES.run_boldmodel_and_pick_google_gemini_oauth_to_sign", "  Run [bold]/model[/] and pick 'Google Gemini (OAuth)' to sign in.")
             return
 
         creds = load_credentials()
@@ -7266,7 +7266,7 @@ class HermesCLI:
             return
 
         if not buckets:
-            self._console_print("  [dim]No quota buckets reported (account may be on legacy/unmetered tier).[/]")
+            self._console_t("CLI_MESSAGES.dimno_quota_buckets_reported_account_may_be_on_leg", "  [dim]No quota buckets reported (account may be on legacy/unmetered tier).[/]")
             return
 
         # Sort for stable display, group by model
@@ -7298,10 +7298,10 @@ class HermesCLI:
                 self.system_prompt = ""
                 self.agent = None  # Force re-init
                 if save_config_value("agent.system_prompt", ""):
-                    print("(^_^)b Personality cleared (saved to config)")
+                    t("CLI_MESSAGES._b_personality_cleared_saved_to_config", "(^_^)b Personality cleared (saved to config)")
                 else:
-                    print("(^_^) Personality cleared (session only)")
-                print("  No personality overlay — using base agent behavior.")
+                    t("CLI_MESSAGES.__personality_cleared_session_only", "(^_^) Personality cleared (session only)")
+                t("CLI_MESSAGES.no_personality_overlay_using_base_agent_behavior", "  No personality overlay — using base agent behavior.")
             elif personality_name in self.personalities:
                 self.system_prompt = self._resolve_personality_prompt(self.personalities[personality_name])
                 self.agent = None  # Force re-init
@@ -7328,7 +7328,7 @@ class HermesCLI:
                     preview = str(prompt)[:50]
                 print(f"  {name:<12} - {preview}")
             print()
-            print("  Usage: /personality <name>")
+            t("CLI_MESSAGES.usage_personality_name", "  Usage: /personality <name>")
             print()
     
     def _handle_cron_command(self, cmd: str):
@@ -7374,7 +7374,7 @@ class HermesCLI:
                     try:
                         opts["repeat"] = int(tokens[i + 1])
                     except ValueError:
-                        print("(._.) --repeat must be an integer")
+                        t("CLI_MESSAGES.__repeat_must_be_an_integer", "(._.) --repeat must be an integer")
                         return None
                     i += 2
                 elif token == "--skill" and i + 1 < len(tokens):
@@ -7411,22 +7411,22 @@ class HermesCLI:
             print("|" + " " * 22 + "(^_^) Scheduled Tasks" + " " * 23 + "|")
             print("+" + "-" * 68 + "+")
             print()
-            print("  Commands:")
-            print("    /cron list")
+            t("CLI_MESSAGES.commands", "  Commands:")
+            t("CLI_MESSAGES.cron_list", "    /cron list")
             print('    /cron add "every 2h" "Check server status" [--skill blogwatcher]')
             print('    /cron edit <job_id> --schedule "every 4h" --prompt "New task"')
-            print("    /cron edit <job_id> --skill blogwatcher --skill maps")
-            print("    /cron edit <job_id> --remove-skill blogwatcher")
-            print("    /cron edit <job_id> --clear-skills")
-            print("    /cron pause <job_id>")
-            print("    /cron resume <job_id>")
-            print("    /cron run <job_id>")
-            print("    /cron remove <job_id>")
+            t("CLI_MESSAGES.cron_edit_job_id_skill_blogwatcher_skill_maps", "    /cron edit <job_id> --skill blogwatcher --skill maps")
+            t("CLI_MESSAGES.cron_edit_job_id_removeskill_blogwatcher", "    /cron edit <job_id> --remove-skill blogwatcher")
+            t("CLI_MESSAGES.cron_edit_job_id_clearskills", "    /cron edit <job_id> --clear-skills")
+            t("CLI_MESSAGES.cron_pause_job_id", "    /cron pause <job_id>")
+            t("CLI_MESSAGES.cron_resume_job_id", "    /cron resume <job_id>")
+            t("CLI_MESSAGES.cron_run_job_id", "    /cron run <job_id>")
+            t("CLI_MESSAGES.cron_remove_job_id", "    /cron remove <job_id>")
             print()
             result = _cron_api(action="list")
             jobs = result.get("jobs", []) if result.get("success") else []
             if jobs:
-                print("  Current Jobs:")
+                t("CLI_MESSAGES.current_jobs", "  Current Jobs:")
                 print("  " + "-" * 63)
                 for job in jobs:
                     repeat_str = job.get("repeat", "?")
@@ -7438,7 +7438,7 @@ class HermesCLI:
                         print(f"      Next: {job['next_run_at']}")
                     print()
             else:
-                print("  No scheduled jobs. Use '/cron add' to create one.")
+                t("CLI_MESSAGES.no_scheduled_jobs_use_cron_add_to_create_one", "  No scheduled jobs. Use '/cron add' to create one.")
             print()
             return
 
@@ -7451,11 +7451,11 @@ class HermesCLI:
             result = _cron_api(action="list", include_disabled=opts["all"])
             jobs = result.get("jobs", []) if result.get("success") else []
             if not jobs:
-                print("(._.) No scheduled jobs.")
+                t("CLI_MESSAGES.__no_scheduled_jobs", "(._.) No scheduled jobs.")
                 return
 
             print()
-            print("Scheduled Jobs:")
+            t("CLI_MESSAGES.scheduled_jobs", "Scheduled Jobs:")
             print("-" * 80)
             for job in jobs:
                 print(f"  ID: {job['job_id']}")
@@ -7474,13 +7474,13 @@ class HermesCLI:
         if subcommand in {"add", "create"}:
             positionals = opts["positionals"]
             if not positionals:
-                print("(._.) Usage: /cron add <schedule> <prompt>")
+                t("CLI_MESSAGES.__usage_cron_add_schedule_prompt", "(._.) Usage: /cron add <schedule> <prompt>")
                 return
             schedule = opts["schedule"] or positionals[0]
             prompt = opts["prompt"] or " ".join(positionals[1:])
             skills = _normalize_skills(opts["skills"])
             if not prompt and not skills:
-                print("(._.) Please provide a prompt or at least one skill")
+                t("CLI_MESSAGES.__please_provide_a_prompt_or_at_least_one_skill", "(._.) Please provide a prompt or at least one skill")
                 return
             result = _cron_api(
                 action="create",
@@ -7504,7 +7504,7 @@ class HermesCLI:
         if subcommand == "edit":
             positionals = opts["positionals"]
             if not positionals:
-                print("(._.) Usage: /cron edit <job_id> [--schedule ...] [--prompt ...] [--skill ...]")
+                t("CLI_MESSAGES.__usage_cron_edit_job_id_schedule_prompt_skill", "(._.) Usage: /cron edit <job_id> [--schedule ...] [--prompt ...] [--skill ...]")
                 return
             job_id = positionals[0]
             existing = get_job(job_id)
@@ -7544,7 +7544,7 @@ class HermesCLI:
                 if job.get("skills"):
                     print(f"  Skills: {', '.join(job['skills'])}")
                 else:
-                    print("  Skills: none")
+                    t("CLI_MESSAGES.skills_none", "  Skills: none")
             else:
                 print(f"(x_x) Failed to update job: {result.get('error')}")
             return
@@ -7567,14 +7567,14 @@ class HermesCLI:
                 print(f"  Next run: {result['job'].get('next_run_at')}")
             elif action == "run":
                 print(f"(^_^)b Triggered job: {result['job']['name']} ({job_id})")
-                print("  It will run on the next scheduler tick.")
+                t("CLI_MESSAGES.it_will_run_on_the_next_scheduler_tick", "  It will run on the next scheduler tick.")
             else:
                 removed = result.get("removed_job", {})
                 print(f"(^_^)b Removed job: {removed.get('name', job_id)} ({job_id})")
             return
 
         print(f"(._.) Unknown cron command: {subcommand}")
-        print("  Available: list, add, edit, pause, resume, run, remove")
+        t("CLI_MESSAGES.available_list_add_edit_pause_resume_run_remove", "  Available: list, add, edit, pause, resume, run, remove")
 
     def _handle_curator_command(self, cmd: str):
         """Handle /curator slash command.
@@ -7637,7 +7637,7 @@ class HermesCLI:
         try:
             config = load_gateway_config()
             
-            print("  Messaging Platform Configuration:")
+            t("CLI_MESSAGES.messaging_platform_configuration", "  Messaging Platform Configuration:")
             print("  " + "-" * 55)
             
             platform_status = {
@@ -7657,7 +7657,7 @@ class HermesCLI:
                     print(f"    ○ {name:<12} Not configured ({env_var})")
             
             print()
-            print("  Session Reset Policy:")
+            t("CLI_MESSAGES.session_reset_policy", "  Session Reset Policy:")
             print("  " + "-" * 55)
             policy = config.default_reset_policy
             print(f"    Mode: {policy.mode}")
@@ -7665,8 +7665,8 @@ class HermesCLI:
             print(f"    Idle timeout: {policy.idle_minutes} minutes")
             
             print()
-            print("  To start the gateway:")
-            print("    python cli.py --gateway")
+            t("CLI_MESSAGES.to_start_the_gateway", "  To start the gateway:")
+            t("CLI_MESSAGES.python_clipy_gateway", "    python cli.py --gateway")
             print()
             print(f"  Configuration file: {display_hermes_home()}/config.yaml")
             print()
@@ -7674,10 +7674,10 @@ class HermesCLI:
         except Exception as e:
             print(f"  Error loading gateway config: {e}")
             print()
-            print("  To configure the gateway:")
-            print("    1. Set environment variables:")
-            print("       TELEGRAM_BOT_TOKEN=your_token")
-            print("       DISCORD_BOT_TOKEN=your_token")
+            t("CLI_MESSAGES.to_configure_the_gateway", "  To configure the gateway:")
+            t("CLI_MESSAGES.1_set_environment_variables", "    1. Set environment variables:")
+            t("CLI_MESSAGES.telegram_bot_tokenyour_token", "       TELEGRAM_BOT_TOKEN=your_token")
+            t("CLI_MESSAGES.discord_bot_tokenyour_token", "       DISCORD_BOT_TOKEN=your_token")
             print(f"    2. Or configure settings in {display_hermes_home()}/config.yaml")
             print()
     
@@ -7774,7 +7774,7 @@ class HermesCLI:
                         session_id=self.session_id,
                         context_length=ctx_len,
                     )
-                _cprint("  ✨ (◕‿◕)✨ Fresh start! Screen cleared and conversation reset.\n")
+                _ct("CLI_MESSAGES.fresh_start_screen_cleared_and_conversation_resetn", "  ✨ (◕‿◕)✨ Fresh start! Screen cleared and conversation reset.\\n")
                 # Show a random tip on new session
                 try:
                     from hermes_cli.tips import get_random_tip
@@ -7789,7 +7789,7 @@ class HermesCLI:
                     pass
             else:
                 self.show_banner()
-                print("  ✨ (◕‿◕)✨ Fresh start! Screen cleared and conversation reset.\n")
+                t("CLI_MESSAGES.fresh_start_screen_cleared_and_conversation_resetn", "  ✨ (◕‿◕)✨ Fresh start! Screen cleared and conversation reset.\\n")
                 # Show a random tip on new session
                 try:
                     from hermes_cli.tips import get_random_tip
@@ -7818,14 +7818,14 @@ class HermesCLI:
                             _cprint(f"  {e}")
                             new_title = None
                         if not new_title:
-                            _cprint("  Title is empty after cleanup. Please use printable characters.")
+                            _ct("CLI_MESSAGES.title_is_empty_after_cleanup_please_use_printable_", "  Title is empty after cleanup. Please use printable characters.")
                         elif self._session_db.get_session(self.session_id):
                             # Session exists in DB — set title directly
                             try:
                                 if self._session_db.set_session_title(self.session_id, new_title):
                                     _cprint(f"  Session title set: {new_title}")
                                 else:
-                                    _cprint("  Session not found in database.")
+                                    _ct("CLI_MESSAGES.session_not_found_in_database", "  Session not found in database.")
                             except ValueError as e:
                                 _cprint(f"  {e}")
                         else:
@@ -7841,7 +7841,7 @@ class HermesCLI:
                         from hermes_state import format_session_db_unavailable
                         _cprint(f"  {format_session_db_unavailable()}")
                 else:
-                    _cprint("  Usage: /title <your session title>")
+                    _ct("CLI_MESSAGES.usage_title_your_session_title", "  Usage: /title <your session title>")
             # Show current title and session ID if no argument given
             elif self._session_db:
                 _cprint(f"  Session ID: {self.session_id}")
@@ -7851,7 +7851,7 @@ class HermesCLI:
                 elif self._pending_title:
                     _cprint(f"  Title (pending): {self._pending_title}")
                 else:
-                    _cprint("  No title set. Usage: /title <your session title>")
+                    _ct("CLI_MESSAGES.no_title_set_usage_title_your_session_title", "  No title set. Usage: /title <your session title>")
             else:
                 from hermes_state import format_session_db_unavailable
                 _cprint(f"  {format_session_db_unavailable()}")
@@ -7959,7 +7959,7 @@ class HermesCLI:
                 mgr = get_plugin_manager()
                 plugins = mgr.list_plugins()
                 if not plugins:
-                    print("No plugins installed.")
+                    t("CLI_MESSAGES.no_plugins_installed", "No plugins installed.")
                     print(f"Drop plugin directories into {display_hermes_home()}/plugins/ to get started.")
                 else:
                     print(f"Plugins ({len(plugins)}):")
@@ -7990,7 +7990,7 @@ class HermesCLI:
             parts = cmd_original.split(None, 1)
             payload = parts[1].strip() if len(parts) > 1 else ""
             if not payload:
-                _cprint("  Usage: /queue <prompt>")
+                _ct("CLI_MESSAGES.usage_queue_prompt", "  Usage: /queue <prompt>")
             else:
                 self._pending_input.put(payload)
                 if self._agent_running:
@@ -8006,7 +8006,7 @@ class HermesCLI:
             parts = cmd_original.split(None, 1)
             payload = parts[1].strip() if len(parts) > 1 else ""
             if not payload:
-                _cprint("  Usage: /steer <prompt>")
+                _ct("CLI_MESSAGES.usage_steer_prompt", "  Usage: /steer <prompt>")
             elif self._agent_running and self.agent is not None and hasattr(self.agent, "steer"):
                 try:
                     accepted = self.agent.steer(payload)
@@ -8016,7 +8016,7 @@ class HermesCLI:
                     if accepted:
                         _cprint(f"  ⏩ Steer queued — arrives after the next tool call: {payload[:80]}{'...' if len(payload) > 80 else ''}")
                     else:
-                        _cprint("  Steer rejected (empty payload).")
+                        _ct("CLI_MESSAGES.steer_rejected_empty_payload", "  Steer rejected (empty payload).")
             else:
                 # No active run — treat as a normal next-turn message.
                 self._pending_input.put(payload)
@@ -8052,9 +8052,9 @@ class HermesCLI:
                             if output:
                                 self._console_print(_rich_text_from_ansi(output))
                             else:
-                                self._console_print("[dim]Command returned no output[/]")
+                                self._console_t("CLI_MESSAGES.dimcommand_returned_no_output", "[dim]Command returned no output[/]")
                         except subprocess.TimeoutExpired:
-                            self._console_print("[bold red]Quick command timed out (30s)[/]")
+                            self._console_t("CLI_MESSAGES.bold_redquick_command_timed_out_30s", "[bold red]Quick command timed out (30s)[/]")
                         except Exception as e:
                             self._console_print(f"[bold red]Quick command error: {e}[/]")
                     else:
@@ -8152,9 +8152,9 @@ class HermesCLI:
         """
         parts = cmd.strip().split(maxsplit=1)
         if len(parts) < 2 or not parts[1].strip():
-            _cprint("  Usage: /background <prompt>")
-            _cprint("  Example: /background Summarize the top HN stories today")
-            _cprint("  The task runs in a separate session and results display here when done.")
+            _ct("CLI_MESSAGES.usage_background_prompt", "  Usage: /background <prompt>")
+            _ct("CLI_MESSAGES.example_background_summarize_the_top_hn_stories_to", "  Example: /background Summarize the top HN stories today")
+            _ct("CLI_MESSAGES.the_task_runs_in_a_separate_session_and_results_di", "  The task runs in a separate session and results display here when done.")
             return
 
         prompt = parts[1].strip()
@@ -8164,12 +8164,12 @@ class HermesCLI:
 
         # Make sure we have valid credentials
         if not self._ensure_runtime_credentials():
-            _cprint("  (>_<) Cannot start background task: no valid credentials.")
+            _ct("CLI_MESSAGES.__cannot_start_background_task_no_valid_credential", "  (>_<) Cannot start background task: no valid credentials.")
             return
 
         _cprint(f"  🔄 Background task #{task_num} started: \"{prompt[:60]}{'...' if len(prompt) > 60 else ''}\"")
         _cprint(f"  Task ID: {task_id}")
-        _cprint("  You can continue chatting — results will appear when done.\n")
+        _ct("CLI_MESSAGES.you_can_continue_chatting_results_will_appear_when", "  You can continue chatting — results will appear when done.\\n")
 
         turn_route = self._resolve_turn_agent_config(prompt)
 
@@ -8264,7 +8264,7 @@ class HermesCLI:
                         width=self._scrollback_box_width(),
                     ))
                 else:
-                    _cprint("  (No response generated)")
+                    _ct("CLI_MESSAGES.no_response_generated", "  (No response generated)")
 
                 # Play bell if enabled
                 if self.bell_on_complete:
@@ -8378,7 +8378,7 @@ class HermesCLI:
                 print(f"   ✓ Chrome is already listening on port {_port}")
             elif cdp_url == _DEFAULT_CDP:
                 # Try to auto-launch Chrome with remote debugging
-                print("   Chrome isn't running with remote debugging — attempting to launch...")
+                t("CLI_MESSAGES.chrome_isnt_running_with_remote_debugging_attempti", "   Chrome isn't running with remote debugging — attempting to launch...")
                 _launched = self._try_launch_chrome_debug(_port, _plat.system())
                 if _launched:
                     # Wait for the port to come up
@@ -8396,22 +8396,22 @@ class HermesCLI:
                         print(f"   ✓ Chrome launched and listening on port {_port}")
                     else:
                         print(f"   ⚠ Chrome launched but port {_port} isn't responding yet")
-                        print("     Try again in a few seconds — the debug instance may still be starting")
+                        t("CLI_MESSAGES.try_again_in_a_few_seconds_the_debug_instance_may_", "     Try again in a few seconds — the debug instance may still be starting")
                 else:
-                    print("   ⚠ Could not auto-launch Chrome")
+                    t("CLI_MESSAGES.could_not_autolaunch_chrome", "   ⚠ Could not auto-launch Chrome")
                     sys_name = _plat.system()
                     chrome_cmd = manual_chrome_debug_command(_port, sys_name)
                     if chrome_cmd:
                         print(f"     Launch Chrome manually:")
                         print(f"     {chrome_cmd}")
                     else:
-                        print("     No Chrome/Chromium executable found in this environment")
+                        t("CLI_MESSAGES.no_chromechromium_executable_found_in_this_environ", "     No Chrome/Chromium executable found in this environment")
             else:
                 print(f"   ⚠ Port {_port} is not reachable at {cdp_url}")
 
             if not _already_open:
                 print()
-                print("Browser not connected — start Chrome with remote debugging and retry /browser connect")
+                t("CLI_MESSAGES.browser_not_connected_start_chrome_with_remote_deb", "Browser not connected — start Chrome with remote debugging and retry /browser connect")
                 print()
                 return
 
@@ -8424,7 +8424,7 @@ class HermesCLI:
             except Exception:
                 pass
             print()
-            print("🌐 Browser connected to live Chrome via CDP")
+            t("CLI_MESSAGES.browser_connected_to_live_chrome_via_cdp", "🌐 Browser connected to live Chrome via CDP")
             print(f"   Endpoint: {cdp_url}")
             print()
 
@@ -8450,8 +8450,8 @@ class HermesCLI:
                 except Exception:
                     pass
                 print()
-                print("🌐 Browser disconnected from live Chrome")
-                print("   Browser tools reverted to default mode (local headless or cloud provider)")
+                t("CLI_MESSAGES.browser_disconnected_from_live_chrome", "🌐 Browser disconnected from live Chrome")
+                t("CLI_MESSAGES.browser_tools_reverted_to_default_mode_local_headl", "   Browser tools reverted to default mode (local headless or cloud provider)")
                 print()
 
                 if hasattr(self, '_pending_input'):
@@ -8461,13 +8461,13 @@ class HermesCLI:
                     )
             else:
                 print()
-                print("Browser is not connected to live Chrome (already using default mode)")
+                t("CLI_MESSAGES.browser_is_not_connected_to_live_chrome_already_us", "Browser is not connected to live Chrome (already using default mode)")
                 print()
 
         elif sub == "status":
             print()
             if current:
-                print("🌐 Browser: connected to live Chrome via CDP")
+                t("CLI_MESSAGES.browser_connected_to_live_chrome_via_cdp", "🌐 Browser: connected to live Chrome via CDP")
                 print(f"   Endpoint: {current}")
 
                 _port = 9222
@@ -8481,9 +8481,9 @@ class HermesCLI:
                     s.settimeout(1)
                     s.connect(("127.0.0.1", _port))
                     s.close()
-                    print("   Status: ✓ reachable")
+                    t("CLI_MESSAGES.status_reachable", "   Status: ✓ reachable")
                 except (OSError, Exception):
-                    print("   Status: ⚠ not reachable (Chrome may not be running)")
+                    t("CLI_MESSAGES.status_not_reachable_chrome_may_not_be_running", "   Status: ⚠ not reachable (Chrome may not be running)")
             else:
                 try:
                     from tools.browser_tool import _get_cloud_provider
@@ -8501,25 +8501,25 @@ class HermesCLI:
                     except Exception:
                         engine = "auto"
                     if engine == "lightpanda":
-                        print("🌐 Browser: local Lightpanda (agent-browser --engine lightpanda)")
-                        print("   ⚡ Lightpanda: faster navigation, no screenshot support")
-                        print("   Automatic Chrome fallback for screenshots and failed commands")
+                        t("CLI_MESSAGES.browser_local_lightpanda_agentbrowser_engine_light", "🌐 Browser: local Lightpanda (agent-browser --engine lightpanda)")
+                        t("CLI_MESSAGES.lightpanda_faster_navigation_no_screenshot_support", "   ⚡ Lightpanda: faster navigation, no screenshot support")
+                        t("CLI_MESSAGES.automatic_chrome_fallback_for_screenshots_and_fail", "   Automatic Chrome fallback for screenshots and failed commands")
                     elif engine == "chrome":
-                        print("🌐 Browser: local headless Chrome (agent-browser --engine chrome)")
+                        t("CLI_MESSAGES.browser_local_headless_chrome_agentbrowser_engine_", "🌐 Browser: local headless Chrome (agent-browser --engine chrome)")
                     else:
-                        print("🌐 Browser: local headless Chromium (agent-browser)")
+                        t("CLI_MESSAGES.browser_local_headless_chromium_agentbrowser", "🌐 Browser: local headless Chromium (agent-browser)")
             print()
-            print("   /browser connect      — connect to your live Chrome")
-            print("   /browser disconnect   — revert to default")
+            t("CLI_MESSAGES.browser_connect_connect_to_your_live_chrome", "   /browser connect      — connect to your live Chrome")
+            t("CLI_MESSAGES.browser_disconnect_revert_to_default", "   /browser disconnect   — revert to default")
             print()
 
         else:
             print()
-            print("Usage: /browser connect|disconnect|status")
+            t("CLI_MESSAGES.usage_browser_connectdisconnectstatus", "Usage: /browser connect|disconnect|status")
             print()
-            print("   connect      Connect browser tools to your live Chrome session")
-            print("   disconnect   Revert to default browser backend")
-            print("   status       Show current browser mode")
+            t("CLI_MESSAGES.connect_connect_browser_tools_to_your_live_chrome_", "   connect      Connect browser tools to your live Chrome session")
+            t("CLI_MESSAGES.disconnect_revert_to_default_browser_backend", "   disconnect   Revert to default browser backend")
+            t("CLI_MESSAGES.status_show_current_browser_mode", "   status       Show current browser mode")
             print()
 
     # ────────────────────────────────────────────────────────────────
@@ -8599,7 +8599,7 @@ class HermesCLI:
             had = mgr.has_goal()
             mgr.clear()
             if had:
-                _cprint("  ✓ Goal cleared.")
+                _ct("CLI_MESSAGES.goal_cleared", "  ✓ Goal cleared.")
             else:
                 _cprint(f"  {_DIM}No active goal.{_RST}")
             return
@@ -8663,12 +8663,12 @@ class HermesCLI:
 
         if verb == "remove":
             if not rest:
-                _cprint("  Usage: /subgoal remove <n>")
+                _ct("CLI_MESSAGES.usage_subgoal_remove_n", "  Usage: /subgoal remove <n>")
                 return
             try:
                 idx = int(rest.split()[0])
             except ValueError:
-                _cprint("  /subgoal remove: <n> must be an integer (1-based index).")
+                _ct("CLI_MESSAGES.subgoal_remove_n_must_be_an_integer_1based_index", "  /subgoal remove: <n> must be an integer (1-based index).")
                 return
             try:
                 removed = mgr.remove_subgoal(idx)
@@ -8820,7 +8820,7 @@ class HermesCLI:
         try:
             from hermes_cli.skin_engine import list_skins, set_active_skin, get_active_skin_name
         except ImportError:
-            print("Skin engine not available.")
+            t("CLI_MESSAGES.skin_engine_not_available", "Skin engine not available.")
             return
 
         parts = cmd.strip().split(maxsplit=1)
@@ -8829,12 +8829,12 @@ class HermesCLI:
             current = get_active_skin_name()
             skins = list_skins()
             print(f"\n  Current skin: {current}")
-            print("  Available skins:")
+            t("CLI_MESSAGES.available_skins", "  Available skins:")
             for s in skins:
                 marker = " ●" if s["name"] == current else "  "
                 source = f" ({s['source']})" if s["source"] == "user" else ""
                 print(f"   {marker} {s['name']}{source} — {s['description']}")
-            print("\n  Usage: /skin <name>")
+            t("CLI_MESSAGES.n_usage_skin_name", "\\n  Usage: /skin <name>")
             print(f"  Custom skins: drop a YAML file in {display_hermes_home()}/skins/\n")
             return
 
@@ -8853,9 +8853,9 @@ class HermesCLI:
             print(f"  Skin set to: {new_skin} (saved)")
         else:
             print(f"  Skin set to: {new_skin}")
-        print("  Note: banner colors will update on next session start.")
+        t("CLI_MESSAGES.note_banner_colors_will_update_on_next_session_sta", "  Note: banner colors will update on next session start.")
         if self._apply_tui_skin_style():
-            print("  Prompt + TUI colors updated.")
+            t("CLI_MESSAGES.prompt_tui_colors_updated", "  Prompt + TUI colors updated.")
 
     def _handle_footer_command(self, cmd_original: str) -> None:
         """Toggle or inspect ``display.runtime_footer.enabled`` from the CLI.
@@ -8897,7 +8897,7 @@ class HermesCLI:
         elif arg == "":
             new_state = not current
         else:
-            _cprint("  Usage: /footer [on|off|status]")
+            _ct("CLI_MESSAGES.usage_footer_onoffstatus", "  Usage: /footer [on|off|status]")
             return
 
         if save_config_value("display.runtime_footer.enabled", new_state):
@@ -8907,7 +8907,7 @@ class HermesCLI:
             )
             _cprint(f"  Runtime footer: {state}")
         else:
-            _cprint("  Failed to save runtime_footer setting to config.yaml")
+            _ct("CLI_MESSAGES.failed_to_save_runtime_footer_setting_to_configyam", "  Failed to save runtime_footer setting to config.yaml")
 
     def _toggle_verbose(self):
         """Cycle tool progress mode: off → new → all → verbose → off."""
@@ -9062,7 +9062,7 @@ class HermesCLI:
     def _handle_fast_command(self, cmd: str):
         """Handle /fast — toggle fast mode (OpenAI Priority Processing / Anthropic Fast Mode)."""
         if not self._fast_command_available():
-            _cprint("  (._.) /fast is only available for models that support fast mode (OpenAI Priority Processing or Anthropic Fast Mode).")
+            _ct("CLI_MESSAGES.__fast_is_only_available_for_models_that_support_f", "  (._.) /fast is only available for models that support fast mode (OpenAI Priority Processing or Anthropic Fast Mode).")
             return
 
         # Determine the branding for the current model
@@ -9118,15 +9118,15 @@ class HermesCLI:
         Claude Code's ``/compact <focus>`` feature.
         """
         if not self.conversation_history or len(self.conversation_history) < 4:
-            print("(._.) Not enough conversation to compress (need at least 4 messages).")
+            t("CLI_MESSAGES.__not_enough_conversation_to_compress_need_at_leas", "(._.) Not enough conversation to compress (need at least 4 messages).")
             return
 
         if not self.agent:
-            print("(._.) No active agent -- send a message first.")
+            t("CLI_MESSAGES.__no_active_agent_send_a_message_first", "(._.) No active agent -- send a message first.")
             return
 
         if not self.agent.compression_enabled:
-            print("(._.) Compression is disabled in config.")
+            t("CLI_MESSAGES.__compression_is_disabled_in_config", "(._.) Compression is disabled in config.")
             return
 
         # Extract optional focus topic from the command (e.g. "/compress database schema")
@@ -9219,14 +9219,14 @@ class HermesCLI:
     def _show_usage(self):
         """Show rate limits (if available) and session token usage."""
         if not self.agent:
-            print("(._.) No active agent -- send a message first.")
+            t("CLI_MESSAGES.__no_active_agent_send_a_message_first", "(._.) No active agent -- send a message first.")
             return
 
         agent = self.agent
         calls = agent.session_api_calls
 
         if calls == 0:
-            print("(._.) No API calls made yet in this session.")
+            t("CLI_MESSAGES.__no_api_calls_made_yet_in_this_session", "(._.) No API calls made yet in this session.")
             return
 
         # ── Rate limits (shown first when available) ────────────────
@@ -9267,7 +9267,7 @@ class HermesCLI:
         )
         elapsed = format_duration_compact((datetime.now() - self.session_start).total_seconds())
 
-        print("  📊 Session Token Usage")
+        t("CLI_MESSAGES.session_token_usage", "  📊 Session Token Usage")
         print(f"  {'─' * 40}")
         print(f"  Model:                     {agent.model}")
         print(f"  Input tokens:              {input_tokens:>10,}")
@@ -9417,14 +9417,14 @@ class HermesCLI:
         # timeout so a hung MCP server cannot block the process_loop
         # indefinitely (which would freeze the entire TUI).
         print()
-        print("🔄 MCP server config changed — reloading connections...")
+        t("CLI_MESSAGES.mcp_server_config_changed_reloading_connections", "🔄 MCP server config changed — reloading connections...")
         _reload_thread = threading.Thread(
             target=self._reload_mcp, daemon=True
         )
         _reload_thread.start()
         _reload_thread.join(timeout=30)
         if _reload_thread.is_alive():
-            print("  ⚠️  MCP reload timed out (30s). Some servers may not have reconnected.")
+            t("CLI_MESSAGES.mcp_reload_timed_out_30s_some_servers_may_not_have", "  ⚠️  MCP reload timed out (30s). Some servers may not have reconnected.")
 
     def _confirm_destructive_slash(self, command: str, detail: str) -> Optional[str]:
         """Prompt the user to confirm a destructive session slash command.
@@ -9485,10 +9485,10 @@ class HermesCLI:
 
         if choice == "always":
             if save_config_value("approvals.destructive_slash_confirm", False):
-                print("🔒 Future /clear, /new, /reset, and /undo will run without confirmation.")
-                print("   Re-enable via `approvals.destructive_slash_confirm: true` in config.yaml.")
+                t("CLI_MESSAGES.future_clear_new_reset_and_undo_will_run_without_c", "🔒 Future /clear, /new, /reset, and /undo will run without confirmation.")
+                t("CLI_MESSAGES.reenable_via_approvalsdestructive_slash_confirm_tr", "   Re-enable via `approvals.destructive_slash_confirm: true` in config.yaml.")
             else:
-                print("⚠️  Couldn't persist opt-out — proceeding once.")
+                t("CLI_MESSAGES.couldnt_persist_optout_proceeding_once", "⚠️  Couldn't persist opt-out — proceeding once.")
 
         return choice
 
@@ -9538,7 +9538,7 @@ class HermesCLI:
             choices=choices,
         )
         if raw is None:
-            print("🟡 /reload-mcp cancelled (no input).")
+            t("CLI_MESSAGES.reloadmcp_cancelled_no_input", "🟡 /reload-mcp cancelled (no input).")
             return
         choice = self._normalize_slash_confirm_choice(raw, choices)
         if choice is None:
@@ -9546,15 +9546,15 @@ class HermesCLI:
             return
 
         if choice == "cancel":
-            print("🟡 /reload-mcp cancelled. MCP tools unchanged.")
+            t("CLI_MESSAGES.reloadmcp_cancelled_mcp_tools_unchanged", "🟡 /reload-mcp cancelled. MCP tools unchanged.")
             return
 
         if choice == "always":
             if save_config_value("approvals.mcp_reload_confirm", False):
-                print("🔒 Future /reload-mcp calls will run without confirmation.")
-                print("   Re-enable via `approvals.mcp_reload_confirm: true` in config.yaml.")
+                t("CLI_MESSAGES.future_reloadmcp_calls_will_run_without_confirmati", "🔒 Future /reload-mcp calls will run without confirmation.")
+                t("CLI_MESSAGES.reenable_via_approvalsmcp_reload_confirm_true_in_c", "   Re-enable via `approvals.mcp_reload_confirm: true` in config.yaml.")
             else:
-                print("⚠️  Couldn't persist opt-out — reloading once.")
+                t("CLI_MESSAGES.couldnt_persist_optout_reloading_once", "⚠️  Couldn't persist opt-out — reloading once.")
 
         with self._busy_command(self._slow_command_status(cmd_original)):
             self._reload_mcp()
@@ -9573,7 +9573,7 @@ class HermesCLI:
                 old_servers = set(_servers.keys())
 
             if not self._command_running:
-                print("🔄 Reloading MCP servers...")
+                t("CLI_MESSAGES.reloading_mcp_servers", "🔄 Reloading MCP servers...")
 
             # Shutdown existing connections
             shutdown_mcp_servers()
@@ -9596,7 +9596,7 @@ class HermesCLI:
             if removed:
                 print(f"  ➖ Removed: {', '.join(sorted(removed))}")
             if not connected_servers:
-                print("  No MCP servers connected.")
+                t("CLI_MESSAGES.no_mcp_servers_connected", "  No MCP servers connected.")
             else:
                 print(f"  🔧 {len(new_tools)} tool(s) available from {len(connected_servers)} server(s)")
 
@@ -9661,7 +9661,7 @@ class HermesCLI:
             from agent.skill_commands import reload_skills, get_skill_commands
 
             if not self._command_running:
-                print("🔄 Reloading skills...")
+                t("CLI_MESSAGES.reloading_skills", "🔄 Reloading skills...")
 
             result = reload_skills()
 
@@ -9675,7 +9675,7 @@ class HermesCLI:
             total = result.get("total", 0)
 
             if not added and not removed:
-                print("  No new skills detected.")
+                t("CLI_MESSAGES.no_new_skills_detected", "  No new skills detected.")
                 print(f"  📚 {total} skill(s) available")
                 return
 
@@ -9685,11 +9685,11 @@ class HermesCLI:
                 return f"    - {nm}: {desc}" if desc else f"    - {nm}"
 
             if added:
-                print("  ➕ Added Skills:")
+                t("CLI_MESSAGES.added_skills", "  ➕ Added Skills:")
                 for item in added:
                     print(f"  {_fmt_line(item)}")
             if removed:
-                print("  ➖ Removed Skills:")
+                t("CLI_MESSAGES.removed_skills", "  ➖ Removed Skills:")
                 for item in removed:
                     print(f"  {_fmt_line(item)}")
             print(f"  📚 {total} skill(s) available")
@@ -10162,7 +10162,7 @@ class HermesCLI:
                 self._enable_voice_mode()
         else:
             _cprint(f"Unknown voice subcommand: {subcommand}")
-            _cprint("Usage: /voice [on|off|tts|status]")
+            _ct("CLI_MESSAGES.usage_voice_onoffttsstatus", "Usage: /voice [on|off|tts|status]")
 
     def _voice_beeps_enabled(self) -> bool:
         """Return whether CLI voice mode should play record start/stop beeps."""
@@ -11040,7 +11040,7 @@ class HermesCLI:
                             # But if it does (race condition), don't interrupt.
                             if self._clarify_state or self._clarify_freetext:
                                 continue
-                            print("\n⚡ New message detected, interrupting...")
+                            t("CLI_MESSAGES.n_new_message_detected_interrupting", "\\n⚡ New message detected, interrupting...")
                             # Signal TTS to stop on interrupt
                             if stop_event is not None:
                                 stop_event.set()
@@ -11363,7 +11363,7 @@ class HermesCLI:
                 except Exception:
                     pass
 
-            print("Resume this session with:")
+            t("CLI_MESSAGES.resume_this_session_with", "Resume this session with:")
             print(f"  hermes --resume {self.session_id}")
             if session_title:
                 print(f"  hermes -c \"{session_title}\"")
@@ -12305,13 +12305,13 @@ class HermesCLI:
 
             if self._agent_running and self.agent:
                 if now - self._last_ctrl_c_time < 2.0:
-                    print("\n⚡ Force exiting...")
+                    t("CLI_MESSAGES.n_force_exiting", "\\n⚡ Force exiting...")
                     self._should_exit = True
                     event.app.exit()
                     return
                 
                 self._last_ctrl_c_time = now
-                print("\n⚡ Interrupting agent... (press Ctrl+C again to force exit)")
+                t("CLI_MESSAGES.n_interrupting_agent_press_ctrlc_again_to_force_ex", "\\n⚡ Interrupting agent... (press Ctrl+C again to force exit)")
                 self.agent.interrupt()
             # If there's text or images, clear them (like bash).
             # If everything is already empty, exit.
@@ -12404,7 +12404,7 @@ class HermesCLI:
                 return
 
             if self._agent_running and self.agent:
-                print("\n⚡ Interrupting agent...")
+                t("CLI_MESSAGES.n_interrupting_agent", "\\n⚡ Interrupting agent...")
                 self.agent.interrupt()
             elif event.app.current_buffer.text or self._attached_images:
                 event.app.current_buffer.reset()
@@ -14005,7 +14005,7 @@ def main(
     if gateway:
         import asyncio
         from gateway.run import start_gateway
-        print("Starting Hermes Gateway (messaging platforms)...")
+        t("CLI_MESSAGES.starting_hermes_gateway_messaging_platforms", "Starting Hermes Gateway (messaging platforms)...")
         asyncio.run(start_gateway())
         return
 

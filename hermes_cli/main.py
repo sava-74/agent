@@ -406,7 +406,7 @@ def _session_browse_picker(sessions: list) -> Optional[str]:
     bug in tmux/iTerm when arrow keys are used.
     """
     if not sessions:
-        print("No sessions found.")
+        print("Сессии не найдены.")
         return None
 
     # Try curses-based picker first
@@ -865,7 +865,7 @@ def _print_tui_exit_summary(
             db.close()
 
     print()
-    print("Resume this session with:")
+    print("Возобновить эту сессию:")
     print(f"  hermes --tui --resume {target}")
     if title:
         print(f'  hermes --tui -c "{title}"')
@@ -1084,7 +1084,7 @@ def _make_tui_argv(tui_dir: Path, tui_dev: bool) -> tuple[list[str], Path]:
     if _tui_need_npm_install(tui_dir):
         npm = _node_bin("npm")
         if not os.environ.get("HERMES_QUIET"):
-            print("Installing TUI dependencies…")
+            print("Установка зависимостей TUI…")
         result = subprocess.run(
             [npm, "install", "--silent", "--no-fund", "--no-audit", "--progress=false"],
             cwd=str(tui_dir),
@@ -1096,7 +1096,7 @@ def _make_tui_argv(tui_dir: Path, tui_dev: bool) -> tuple[list[str], Path]:
         if result.returncode != 0:
             combined = f"{result.stdout or ''}\n{result.stderr or ''}".strip()
             preview = "\n".join(combined.splitlines()[-30:])
-            print("npm install failed.")
+            print("npm install не удался.")
             if preview:
                 print(preview)
             sys.exit(1)
@@ -1118,7 +1118,7 @@ def _make_tui_argv(tui_dir: Path, tui_dev: bool) -> tuple[list[str], Path]:
         if result.returncode != 0:
             combined = f"{result.stdout or ''}{result.stderr or ''}".strip()
             preview = "\n".join(combined.splitlines()[-30:])
-            print("TUI dev prebuild failed.")
+            print("Сборка TUI dev не удалась.")
             if preview:
                 print(preview)
             sys.exit(1)
@@ -1139,7 +1139,7 @@ def _make_tui_argv(tui_dir: Path, tui_dev: bool) -> tuple[list[str], Path]:
     if result.returncode != 0:
         combined = f"{result.stdout or ''}{result.stderr or ''}".strip()
         preview = "\n".join(combined.splitlines()[-30:])
-        print("TUI build failed.")
+        print("Сборка TUI не удалась.")
         if preview:
             print(preview)
         sys.exit(1)
@@ -1517,7 +1517,7 @@ def cmd_whatsapp(args):
     current_mode = get_env_value("WHATSAPP_MODE") or ""
     if not current_mode:
         print()
-        print("How will you use WhatsApp with Hermes?")
+        print("Как вы будете использовать WhatsApp с Hermes?")
         print()
         print("  1. Separate bot number (recommended)")
         print("     People message the bot's number directly — cleanest experience.")
@@ -11688,7 +11688,7 @@ Examples:
                 source=args.source, exclude_sources=_exclude, limit=args.limit
             )
             if not sessions:
-                print("No sessions found.")
+                print("Сессии не найдены.")
                 return
             has_titles = any(s.get("title") for s in sessions)
             if has_titles:
@@ -11797,7 +11797,7 @@ Examples:
             )
             db.close()
             if not sessions:
-                print("No sessions found.")
+                print("Сессии не найдены.")
                 return
 
             selected_id = _session_browse_picker(sessions)

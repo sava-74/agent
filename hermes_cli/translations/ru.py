@@ -2,11 +2,9 @@
 Russian translation file for Hermes Agent CLI.
 All user-facing strings should be translated here.
 """
-
 # ============================================================================
 # Banner and branding / Баннер и брендинг
 # ============================================================================
-
 BANNER = {
     "welcome": "Добро пожаловать в Hermes Agent",
     "available_tools": "Доступные инструменты",
@@ -34,11 +32,9 @@ BANNER = {
     "yolo_mode": "Режим YOLO",
     "yolo_mode_desc": "— все подтверждения bypassed",
 }
-
 # ============================================================================
 # Commands / Команды
 # ============================================================================
-
 COMMANDS = {
     # Session / Сессия
     "new": "Начать новую сессию (новый ID + история)",
@@ -71,14 +67,13 @@ COMMANDS = {
     "steer": "Вставить сообщение после следующего вызова инструмента без прерывания",
     "goal": "Установить постоянную цель, над которой Hermes работает в нескольких ходах до достижения",
     "subgoal": "Добавить или управлять дополнительными критериями для активной цели",
-    "status": "Показать информацию о сессии",
+    "статус": "Показать информацию о сессии",
     "whoami": "Показать доступ к командам (админ / пользователь)",
     "profile": "Показать активный профиль и домашний каталог",
     "sethome": "Установить этот чат как домашний канал",
     "set-home": "Установить этот чат как домашний канал",
     "resume": "Возобновить ранее названную сессию",
     "sessions": "Просмотр и возобновление предыдущих сессий",
-    
     # Configuration / Конфигурация
     "config": "Показать текущую конфигурацию",
     "model": "Переключить модель для этой сессии",
@@ -98,7 +93,6 @@ COMMANDS = {
     "indicator": "Выбрать стиль индикатора занятости TUI",
     "voice": "Переключить голосовой режим",
     "busy": "Управление действием Enter во время работы Hermes",
-    
     # Tools & Skills / Инструменты и навыки
     "tools": "Управление инструментами: /tools [list|disable|enable] [имя...]",
     "toolsets": "Список доступных наборов инструментов",
@@ -113,7 +107,6 @@ COMMANDS = {
     "reload_skills": "Повторное сканирование ~/.hermes/skills/ на новые или удалённые навыки",
     "browser": "Подключить инструменты браузера к живому Chrome через CDP",
     "plugins": "Список установленных плагинов и их статус",
-    
     # Info / Информация
     "commands": "Просмотр всех команд и навыков (постранично)",
     "help": "Показать доступные команды",
@@ -122,11 +115,9 @@ COMMANDS = {
     "insights": "Показать аналитику и инсайты использования",
     "platforms": "Показать статус платформы шлюза/сообщений",
 }
-
 # ============================================================================
 # Status messages / Сообщения статуса
 # ============================================================================
-
 STATUS = {
     "thinking": "Думаю...",
     "waiting": "Ожидание...",
@@ -154,11 +145,9 @@ STATUS = {
     "archived": "Архивировано",
     "pinned": "Закреплено",
 }
-
 # ============================================================================
 # Tool responses / Ответы инструментов
 # ============================================================================
-
 TOOLS = {
     "terminal": "Терминал",
     "web_search": "Поиск в интернете",
@@ -174,11 +163,9 @@ TOOLS = {
     "patch": "Применить патч",
     "remove_file": "Удалить файл",
 }
-
 # ============================================================================
 # Error messages / Сообщения об ошибках
 # ============================================================================
-
 ERRORS = {
     "api_error": "Ошибка API",
     "network_error": "Ошибка сети",
@@ -198,11 +185,9 @@ ERRORS = {
     "operation_cancelled": "Операция отменена",
     "operation_failed": "Операция не удалась",
 }
-
 # ============================================================================
 # Prompts and questions / Подсказки и вопросы
 # ============================================================================
-
 PROMPTS = {
     "confirm": "Вы уверены?",
     "confirm_yn": "Вы уверены? [Y/n]",
@@ -221,11 +206,9 @@ PROMPTS = {
     "delete_confirm": "Удалить?",
     "are_you_sure": "Вы уверены?",
 }
-
 # ============================================================================
 # Help text / Текст справки
 # ============================================================================
-
 HELP = {
     "usage_title": "Использование токенов",
     "usage_input": "Входные токены",
@@ -249,11 +232,9 @@ HELP = {
     "session_info": "Сессия",
     "profile_info": "Профиль",
 }
-
 # ============================================================================
 # Miscellaneous / Разное
 # ============================================================================
-
 MISC = {
     "version": "Версия",
     "python": "Python",
@@ -284,15 +265,2631 @@ MISC = {
     "showing": "Показано",
     "entries": "записей",
 }
-
 # ============================================================================
 # Categories / Категории
 # ============================================================================
-
 CATEGORIES = {
     "Session": "Сессия",
     "Configuration": "Конфигурация",
     "Tools & Skills": "Инструменты и навыки",
     "Info": "Информация",
     "Exit": "Выход",
+}
+# ============================================================================
+# Command descriptions / Описания команд
+# ============================================================================
+COMMANDS_TRANSLATIONS = {
+    # Session / Сессия
+    "new": "Начать новую сессию (новый ID + история)",
+    "reset": "Начать новую сессию (новый ID + история)",
+    "topic": "Включить или просмотреть топик-сессии Telegram",
+    "clear": "Очистить экран и начать новую сессию",
+    "redraw": "Принудительно перерисовать UI (восстанавливает после сбоев терминала)",
+    "history": "Показать историю разговора",
+    "save": "Сохранить текущий разговор",
+    "retry": "Повторить последнее сообщение (отправить агенту повторно)",
+    "undo": "Удалить последний обмен пользователь/ассистент",
+    "title": "Установить заголовок для текущей сессии",
+    "handoff": "Передать эту сессию в платформу сообщений (Telegram, Discord и т.д.)",
+    "branch": "Ответвить текущую сессию (исследовать другой путь)",
+    "fork": "Ответвить текущую сессию (исследовать другой путь)",
+    "compress": "Вручную сжать контекст разговора",
+    "rollback": "Список или восстановление чекпоинтов файловой системы",
+    "snapshot": "Создать или восстановить снимки состояния конфигурации/состояния Hermes",
+    "snap": "Создать или восстановить снимки состояния конфигурации/состояния Hermes",
+    "stop": "Убить все запущенные фоновые процессы",
+    "approve": "Одобрить ожидающую опасную команду",
+    "deny": "Отклонить ожидающую опасную команду",
+    "background": "Запустить запрос в фоновом режиме",
+    "bg": "Запустить запрос в фоновом режиме",
+    "btw": "Запустить запрос в фоновом режиме",
+    "agents": "Показать активные агенты и запущенные задачи",
+    "tasks": "Показать активные агенты и запущенные задачи",
+    "queue": "Поставить запрос в очередь для следующего хода (не прерывает)",
+    "q": "Поставить запрос в очередь для следующего хода (не прерывает)",
+    "steer": "Вставить сообщение после следующего вызова инструмента без прерывания",
+    "goal": "Установить постоянную цель, над которой Hermes работает в нескольких ходах до достижения",
+    "subgoal": "Добавить или управлять дополнительными критериями для активной цели",
+    "status": "Показать информацию о сессии",
+    "whoami": "Показать доступ к командам (админ / пользователь)",
+    "profile": "Показать активный профиль и домашний каталог",
+    "sethome": "Установить этот чат как домашний канал",
+    "set-home": "Установить этот чат как домашний канал",
+    "resume": "Возобновить ранее названную сессию",
+    "sessions": "Просмотр и возобновление предыдущих сессий",
+    # Configuration / Конфигурация
+    "config": "Показать текущую конфигурацию",
+    "model": "Переключить модель для этой сессии",
+    "provider": "Переключить модель для этой сессии",
+    "codex-runtime": "Переключить среду выполнения codex app-server для моделей OpenAI/Codex",
+    "codex_runtime": "Переключить среду выполнения codex app-server для моделей OpenAI/Codex",
+    "gquota": "Показать использование квоты Google Gemini Code Assist",
+    "personality": "Установить предопределённую личность",
+    "statusbar": "Переключить строку состояния контекста/модели",
+    "sb": "Переключить строку состояния контекста/модели",
+    "verbose": "Переключить отображение прогресса инструментов: off -> new -> all -> verbose",
+    "footer": "Переключить футер метаданных шлюза на финальных ответах",
+    "yolo": "Переключить режим YOLO (пропуск всех одобрений опасных команд)",
+    "reasoning": "Управление усилием рассуждения и отображением",
+    "fast": "Переключить быстрый режим — OpenAI Priority Processing / Anthropic Fast Mode",
+    "skin": "Показать или сменить скин/тему отображения",
+    "indicator": "Выбрать стиль индикатора занятости TUI",
+    "voice": "Переключить голосовой режим",
+    "busy": "Управление действием Enter во время работы Hermes",
+    # Tools & Skills / Инструменты и навыки
+    "tools": "Управление инструментами: /tools [list|disable|enable] [name...]",
+    "toolsets": "Список доступных наборов инструментов",
+    "skills": "Поиск, установка, проверка или управление навыками",
+    "cron": "Управление запланированными задачами",
+    "curator": "Фоновое обслуживание навыков (статус, запуск, закрепление, архивирование, список архивных)",
+    "kanban": "Доска многопрофильного сотрудничества (задачи, ссылки, комментарии)",
+    "reload": "Перезагрузить переменные .env в текущую сессию",
+    "reload-mcp": "Перезагрузить MCP серверы из конфигурации",
+    "reload_mcp": "Перезагрузить MCP серверы из конфигурации",
+    "reload-skills": "Повторное сканирование ~/.hermes/skills/ на новые или удалённые навыки",
+    "reload_skills": "Повторное сканирование ~/.hermes/skills/ на новые или удалённые навыки",
+    "browser": "Подключить инструменты браузера к живому Chrome через CDP",
+    "plugins": "Список установленных плагинов и их статус",
+    # Info / Информация
+    "commands": "Просмотр всех команд и навыков (постранично)",
+    "help": "Показать доступные команды",
+    "restart": "Грациозно перезапустить шлюз после завершения активных выполнений",
+    "usage": "Показать использование токенов и лимиты для текущей сессии",
+    "insights": "Показать аналитику и инсайты использования",
+    "platforms": "Показать статус платформы шлюза/сообщений",
+    "copy": "Копировать последний ответ ассистента в буфер обмена",
+    "paste": "Прикрепить изображение из буфера обмена",
+    "image": "Прикрепить локальный файл изображения для следующего запроса",
+    "update": "Обновить Hermes Agent до последней версии",
+    "debug": "Загрузить отчёт отладки (системная информация + логи) и получить ссылки",
+    # Exit / Выход
+    "quit": "Выйти из CLI (используйте --delete для удаления истории сессии)",
+    "exit": "Выйти из CLI (используйте --delete для удаления истории сессии)",
+}
+# Категории команд
+COMMAND_CATEGORIES = {
+    "Сессия": "Session",
+    "Конфигурация": "Configuration",
+    "Инструменты и навыки": "Tools & Skills",
+    "Информация": "Info",
+    "Выход": "Exit",
+}
+# ============================================================================
+# Agent messages / Сообщения агента (run_agent.py)
+# ============================================================================
+AGENT_MESSAGES = {
+    # System / Система
+    "no_env_file_found": "Файл .env не найден. Используются системные переменные окружения.",
+    "sessiondb_unavailable": "SessionDB недоступна для воспроизведения",
+    "lm_studio_preload_skipped": "Предзагрузка LM Studio пропущена: {path}",
+    "status_callback_error": "Ошибка status_callback: {func}",
+    "session_db_append_failed": "Не удалось добавить сообщение в Session DB: {error}",
+    "interrupt_propagate_failed": "Не удалось передать прерывание дочернему агенту: {error}",
+    "interrupt_requested": "\\n⚡ Запрошено прерывание",
+    "openrouter_cache_hit": "Кэш ответов OpenRouter: попадание (всего: {count})",
+    "openrouter_cache_status": "Кэш ответов OpenRouter: {status}",
+    "duplicate_tool_call_removed": "Удалён дубликат вызова инструмента: {tool}",
+    "nous_credential_refresh_failed": "Обновление учётных данных Nous не удалось: {error}",
+    "copilot_credential_refresh_failed": "Обновление учётных данных Copilot не удалось: {error}",
+    "anthropic_credential_refresh_failed": "Обновление учётных данных Anthropic не удалось: {error}",
+    "anthropic_client_rebuild_failed": "Не удалось пересоздать клиент Anthropic: {error}",
+    "interim_callback_error": "Ошибка interim_assistant_callback",
+    # Banner / Баннер
+    "ai_agent_title": "🤖 AI Агент с вызовом инструментов",
+    "available_tools_title": "📋 Доступные инструменты и наборы:",
+    "predefined_toolsets": "\n🎯 Предопределённые наборы инструментов (новая система):",
+    "basic_toolsets": "\n📌 Базовые наборы:",
+    "scenario_toolsets": "\n🎭 Наборы для сценариев:",
+    "legacy_toolsets": "\n📦 Устаревшие наборы (для обратной совместимости):",
+    "individual_tools": "\n🔧 Отдельные инструменты (доступно {count}):",
+    "usage_examples": "\n💡 Примеры использования:",
+    "example_use_predefined": "  # Использовать предопределённые наборы",
+    "example_combine_toolsets": "  # Комбинировать несколько наборов",
+    "example_disable_toolsets": "  # Отключить наборы",
+    "example_trajectory_saving": "  # Запустить с сохранением траекторий",
+    "enabled_toolsets_label": "🎯 Включённые наборы: {list}",
+    "disabled_toolsets_label": "🚫 Отключённые наборы: {list}",
+    "trajectory_enabled": "💾 Сохранение траекторий: ВКЛЮЧЕНО",
+    "trajectory_disabled": "💾 Сохранение траекторий: ОТКЛЮЧЕНО",
+    "trajectory_info": "   - Успешные диалоги → trajectory_samples.jsonl",
+    "trajectory_enable_hint": "   - Включить: --save_trajectories",
+    "enabled_tools_label": "🔧 Включённые инструменты: {list}",
+    "token_tracking_enabled": "📊 Отслеживание токенов: ВКЛЮЧЕНО",
+    "token_tracking_disabled": "📊 Отслеживание токенов: ОТКЛЮЧЕНО",
+    "agent_config_title": "⚙️  Конфигурация агента:",
+    "config_model": "   Модель: {model}",
+    "config_provider": "   Провайдер: {provider}",
+    "config_max_iterations": "   Макс. итераций: {max}",
+    "config_quiet_mode": "   Тихий режим: {mode}",
+    "config_save_trajectories": "   Сохранять траектории: {mode}",
+    "config_enabled_toolsets": "   Включённые наборы: {toolsets}",
+    "config_disabled_toolsets": "   Отключённые наборы: {toolsets}",
+    "warning_toolsets_deprecated": "⚠️  Предупреждение: --toolsets устарел. Используйте --enabled_toolsets.",
+    "starting_agent_with_tools": "✅ Запуск агента с инструментами...",
+    "starting_agent_chat_only": "🚀 Запуск агента без инструментов (режим только чат)...",
+    "query_label": "Запрос: {query}",
+    # Tool execution / Выполнение инструментов
+    "executing_tool": "Выполняю инструмент: {tool}",
+    "tool_completed": "Инструмент {tool} успешно завершён",
+    "tool_failed": "Инструмент {tool} не удался: {error}",
+    "running_terminal_command": "Запускаю команду терминала: {command}",
+    "reading_file": "Читаю файл: {path}",
+    "writing_file": "Записываю файл: {path}",
+    "searching_files": "Ищу файлы: {pattern}",
+    "web_search": "Поиск в интернете: {query}",
+    "thinking": "Думаю...",
+    "processing": "Обрабатываю...",
+    "waiting_for_response": "Ожидаю ответ...",
+    "error_label": "Ошибка: {message}",
+    "success_label": "Успешно!",
+    "failed_label": "Не удалось: {reason}",
+    # Session / Сессия
+    "starting_new_session": "Начинаю новую сессию: {id}",
+    "resuming_session": "Возобновляю сессию: {id}",
+    "session_saved": "Сессия сохранена: {path}",
+    "session_loaded": "Сессия загружена: {path}",
+    "checkpoint_created": "Чекпоинт создан: {id}",
+    "checkpoint_restored": "Чекпоинт восстановлен: {id}",
+    # Progress / Прогресс
+    "iteration_count": "Итерация {current}/{max}",
+    "token_usage": "Использование токенов: {used}/{limit}",
+    "budget_remaining": "Остаток бюджета: {remaining}",
+    "rate_limit_waiting": "Достигнут лимит запросов, ожидаю...",
+    "retrying_in": "Повтор через {seconds}с...",
+    # Memory / Память
+    "memory_saved": "Память сохранена: {count} записей",
+    "memory_loaded": "Память загружена: {count} записей",
+    "memory_search": "Поиск в памяти: {query}",
+    "no_memories_found": "Релевантных записей не найдено",
+    # Delegation / Делегирование
+    "delegating_task": "Делегирую задачу субагенту...",
+    "subagent_completed": "Субагент завершил задачу",
+    "subagent_failed": "Субагент не удался: {error}",
+    "waiting_for_subagent": "Ожидаю субагента...",
+    # Browser / Браузер
+    "navigating_to": "Перехожу на: {url}",
+    "page_loaded": "Страница загружена: {title}",
+    "browser_error": "Ошибка браузера: {error}",
+    "screenshot_saved": "Скриншот сохранён: {path}",
+    # Skills / Навыки
+    "loading_skill": "Загружаю навык: {skill}",
+    "skill_loaded": "Навык загружен: {skill}",
+    "skill_not_found": "Навык не найден: {skill}",
+    "applying_skill_instructions": "Применяю инструкции навыка...",
+    # Cron / Задачи
+    "scheduled_task_created": "Запланирована задача: {id}",
+    "scheduled_task_completed": "Задача завершена: {id}",
+    "scheduled_task_failed": "Задача не удалась: {id}",
+    # Misc / Разное
+    "press_ctrlc_interrupt": "Нажмите Ctrl+C для прерывания",
+    "interrupted_by_user": "Прервано пользователем",
+    "operation_cancelled": "Операция отменена",
+    "operation_completed": "Операция завершена",
+    "timeout_exceeded": "Превышено время ожидания",
+    "connection_lost": "Соединение потеряно",
+    "reconnecting": "Переподключение...",
+    "connected": "Подключено",
+    "disconnected": "Отключено",
+}
+
+
+# ============================================================================
+# Tool messages / Сообщения инструментов
+# ============================================================================
+
+TOOL_MESSAGES = {
+    # File operations / Операции с файлами
+    "file_read_result": "Результат чтения файла",
+    "file_write_result": "Результат записи файла",
+    "file_patch_result": "Результат применения патча",
+    "file_search_result": "Результат поиска в файлах",
+    "file_not_found": "Файл не найден: {path}",
+    "directory_not_found": "Директория не найдена: {path}",
+    "file_created": "Файл создан: {path}",
+    "file_updated": "Файл обновлён: {path}",
+    "file_deleted": "Файл удалён: {path}",
+    "files_modified": "Файлов изменено: {count}",
+    "files_created": "Файлов создано: {count}",
+    "files_deleted": "Файлов удалено: {count}",
+    "search_matches": "Найдено совпадений: {count}",
+    "search_in_files": "Поиск в файлах: {pattern}",
+    "reading_file": "Чтение файла: {path}",
+    "writing_file": "Запись файла: {path}",
+    "patching_file": "Применение патча: {path}",
+    "searching_files": "Поиск в файлах: {pattern}",
+    "linting_file": "Проверка файла: {path}",
+    "lint_passed": "Проверка пройдена",
+    "lint_failed": "Проверка не пройдена: {error}",
+    "lsp_diagnostics": "Диагностика LSP: {count} проблем",
+    
+    # Terminal / Терминал
+    "running_command": "Запуск команды: {command}",
+    "command_completed": "Команда завершена с кодом {code}",
+    "command_failed": "Команда не удалась: {error}",
+    "command_timeout": "Превышено время ожидания команды",
+    "command_output": "Вывод команды: {output}",
+    "command_error": "Ошибка команды: {error}",
+    "terminal_ready": "Терминал готов",
+    "terminal_error": "Ошибка терминала: {error}",
+    "process_started": "Процесс запущен: {pid}",
+    "process_completed": "Процесс завершён: {pid}",
+    "process_killed": "Процесс остановлен: {pid}",
+    "process_running": "Процесс выполняется: {pid}",
+    "process_not_found": "Процесс не найден: {pid}",
+    "background_task_started": "Фоновая задача запущена: {id}",
+    "background_task_completed": "Фоновая задача завершена: {id}",
+    "background_task_failed": "Фоновая задача не удалась: {id}",
+    
+    # Web / Веб
+    "web_search": "Поиск в интернете: {query}",
+    "web_search_results": "Найдено результатов: {count}",
+    "web_extract": "Извлечение контента: {url}",
+    "web_extract_success": "Контент извлечён: {url}",
+    "web_extract_failed": "Не удалось извлечь контент: {url}",
+    "web_search_failed": "Поиск не удался: {error}",
+    "no_results_found": "Ничего не найдено",
+    "extracting_content": "Извлечение контента со страницы",
+    "page_loaded": "Страница загружена: {title}",
+    "page_load_failed": "Не удалось загрузить страницу: {error}",
+    "browser_navigating": "Переход на: {url}",
+    "browser_navigation_complete": "Переход завершён: {url}",
+    "browser_screenshot": "Скриншот сохранён: {path}",
+    "browser_click": "Клик: {element}",
+    "browser_input": "Ввод текста: {text}",
+    "browser_scroll": "Прокрутка: {direction}",
+    
+    # Code execution / Выполнение кода
+    "executing_code": "Выполнение кода",
+    "code_execution_success": "Код выполнен успешно",
+    "code_execution_failed": "Ошибка выполнения кода: {error}",
+    "code_output": "Вывод кода: {output}",
+    "code_error": "Ошибка кода: {error}",
+    "installing_package": "Установка пакета: {package}",
+    "package_installed": "Пакет установлен: {package}",
+    "package_install_failed": "Не удалось установить пакет: {package}",
+    "importing_module": "Импорт модуля: {module}",
+    "module_imported": "Модуль импортирован: {module}",
+    "module_not_found": "Модуль не найден: {module}",
+    
+    # Delegate / Делегирование
+    "delegating_task": "Делегирование задачи: {task}",
+    "task_delegated": "Задача делегирована: {agent}",
+    "task_completed": "Задача завершена: {result}",
+    "task_failed": "Задача не удалась: {error}",
+    "waiting_for_subagent": "Ожидание субагента...",
+    "subagent_response": "Ответ субагента: {response}",
+    "subagent_timeout": "Субагент превысил время ожидания",
+    "subagent_error": "Ошибка субагента: {error}",
+    
+    # Memory / Память
+    "memory_saved": "Память сохранена: {count} записей",
+    "memory_loaded": "Память загружена: {count} записей",
+    "memory_search": "Поиск в памяти: {query}",
+    "memory_found": "Найдено записей: {count}",
+    "memory_not_found": "Записи не найдены",
+    "memory_updated": "Память обновлена",
+    "memory_deleted": "Память удалена",
+    "memory_error": "Ошибка памяти: {error}",
+    
+    # Todo / Задачи
+    "todo_created": "Задача создана: {id}",
+    "todo_updated": "Задача обновлена: {id}",
+    "todo_completed": "Задача завершена: {id}",
+    "todo_deleted": "Задача удалена: {id}",
+    "todo_list": "Список задач: {count}",
+    "todo_not_found": "Задача не найдена: {id}",
+    "todo_error": "Ошибка задачи: {error}",
+    
+    # Vision / Изображения
+    "analyzing_image": "Анализ изображения: {path}",
+    "image_analyzed": "Изображение проанализировано",
+    "image_analysis_failed": "Не удалось проанализировать изображение: {error}",
+    "image_description": "Описание изображения: {description}",
+    "image_text_detected": "Обнаружен текст: {text}",
+    "image_objects_detected": "Обнаружено объектов: {count}",
+    
+    # Approval / Подтверждения
+    "approval_requested": "Запрошено подтверждение",
+    "approval_granted": "Подтверждено",
+    "approval_denied": "Отклонено",
+    "approval_timeout": "Превышено время ожидания подтверждения",
+    "approval_error": "Ошибка подтверждения: {error}",
+    "dangerous_command": "Опасная команда: {command}",
+    "command_approved": "Команда одобрена: {command}",
+    "command_denied": "Команда отклонена: {command}",
+    
+    # Clarify / Уточнения
+    "clarify_requested": "Запрошено уточнение",
+    "clarify_response": "Ответ на уточнение: {response}",
+    "clarify_timeout": "Превышено время ожидания уточнения",
+    "clarify_error": "Ошибка уточнения: {error}",
+    
+    # Cron / Запланированные задачи
+    "cron_job_created": "Задача создана: {id}",
+    "cron_job_updated": "Задача обновлена: {id}",
+    "cron_job_deleted": "Задача удалена: {id}",
+    "cron_job_paused": "Задача приостановлена: {id}",
+    "cron_job_resumed": "Задача возобновлена: {id}",
+    "cron_job_executed": "Задача выполнена: {id}",
+    "cron_job_failed": "Задача не удалась: {id}",
+    "cron_job_scheduled": "Задача запланирована: {schedule}",
+    "cron_job_list": "Запланированные задачи: {count}",
+    "cron_job_not_found": "Задача не найдена: {id}",
+    
+    # Image generation / Генерация изображений
+    "generating_image": "Генерация изображения: {prompt}",
+    "image_generated": "Изображение создано: {path}",
+    "image_generation_failed": "Не удалось создать изображение: {error}",
+    "image_saved": "Изображение сохранено: {path}",
+    "image_downloaded": "Изображение загружено: {url}",
+    
+    # Common errors / Общие ошибки
+    "tool_error": "Ошибка инструмента: {error}",
+    "tool_timeout": "Превышено время ожидания инструмента",
+    "tool_not_available": "Инструмент недоступен: {tool}",
+    "tool_not_found": "Инструмент не найден: {tool}",
+    "tool_disabled": "Инструмент отключен: {tool}",
+    "invalid_arguments": "Неверные аргументы: {error}",
+    "missing_required_argument": "Отсутствует обязательный аргумент: {arg}",
+    "permission_denied": "Отказано в доступе: {path}",
+    "rate_limit_exceeded": "Превышен лимит запросов",
+    "quota_exceeded": "Превышена квота",
+    "network_error": "Ошибка сети: {error}",
+    "connection_error": "Ошибка соединения: {error}",
+    "timeout_error": "Ошибка времени ожидания",
+    "unknown_error": "Неизвестная ошибка: {error}",
+}
+
+
+# ============================================================================
+# Gateway messages / Сообщения шлюза
+# ============================================================================
+
+GATEWAY_MESSAGES = {
+    # Startup / Запуск
+    "gateway_starting": "Запуск шлюза...",
+    "gateway_started": "Шлюз запущен",
+    "gateway_running": "Шлюз работает",
+    "gateway_stopped": "Шлюз остановлен",
+    "gateway_stopping": "Остановка шлюза...",
+    "gateway_restarting": "Перезапуск шлюза...",
+    "gateway_restart_complete": "Перезапуск завершён",
+    "gateway_initialization_failed": "Не удалось инициализировать шлюз: {error}",
+    "gateway_shutdown": "Завершение работы шлюза",
+    "gateway_shutdown_complete": "Завершение работы завершено",
+    
+    # Platform status / Статус платформ
+    "platform_connected": "Платформа подключена: {platform}",
+    "platform_disconnected": "Платформа отключена: {platform}",
+    "platform_connecting": "Подключение платформы: {platform}",
+    "platform_connection_failed": "Не удалось подключить платформу: {platform}",
+    "platform_error": "Ошибка платформы {platform}: {error}",
+    "platform_paused": "Платформа приостановлена: {platform}",
+    "platform_resumed": "Платформа возобновлена: {platform}",
+    "platform_not_available": "Платформа недоступна: {platform}",
+    "platform_already_enabled": "Платформа уже включена: {platform}",
+    "platform_already_disabled": "Платформа уже отключена: {platform}",
+    
+    # Telegram / Telegram
+    "telegram_bot_started": "Telegram бот запущен",
+    "telegram_bot_stopped": "Telegram бот остановлен",
+    "telegram_message_received": "Получено сообщение Telegram",
+    "telegram_message_sent": "Сообщение Telegram отправлено",
+    "telegram_message_failed": "Не удалось отправить сообщение Telegram: {error}",
+    "telegram_chat_not_found": "Чат Telegram не найден: {chat_id}",
+    "telegram_user_not_found": "Пользователь Telegram не найден: {user_id}",
+    "telegram_update_processed": "Обновление Telegram обработано",
+    "telegram_update_failed": "Не удалось обработать обновление Telegram: {error}",
+    "telegram_webhook_set": "Webhook Telegram установлен",
+    "telegram_webhook_deleted": "Webhook Telegram удалён",
+    "telegram_webhook_error": "Ошибка webhook Telegram: {error}",
+    
+    # Discord / Discord
+    "discord_bot_started": "Discord бот запущен",
+    "discord_bot_stopped": "Discord бот остановлен",
+    "discord_message_received": "Получено сообщение Discord",
+    "discord_message_sent": "Сообщение Discord отправлено",
+    "discord_message_failed": "Не удалось отправить сообщение Discord: {error}",
+    "discord_channel_not_found": "Канал Discord не найден: {channel_id}",
+    "discord_server_not_found": "Сервер Discord не найден: {server_id}",
+    "discord_user_not_found": "Пользователь Discord не найден: {user_id}",
+    "discord_reaction_added": "Реакция Discord добавлена",
+    "discord_reaction_removed": "Реакция Discord удалена",
+    
+    # WhatsApp / WhatsApp
+    "whatsapp_connected": "WhatsApp подключён",
+    "whatsapp_disconnected": "WhatsApp отключён",
+    "whatsapp_message_received": "Получено сообщение WhatsApp",
+    "whatsapp_message_sent": "Сообщение WhatsApp отправлено",
+    "whatsapp_message_failed": "Не удалось отправить сообщение WhatsApp: {error}",
+    "whatsapp_session_expired": "Сессия WhatsApp истекла",
+    "whatsapp_session_refreshed": "Сессия WhatsApp обновлена",
+    "whatsapp_pairing_started": "Сопряжение WhatsApp начато",
+    "whatsapp_pairing_complete": "Сопряжение WhatsApp завершено",
+    "whatsapp_pairing_failed": "Не удалось сопряжение WhatsApp: {error}",
+    "whatsapp_qr_generated": "QR-код WhatsApp сгенерирован",
+    "whatsapp_qr_expired": "QR-код WhatsApp истёк",
+    
+    # Session management / Управление сессиями
+    "session_created": "Сессия создана: {session_id}",
+    "session_resumed": "Сессия возобновлена: {session_id}",
+    "session_ended": "Сессия завершена: {session_id}",
+    "session_not_found": "Сессия не найдена: {session_id}",
+    "session_handoff_started": "Передача сессии начата",
+    "session_handoff_complete": "Передача сессии завершена",
+    "session_handoff_failed": "Не удалось передать сессию: {error}",
+    "session_migrated": "Сессия мигрирована: {session_id}",
+    "session_migration_failed": "Не удалось мигрировать сессию: {error}",
+    
+    # Message delivery / Доставка сообщений
+    "message_delivered": "Сообщение доставлено: {platform}",
+    "message_delivery_failed": "Не удалось доставить сообщение: {error}",
+    "message_retrying": "Повторная отправка сообщения",
+    "message_retry_failed": "Не удалось отправить сообщение повторно: {error}",
+    "message_queued": "Сообщение в очереди: {count}",
+    "message_queue_empty": "Очередь сообщений пуста",
+    "message_queue_flushed": "Очередь сообщений очищена",
+    "message_too_long": "Сообщение слишком длинное: {length} символов",
+    "message_truncated": "Сообщение сокращено до {max} символов",
+    "message_split": "Сообщение разделено на {count} частей",
+    
+    # Rate limiting / Ограничения
+    "rate_limit_reached": "Достигнут лимит запросов: {platform}",
+    "rate_limit_waiting": "Ожидание снятия лимита: {seconds}с",
+    "rate_limit_reset": "Лимит сброшен: {platform}",
+    "quota_exceeded": "Превышена квота: {platform}",
+    "quota_reset": "Квота сброшена: {platform}",
+    "throttling_enabled": "Троттлинг включён: {platform}",
+    "throttling_disabled": "Троттлинг отключён: {platform}",
+    
+    # Webhooks / Webhooks
+    "webhook_registered": "Webhook зарегистрирован: {url}",
+    "webhook_unregistered": "Webhook удалён: {url}",
+    "webhook_triggered": "Webhook активирован: {event}",
+    "webhook_failed": "Webhook не удался: {url}",
+    "webhook_timeout": "Webhook превысил время ожидания: {url}",
+    "webhook_invalid_url": "Неверный URL webhook: {url}",
+    "webhook_security_error": "Ошибка безопасности webhook: {error}",
+    
+    # Authentication / Аутентификация
+    "auth_required": "Требуется аутентификация",
+    "auth_success": "Аутентификация успешна",
+    "auth_failed": "Аутентификация не удалась: {error}",
+    "auth_expired": "Аутентификация истекла",
+    "auth_refreshed": "Аутентификация обновлена",
+    "auth_token_invalid": "Неверный токен аутентификации",
+    "auth_permission_denied": "Отказано в доступе: {resource}",
+    "auth_user_not_found": "Пользователь не найден: {user_id}",
+    
+    # Configuration / Конфигурация
+    "config_loaded": "Конфигурация загружена",
+    "config_saved": "Конфигурация сохранена",
+    "config_reloaded": "Конфигурация перезаряжена",
+    "config_error": "Ошибка конфигурации: {error}",
+    "config_invalid": "Неверная конфигурация: {error}",
+    "config_updated": "Конфигурация обновлена: {key}",
+    "config_reset": "Конфигурация сброшена: {key}",
+    
+    # Errors / Ошибки
+    "gateway_error": "Ошибка шлюза: {error}",
+    "platform_error": "Ошибка платформы: {platform}",
+    "network_error": "Ошибка сети: {error}",
+    "connection_error": "Ошибка соединения: {error}",
+    "timeout_error": "Ошибка времени ожидания",
+    "ssl_error": "SSL ошибка: {error}",
+    "certificate_error": "Ошибка сертификата: {error}",
+    "dns_error": "DNS ошибка: {error}",
+    "unknown_error": "Неизвестная ошибка: {error}",
+    
+    # Status / Статус
+    "status_ok": "OK",
+    "status_warning": "Предупреждение",
+    "status_error": "Ошибка",
+    "status_critical": "Критическая ошибка",
+    "status_unknown": "Неизвестно",
+    "status_healthy": "Здоров",
+    "status_unhealthy": "Нездоров",
+    "status_degraded": "Деградирован",
+    
+    # Misc / Разное
+    "restart_requested": "Запрошен перезапуск",
+    "restart_initiated": "Перезапуск начат",
+    "restart_cancelled": "Перезапуск отменён",
+    "shutdown_requested": "Запрошено завершение",
+    "shutdown_initiated": "Завершение начато",
+    "shutdown_cancelled": "Завершение отменено",
+    "maintenance_mode_enabled": "Режим обслуживания включён",
+    "maintenance_mode_disabled": "Режим обслуживания отключён",
+    "debug_mode_enabled": "Режим отладки включён",
+    "debug_mode_disabled": "Режим отладки отключён",
+}
+
+
+# ============================================================================
+# Setup wizard / Мастер настройки
+# ============================================================================
+
+SETUP_WIZARD = {
+    "welcome_title": "⚕ Добро пожаловать в Hermes Agent",
+    "welcome_message": "Этот мастер поможет настроить Hermes Agent",
+    "setup_cancelled": "Настройка отменена",
+    "setup_complete": "Настройка завершена!",
+    "setup_error": "Ошибка настройки: {error}",
+    
+    # API Keys / API ключи
+    "api_key_prompt": "Введите ваш {provider} API ключ",
+    "api_key_saved": "API ключ {provider} сохранён",
+    "api_key_invalid": "Неверный API ключ: {provider}",
+    "api_key_required": "Требуется API ключ: {provider}",
+    "api_key_skip": "Пропустить настройку {provider}",
+    "api_key_test": "Проверка API ключа {provider}",
+    "api_key_test_success": "API ключ {provider} проверен успешно",
+    "api_key_test_failed": "Не удалось проверить API ключ {provider}: {error}",
+    
+    # Model selection / Выбор модели
+    "model_select_prompt": "Выберите модель по умолчанию",
+    "model_selected": "Модель выбрана: {model}",
+    "model_not_available": "Модель недоступна: {model}",
+    "model_recommended": "Рекомендуемая модель: {model}",
+    "model_custom": "Пользовательская модель",
+    "model_enter_name": "Введите название модели",
+    
+    # Provider selection / Выбор провайдера
+    "provider_select_prompt": "Выберите провайдера по умолчанию",
+    "provider_selected": "Провайдер выбран: {provider}",
+    "provider_not_available": "Провайдер недоступен: {provider}",
+    "provider_recommended": "Рекомендуемый провайдер: {provider}",
+    "provider_custom": "Пользовательский провайдер",
+    "provider_enter_url": "Введите URL провайдера",
+    
+    # Terminal / Терминал
+    "terminal_select_prompt": "Выберите терминал по умолчанию",
+    "terminal_selected": "Терминал выбран: {terminal}",
+    "terminal_local": "Локальный терминал",
+    "terminal_docker": "Docker терминал",
+    "terminal_ssh": "SSH терминал",
+    "terminal_custom": "Пользовательский терминал",
+    
+    # Browser / Браузер
+    "browser_select_prompt": "Выберите браузер по умолчанию",
+    "browser_selected": "Браузер выбран: {browser}",
+    "browser_local": "Локальный браузер (headless)",
+    "browser_remote": "Удалённый браузер (CDP)",
+    "browser_cloud": "Облачный браузер",
+    "browser_custom": "Пользовательский браузер",
+    "browser_not_configured": "Браузер не настроен",
+    
+    # Skills / Навыки
+    "skills_install_prompt": "Установить рекомендуемые навыки?",
+    "skills_selected": "Навыки выбраны: {skills}",
+    "skills_installed": "Навыки установлены: {count}",
+    "skills_install_failed": "Не удалось установить навыки: {error}",
+    "skills_skip": "Пропустить установку навыков",
+    "skills_recommended": "Рекомендуемые навыки",
+    "skills_optional": "Опциональные навыки",
+    
+    # MCP Servers / MCP серверы
+    "mcp_select_prompt": "Настроить MCP серверы?",
+    "mcp_selected": "MCP серверы выбраны: {servers}",
+    "mcp_configured": "MCP серверы настроены: {count}",
+    "mcp_config_failed": "Не удалось настроить MCP серверы: {error}",
+    "mcp_skip": "Пропустить настройку MCP",
+    "mcp_recommended": "Рекомендуемые MCP серверы",
+    
+    # Platform / Платформа
+    "platform_select_prompt": "Выберите платформу по умолчанию",
+    "platform_selected": "Платформа выбрана: {platform}",
+    "platform_cli": "CLI (терминал)",
+    "platform_telegram": "Telegram",
+    "platform_discord": "Discord",
+    "platform_whatsapp": "WhatsApp",
+    "platform_slack": "Slack",
+    "platform_custom": "Пользовательская платформа",
+    
+    # Advanced / Дополнительно
+    "advanced_settings": "Дополнительные настройки",
+    "advanced_skip": "Пропустить дополнительные настройки",
+    "advanced_configure": "Настроить дополнительные параметры",
+    "advanced_memory": "Настройка памяти",
+    "advanced_context": "Настройка контекста",
+    "advanced_budget": "Настройка бюджета",
+    "advanced_security": "Настройка безопасности",
+    
+    # Progress / Прогресс
+    "step_of": "Шаг {current} из {total}",
+    "step_complete": "Шаг завершён: {step}",
+    "step_failed": "Не удалось выполнить шаг: {step}",
+    "step_skipped": "Шаг пропущен: {step}",
+    "please_wait": "Пожалуйста, подождите...",
+    "processing": "Обработка...",
+    "saving": "Сохранение...",
+    "loading": "Загрузка...",
+    
+    # Final / Завершение
+    "setup_summary": "Сводка настройки",
+    "setup_review": "Проверьте настройки перед сохранением",
+    "setup_save": "Сохранить настройки",
+    "setup_discard": "Отменить настройки",
+    "setup_exit": "Выйти из мастера",
+    "setup_back": "Назад",
+    "setup_next": "Далее",
+    "setup_finish": "Завершить",
+}
+
+# ============================================================================
+# UI elements / Элементы интерфейса
+# ============================================================================
+
+UI_ELEMENTS = {
+    # Buttons / Кнопки
+    "btn_ok": "OK",
+    "btn_cancel": "Отмена",
+    "btn_yes": "Да",
+    "btn_no": "Нет",
+    "btn_save": "Сохранить",
+    "btn_delete": "Удалить",
+    "btn_edit": "Редактировать",
+    "btn_add": "Добавить",
+    "btn_remove": "Удалить",
+    "btn_refresh": "Обновить",
+    "btn_reload": "Перезагрузить",
+    "btn_retry": "Повторить",
+    "btn_continue": "Продолжить",
+    "btn_back": "Назад",
+    "btn_next": "Далее",
+    "btn_finish": "Завершить",
+    "btn_skip": "Пропустить",
+    "btn_close": "Закрыть",
+    "btn_exit": "Выйти",
+    "btn_help": "Помощь",
+    "btn_settings": "Настройки",
+    "btn_advanced": "Дополнительно",
+    "btn_default": "По умолчанию",
+    "btn_reset": "Сбросить",
+    "btn_apply": "Применить",
+    "btn_confirm": "Подтвердить",
+    "btn_deny": "Отклонить",
+    "btn_approve": "Одобрить",
+    
+    # Labels / Метки
+    "label_name": "Имя",
+    "label_value": "Значение",
+    "label_type": "Тип",
+    "label_status": "Статус",
+    "label_description": "Описание",
+    "label_version": "Версия",
+    "label_author": "Автор",
+    "label_date": "Дата",
+    "label_time": "Время",
+    "label_size": "Размер",
+    "label_path": "Путь",
+    "label_url": "URL",
+    "label_port": "Порт",
+    "label_host": "Хост",
+    "label_user": "Пользователь",
+    "label_password": "Пароль",
+    "label_key": "Ключ",
+    "label_secret": "Секрет",
+    "label_token": "Токен",
+    "label_api_key": "API ключ",
+    "label_endpoint": "Эндпоинт",
+    "label_timeout": "Таймаут",
+    "label_retries": "Попытки",
+    "label_limit": "Лимит",
+    "label_count": "Количество",
+    "label_total": "Всего",
+    "label_used": "Использовано",
+    "label_remaining": "Осталось",
+    "label_available": "Доступно",
+    "label_enabled": "Включено",
+    "label_disabled": "Отключено",
+    "label_active": "Активно",
+    "label_inactive": "Неактивно",
+    "label_online": "В сети",
+    "label_offline": "Не в сети",
+    "label_connected": "Подключено",
+    "label_disconnected": "Отключено",
+    "label_running": "Выполняется",
+    "label_stopped": "Остановлено",
+    "label_paused": "Приостановлено",
+    "label_pending": "Ожидает",
+    "label_completed": "Завершено",
+    "label_failed": "Не удалось",
+    "label_error": "Ошибка",
+    "label_warning": "Предупреждение",
+    "label_info": "Инфо",
+    "label_success": "Успешно",
+    
+    # Messages / Сообщения
+    "msg_loading": "Загрузка...",
+    "msg_saving": "Сохранение...",
+    "msg_processing": "Обработка...",
+    "msg_wait": "Пожалуйста, подождите...",
+    "msg_confirm": "Вы уверены?",
+    "msg_are_you_sure": "Вы уверены?",
+    "msg_sure_delete": "Вы уверены что хотите удалить?",
+    "msg_sure_exit": "Вы уверены что хотите выйти?",
+    "msg_sure_cancel": "Вы уверены что хотите отменить?",
+    "msg_no_data": "Нет данных",
+    "msg_no_results": "Нет результатов",
+    "msg_no_matches": "Нет совпадений",
+    "msg_not_found": "Не найдено",
+    "msg_not_available": "Недоступно",
+    "msg_not_implemented": "Не реализовано",
+    "msg_not_supported": "Не поддерживается",
+    "msg_invalid_input": "Неверный ввод",
+    "msg_invalid_value": "Неверное значение",
+    "msg_invalid_format": "Неверный формат",
+    "msg_required": "Обязательно",
+    "msg_optional": "Опционально",
+    "msg_success": "Успешно",
+    "msg_done": "Готово",
+    "msg_complete": "Завершено",
+    "msg_finished": "Завершено",
+}
+
+
+# ============================================================================
+# Skills system / Система навыков
+# ============================================================================
+
+SKILLS_SYSTEM = {
+    # Skill metadata / Метаданные навыков
+    "skill_name": "Навык: {name}",
+    "skill_description": "Описание: {description}",
+    "skill_version": "Версия: {version}",
+    "skill_author": "Автор: {author}",
+    "skill_category": "Категория: {category}",
+    "skill_platforms": "Платформы: {platforms}",
+    "skill_requirements": "Требования: {requirements}",
+    "skill_dependencies": "Зависимости: {dependencies}",
+    "skill_commands": "Команды: {commands}",
+    "skill_examples": "Примеры: {examples}",
+    "skill_notes": "Примечания: {notes}",
+    "skill_warnings": "Предупреждения: {warnings}",
+    "skill_tips": "Советы: {tips}",
+    
+    # Skill installation / Установка навыков
+    "skill_install_start": "Установка навыка: {name}",
+    "skill_install_success": "Навык установлен: {name}",
+    "skill_install_failed": "Не удалось установить навык: {name}",
+    "skill_install_cancelled": "Установка навыка отменена: {name}",
+    "skill_already_installed": "Навык уже установлен: {name}",
+    "skill_update_available": "Доступно обновление навыка: {name}",
+    "skill_updated": "Навык обновлён: {name}",
+    "skill_update_failed": "Не удалось обновить навык: {name}",
+    "skill_uninstall": "Удаление навыка: {name}",
+    "skill_uninstalled": "Навык удалён: {name}",
+    "skill_uninstall_failed": "Не удалось удалить навык: {name}",
+    
+    # Skill loading / Загрузка навыков
+    "skill_loading": "Загрузка навыка: {name}",
+    "skill_loaded": "Навык загружен: {name}",
+    "skill_load_failed": "Не удалось загрузить навык: {name}",
+    "skill_not_found": "Навык не найден: {name}",
+    "skill_disabled": "Навык отключен: {name}",
+    "skill_enabled": "Навык включен: {name}",
+    "skill_enable_failed": "Не удалось включить навык: {name}",
+    "skill_disable_failed": "Не удалось отключить навык: {name}",
+    
+    # Skill execution / Выполнение навыков
+    "skill_executing": "Выполнение навыка: {name}",
+    "skill_completed": "Навык выполнен: {name}",
+    "skill_failed": "Навык не удался: {name}",
+    "skill_error": "Ошибка навыка: {error}",
+    "skill_timeout": "Навык превысил время ожидания: {name}",
+    "skill_interrupted": "Навык прерван: {name}",
+    "skill_retry": "Повтор навыка: {name}",
+    "skill_retry_failed": "Повтор навыка не удался: {name}",
+    
+    # Skill search / Поиск навыков
+    "skill_search": "Поиск навыков: {query}",
+    "skill_search_results": "Найдено навыков: {count}",
+    "skill_search_no_results": "Навыки не найдены: {query}",
+    "skill_browse": "Просмотр навыков",
+    "skill_browse_results": "Доступные навыки: {count}",
+    "skill_browse_no_results": "Нет доступных навыков",
+    "skill_filter": "Фильтр навыков: {filter}",
+    "skill_sort": "Сортировка навыков: {sort}",
+    
+    # Skill curator / Куратор навыков
+    "curator_running": "Куратор запущен",
+    "curator_stopped": "Куратор остановлен",
+    "curator_paused": "Куратор приостановлен",
+    "curator_resumed": "Куратор возобновлён",
+    "curator_processing": "Куратор обрабатывает: {skill}",
+    "curator_complete": "Куратор завершил: {skill}",
+    "curator_error": "Ошибка куратора: {error}",
+    "curator_archived": "Навык архивирован: {skill}",
+    "curator_restored": "Навык восстановлен: {skill}",
+    "curator_pinned": "Навык закреплён: {skill}",
+    "curator_unpinned": "Навык откреплён: {skill}",
+    
+    # Skill validation / Проверка навыков
+    "skill_validating": "Проверка навыка: {name}",
+    "skill_valid": "Навык проверен: {name}",
+    "skill_invalid": "Навык не прошёл проверку: {name}",
+    "skill_validation_error": "Ошибка проверки навыка: {error}",
+    "skill_missing_required": "Отсутствует обязательное поле: {field}",
+    "skill_invalid_format": "Неверный формат: {field}",
+    "skill_deprecated": "Навык устарел: {name}",
+    "skill_compatible": "Навык совместим: {name}",
+    "skill_incompatible": "Навык несовместим: {name}",
+    
+    # Skill templates / Шаблоны навыков
+    "skill_template": "Шаблон навыка: {name}",
+    "skill_template_created": "Шаблон создан: {name}",
+    "skill_template_updated": "Шаблон обновлён: {name}",
+    "skill_template_deleted": "Шаблон удалён: {name}",
+    "skill_template_applied": "Шаблон применён: {name}",
+    "skill_template_not_found": "Шаблон не найден: {name}",
+    
+    # Skill references / Ссылки навыков
+    "skill_reference": "Ссылка: {name}",
+    "skill_reference_added": "Ссылка добавлена: {name}",
+    "skill_reference_removed": "Ссылка удалена: {name}",
+    "skill_reference_not_found": "Ссылка не найдена: {name}",
+    "skill_script": "Скрипт: {name}",
+    "skill_script_executed": "Скрипт выполнен: {name}",
+    "skill_script_failed": "Скрипт не удался: {name}",
+    
+    # Skill categories / Категории навыков
+    "category_development": "Разработка",
+    "category_devops": "DevOps",
+    "category_data_science": "Data Science",
+    "category_mlops": "MLOps",
+    "category_research": "Исследования",
+    "category_productivity": "Продуктивность",
+    "category_creative": "Творчество",
+    "category_media": "Медиа",
+    "category_gaming": "Игры",
+    "category_smart_home": "Умный дом",
+    "category_communication": "Коммуникация",
+    "category_security": "Безопасность",
+    "category_utilities": "Утилиты",
+    "category_other": "Другое",
+}
+
+# ============================================================================
+# README and documentation / README и документация
+# ============================================================================
+
+README_DOCS = {
+    # Common phrases / Общие фразы
+    "readme": "README",
+    "readme_title": "О проекте",
+    "installation": "Установка",
+    "usage": "Использование",
+    "examples": "Примеры",
+    "configuration": "Конфигурация",
+    "api_reference": "API справка",
+    "contributing": "Вклад",
+    "license": "Лицензия",
+    "changelog": "История изменений",
+    "faq": "FAQ",
+    "troubleshooting": "Решение проблем",
+    "getting_started": "Начало работы",
+    "quick_start": "Быстрый старт",
+    "requirements": "Требования",
+    "dependencies": "Зависимости",
+    "features": "Возможности",
+    "roadmap": "План развития",
+    "acknowledgments": "Благодарности",
+    "contact": "Контакты",
+    "support": "Поддержка",
+    "donate": "Пожертвовать",
+    "sponsor": "Спонсор",
+    
+    # Installation steps / Шаги установки
+    "install_step_1": "Шаг 1: Установка зависимостей",
+    "install_step_2": "Шаг 2: Настройка конфигурации",
+    "install_step_3": "Шаг 3: Запуск приложения",
+    "install_prerequisites": "Предварительные требования",
+    "install_system_requirements": "Системные требования",
+    "install_python_version": "Требуется Python {version}",
+    "install_node_version": "Требуется Node.js {version}",
+    "install_git_required": "Требуется Git",
+    "install_download": "Скачать",
+    "install_clone": "Клонировать репозиторий",
+    "install_build": "Собрать",
+    "install_test": "Тестировать",
+    "install_verify": "Проверить установку",
+    
+    # Usage instructions / Инструкции по использованию
+    "usage_basic": "Базовое использование",
+    "usage_advanced": "Продвинутое использование",
+    "usage_examples": "Примеры использования",
+    "usage_cli": "Использование CLI",
+    "usage_api": "Использование API",
+    "usage_gui": "Использование GUI",
+    "usage_web": "Использование Web",
+    "usage_mobile": "Использование Mobile",
+    "usage_desktop": "Использование Desktop",
+    "usage_server": "Использование Server",
+    "usage_cloud": "Использование Cloud",
+    "usage_local": "Использование Local",
+    "usage_docker": "Использование Docker",
+    "usage_kubernetes": "Использование Kubernetes",
+    
+    # Configuration options / Опции конфигурации
+    "config_basic": "Базовая конфигурация",
+    "config_advanced": "Продвинутая конфигурация",
+    "config_environment": "Конфигурация окружения",
+    "config_file": "Файл конфигурации",
+    "config_example": "Пример конфигурации",
+    "config_default": "Конфигурация по умолчанию",
+    "config_custom": "Пользовательская конфигурация",
+    "config_validate": "Проверить конфигурацию",
+    "config_reset": "Сбросить конфигурацию",
+    "config_backup": "Резервная копия конфигурации",
+    "config_restore": "Восстановить конфигурацию",
+    
+    # Error messages / Сообщения об ошибках
+    "error_install": "Ошибка установки: {error}",
+    "error_config": "Ошибка конфигурации: {error}",
+    "error_runtime": "Ошибка выполнения: {error}",
+    "error_network": "Ошибка сети: {error}",
+    "error_permission": "Ошибка доступа: {error}",
+    "error_missing": "Отсутствует: {item}",
+    "error_invalid": "Неверно: {item}",
+    "error_deprecated": "Устарело: {item}",
+    "error_unsupported": "Не поддерживается: {item}",
+    "error_unknown": "Неизвестная ошибка: {error}",
+    
+    # Success messages / Сообщения об успехе
+    "success_install": "Установка успешна",
+    "success_config": "Конфигурация успешна",
+    "success_build": "Сборка успешна",
+    "success_test": "Тесты успешны",
+    "success_deploy": "Развёртывание успешно",
+    "success_complete": "Завершено успешно",
+}
+
+
+# ============================================================================
+# Hermes CLI extra / Дополнительные сообщения Hermes CLI
+# ============================================================================
+
+HERMES_CLI_EXTRA = {
+    # Auth / Аутентификация
+    "nous_inference_auth_jwt": "Nous inference auth: используется NAS invoke JWT",
+    "spotify_register_app": "Spotify требует регистрации собственного приложения разработчика",
+    "spotify_app_takes_minutes": "Это занимает около двух минут и делается один раз",
+    "spotify_app_name": "Название приложения: любое (например, hermes-agent)",
+    "spotify_app_description": "Описание: любое",
+    "spotify_api_sdk": "API/SDK: Web API",
+    "spotify_agree_terms": "Согласитесь с условиями, нажмите Save",
+    "spotify_copy_client_id": "Со страницы настроек скопируйте Client ID",
+    "spotify_client_id_saved": "Сохранено HERMES_SPOTIFY_CLIENT_ID в ~/.hermes/.env",
+    "spotify_pkce_login": "Запуск входа Spotify PKCE...",
+    "spotify_redirect_uri": "Убедитесь что redirect URI разрешён в настройках приложения Spotify",
+    "spotify_authorize_url": "Откройте этот URL для авторизации Hermes:",
+    "spotify_browser_opened": "Браузер открыт для авторизации Spotify",
+    "spotify_browser_failed": "Не удалось открыть браузер автоматически; используйте URL выше",
+    "spotify_provider_state": "Состояние провайдера сохранено в providers.spotify",
+    "spotify_remote_session": "Обнаружена удалённая сессия. Браузер перенаправится на",
+    "spotify_loopback_listener": "который ожидает loopback listener на ЭТОЙ машине",
+    "spotify_forward_port": "Если браузер на другой машине, пробросьте порт сначала:",
+    "spotify_open_local": "Затем откройте URL авторизации выше в локальном браузере",
+    "nous_nas_refused_scope": "Nous inference auth: NAS отклонил invoke scope, повторяем legacy scope",
+    "nous_using_cached_key": "Nous inference auth: используется закэшированный agent_key",
+    "command_removed": "команда была удалена",
+    "to_select_provider": "для выбора провайдера, или",
+    "codex_credentials_found": "Найдены существующие учётные данные Codex в хранилище Hermes",
+    "codex_credentials_expired": "Существующие учётные данные Codex истекли. Начинаем новый вход...",
+    "codex_cli_credentials": "Найдены существующие учётные данные Codex CLI в ~/.codex/auth.json",
+    "codex_create_session": "Hermes создаст собственную сессию чтобы избежать конфликтов с Codex CLI / VS Code",
+    "codex_working_independently": "Hermes продолжит работать независимо со своей сессией",
+    "codex_signing_in": "Вход в OpenAI Codex...",
+    "codex_own_session": "(Hermes создаёт собственную сессию — не повлияет на Codex CLI / VS Code)",
+    "xai_oauth_found": "Найдены существующие учётные данные xAI OAuth в хранилище Hermes",
+    "xai_signing_in": "Вход в xAI Grok OAuth (SuperGrok Subscription)...",
+    "xai_local_session": "(Hermes создаёт собственную локальную OAuth сессию)",
+    "xai_authorize_url": "Откройте этот URL для авторизации Hermes с xAI:",
+    "xai_browser_opened": "Браузер открыт для авторизации xAI",
+    "xai_browser_failed": "Не удалось открыть браузер автоматически; используйте URL выше",
+    "auth_follow_steps": "Чтобы продолжить, выполните следующие шаги:",
+    "auth_open_browser": "Откройте этот URL в вашем браузере:",
+    "auth_waiting_signin": "Ожидание входа... (нажмите Ctrl+C для отмены)",
+    "auth_browser_verification": "(Браузер открыт для проверки)",
+    "auth_browser_auto_failed": "Не удалось открыть браузер автоматически — используйте URL выше",
+    "minimax_oauth_success": "✓ Вход MiniMax OAuth успешен",
+    "tls_verification_disabled": "TLS проверка: отключена (--insecure)",
+    "nous_no_subscription": "Ваш аккаунт Nous Portal не имеет активной подписки",
+    "nous_subscribe_hint": "После подписки, запустите `hermes model` снова для завершения настройки",
+    "nous_shared_credentials": "Найдены существующие общие учётные данные Nous OAuth",
+    "nous_rehydrating_session": "Восстановление сессии Nous из общих учётных данных...",
+    
+    # Config / Конфигурация
+    "config_wizard_title": "⚕ Мастер настройки Hermes",
+    "config_wizard_welcome": "Этот мастер поможет настроить Hermes Agent",
+    "config_provider_select": "Выберите провайдера по умолчанию",
+    "config_model_select": "Выберите модель по умолчанию",
+    "config_terminal_select": "Выберите терминал по умолчанию",
+    "config_browser_select": "Выберите браузер по умолчанию",
+    "config_api_key_prompt": "Введите ваш {provider} API ключ",
+    "config_api_key_test": "Проверка API ключа {provider}",
+    "config_api_key_valid": "API ключ {provider} проверен успешно",
+    "config_api_key_invalid": "Неверный API ключ: {provider}",
+    "config_save_settings": "Сохранить настройки",
+    "config_discard_settings": "Отменить настройки",
+    "config_review": "Проверьте настройки перед сохранением",
+    "config_summary": "Сводка конфигурации",
+    "config_complete": "Конфигурация завершена!",
+    "config_error": "Ошибка конфигурации: {error}",
+    
+    # Sessions / Сессии
+    "session_list_title": "Список сессий",
+    "session_no_previous": "Предыдущих сессий пока нет",
+    "session_select_prompt": "Выберите сессию для возобновления",
+    "session_invalid_number": "Неверный номер. Введите 1-{max} или q для отмены",
+    "session_resuming": "Возобновление сессии: {id}",
+    "session_created": "Сессия создана: {id}",
+    "session_saved": "Сессия сохранена: {path}",
+    "session_deleted": "Сессия удалена: {id}",
+    "session_title_set": "Заголовок сессии установлен: {title}",
+    "session_branch_created": "Ветка сессии создана: {name}",
+    "session_fork_created": "Ответвление сессии создано: {name}",
+    "session_compressed": "Контекст сессии сжат",
+    "session_compress_failed": "Не удалось сжать контекст: {error}",
+    
+    # Tokens / Токены
+    "token_usage_title": "Использование токенов",
+    "token_input": "Входные токены",
+    "token_output": "Выходные токены",
+    "token_total": "Всего токенов",
+    "token_cost": "Стоимость",
+    "token_remaining": "Осталось токенов",
+    "token_limit": "Лимит токенов",
+    "token_warning": "⚠️  Мало токенов: {remaining} осталось",
+    "token_exceeded": "❌ Превышен лимит токенов",
+    "token_reset": "Счётчик токенов сброшен",
+    
+    # Models / Модели
+    "model_list_title": "Доступные модели",
+    "model_current": "Текущая модель: {model}",
+    "model_switched": "Модель переключена на {model}",
+    "model_not_found": "Модель не найдена: {model}",
+    "model_not_available": "Модель недоступна: {model}",
+    "model_recommended": "Рекомендуемая модель: {model}",
+    "model_fast_available": "Быстрый режим доступен для {model}",
+    "model_fast_unavailable": "Быстрый режим недоступен для {model}",
+    "model_reasoning_available": "Режим рассуждения доступен для {model}",
+    "model_reasoning_unavailable": "Режим рассуждения недоступен для {model}",
+    "model_context_length": "Длина контекста: {length} токенов",
+    "model_price": "Цена: ${price} за 1K токенов",
+    
+    # Personality / Личность
+    "personality_list": "Доступные личности",
+    "personality_set": "Личность установлена: {name}",
+    "personality_cleared": "Личность сброшена",
+    "personality_not_found": "Личность не найдена: {name}",
+    "personality_session_only": "Личность установлена только для сессии",
+    "personality_global": "Личность установлена глобально",
+    
+    # Status bar / Строка состояния
+    "statusbar_enabled": "Строка состояния включена",
+    "statusbar_disabled": "Строка состояния отключена",
+    "statusbar_model": "Модель: {model}",
+    "statusbar_context": "Контекст: {tokens} токенов",
+    "statusbar_provider": "Провайдер: {provider}",
+    "statusbar_session": "Сессия: {id}",
+    
+    # Verbose mode / Режим подробный
+    "verbose_off": "Режим подробный: отключен",
+    "verbose_new": "Режим подробный: новые инструменты",
+    "verbose_all": "Режим подробный: все инструменты",
+    "verbose_verbose": "Режим подробный: подробный",
+    "verbose_cycle": "Режим переключен на: {mode}",
+    
+    # YOLO mode / Режим YOLO
+    "yolo_enabled": "Режим YOLO: включен (все подтверждения пропускаются)",
+    "yolo_disabled": "Режим YOLO: отключен (подтверждения требуются)",
+    "yolo_warning": "⚠️  Режим YOLO опасен — команды выполняются без подтверждения",
+    
+    # Reasoning / Рассуждение
+    "reasoning_level_set": "Уровень рассуждения: {level}",
+    "reasoning_show": "Рассуждение: показано",
+    "reasoning_hide": "Рассуждение: скрыто",
+    "reasoning_effort_low": "Усилие рассуждения: низкое",
+    "reasoning_effort_medium": "Усилие рассуждения: среднее",
+    "reasoning_effort_high": "Усилие рассуждения: высокое",
+    
+    # Fast mode / Быстрый режим
+    "fast_enabled": "Быстрый режим: включен",
+    "fast_disabled": "Быстрый режим: отключен",
+    "fast_status": "Быстрый режим: {status}",
+    "fast_openai_priority": "OpenAI Priority Processing",
+    "fast_anthropic_mode": "Anthropic Fast Mode",
+    
+    # Skin / Скин
+    "skin_list": "Доступные скины",
+    "skin_set": "Скин установлен: {name}",
+    "skin_not_found": "Скин не найден: {name}",
+    "skin_preview": "Предпросмотр скина: {name}",
+    "skin_default": "Скин по умолчанию: {name}",
+    
+    # Voice / Голос
+    "voice_enabled": "Голосовой режим: включен",
+    "voice_disabled": "Голосовой режим: отключен",
+    "voice_status": "Голосовой режим: {status}",
+    "voice_tts_enabled": "TTS: включен",
+    "voice_tts_disabled": "TTS: отключен",
+    
+    # Busy input mode / Режим ввода при занятости
+    "busy_interrupt": "Enter: прервать текущий ход",
+    "busy_queue": "Enter: поставить в очередь",
+    "busy_steer": "Enter: вставить после инструмента",
+    "busy_status": "Режим ввода при занятости: {mode}",
+    
+    # MCP servers / MCP серверы
+    "mcp_list": "MCP серверы: {count}",
+    "mcp_connected": "MCP сервер подключен: {name}",
+    "mcp_disconnected": "MCP сервер отключен: {name}",
+    "mcp_reload": "MCP серверы перезаряжены",
+    "mcp_reload_failed": "Не удалось перезарядить MCP серверы: {error}",
+    "mcp_server_not_found": "MCP сервер не найден: {name}",
+    
+    # Browser tools / Инструменты браузера
+    "browser_connect": "Подключение к Chrome через CDP",
+    "browser_connected": "Браузер подключен: {url}",
+    "browser_disconnected": "Браузер отключен",
+    "browser_connect_failed": "Не удалось подключить браузер: {error}",
+    "browser_status": "Статус браузера: {status}",
+    "browser_local": "Локальный браузер (headless)",
+    "browser_remote": "Удалённый браузер (CDP)",
+    "browser_cloud": "Облачный браузер",
+    
+    # Plugins / Плагины
+    "plugin_list": "Установленные плагины: {count}",
+    "plugin_installed": "Плагин установлен: {name}",
+    "plugin_uninstalled": "Плагин удалён: {name}",
+    "plugin_enabled": "Плагин включен: {name}",
+    "plugin_disabled": "Плагин отключен: {name}",
+    "plugin_not_found": "Плагин не найден: {name}",
+    "plugin_load_failed": "Не удалось загрузить плагин: {error}",
+    "plugin_update_available": "Доступно обновление плагина: {name}",
+    
+    # Kurator / Куратор
+    "curator_status": "Статус куратора: {status}",
+    "curator_running": "Куратор запущен",
+    "curator_stopped": "Куратор остановлен",
+    "curator_paused": "Куратор приостановлен",
+    "curator_resumed": "Куратор возобновлён",
+    "curator_skill_pinned": "Навык закреплён: {name}",
+    "curator_skill_unpinned": "Навык откреплён: {name}",
+    "curator_skill_archived": "Навык архивирован: {name}",
+    "curator_skill_restored": "Навык восстановлен: {name}",
+    "curator_list_archived": "Архивированные навыки: {count}",
+    
+    # Kanban / Канбан
+    "kanban_list": "Задачи канбан: {count}",
+    "kanban_created": "Задача создана: {id}",
+    "kanban_assigned": "Задача назначена: {id}",
+    "kanban_completed": "Задача завершена: {id}",
+    "kanban_blocked": "Задача заблокирована: {id}",
+    "kanban_unblocked": "Задача разблокирована: {id}",
+    "kanban_archived": "Задача архивирована: {id}",
+    "kanban_not_found": "Задача не найдена: {id}",
+    "kanban_comment_added": "Комментарий добавлен: {id}",
+    
+    # Cron / Задачи
+    "cron_list": "Запланированные задачи: {count}",
+    "cron_created": "Задача создана: {id}",
+    "cron_updated": "Задача обновлена: {id}",
+    "cron_paused": "Задача приостановлена: {id}",
+    "cron_resumed": "Задача возобновлена: {id}",
+    "cron_executed": "Задача выполнена: {id}",
+    "cron_failed": "Задача не удалась: {id}",
+    "cron_removed": "Задача удалена: {id}",
+    "cron_not_found": "Задача не найдена: {id}",
+    
+    # Insights / Инсайты
+    "insights_title": "Аналитика использования",
+    "insights_days": "За последние {days} дней",
+    "insights_sessions": "Сессий: {count}",
+    "insights_messages": "Сообщений: {count}",
+    "insights_tokens": "Токенов: {count}",
+    "insights_cost": "Стоимость: ${cost}",
+    "insights_tools": "Инструментов использовано: {count}",
+    "insights_skills": "Навыков использовано: {count}",
+    "insights_top_model": "Топ модель: {model}",
+    "insights_top_provider": "Топ провайдер: {provider}",
+    
+    # Platforms / Платформы
+    "platform_list": "Платформы: {count}",
+    "platform_status": "Статус платформы: {platform}",
+    "platform_enabled": "Платформа включена: {platform}",
+    "platform_disabled": "Платформа отключена: {platform}",
+    "platform_connected": "Платформа подключена: {platform}",
+    "platform_disconnected": "Платформа отключена: {platform}",
+    "platform_error": "Ошибка платформы: {platform}",
+    
+    # Debug / Отладка
+    "debug_title": "Отладка Hermes",
+    "debug_report": "Отчёт отладки",
+    "debug_upload": "Загрузка отчёта отладки",
+    "debug_logs": "Логи Hermes",
+    "debug_config": "Конфигурация",
+    "debug_system": "Системная информация",
+    "debug_network": "Сетевая информация",
+    "debug_uploaded": "Отчёт загружен: {url}",
+    "debug_upload_failed": "Не удалось загрузить отчёт: {error}",
+    
+    # Update / Обновление
+    "update_checking": "Проверка обновлений...",
+    "update_available": "Доступно обновление: {version}",
+    "update_up_to_date": "Установлена последняя версия",
+    "update_downloading": "Загрузка обновления...",
+    "update_installing": "Установка обновления...",
+    "update_complete": "Обновление завершено",
+    "update_failed": "Не удалось обновить: {error}",
+    "update_restart_required": "Требуется перезапуск для применения обновления",
+    
+    # Uninstall / Удаление
+    "uninstall_confirm": "Вы уверены что хотите удалить Hermes?",
+    "uninstalling": "Удаление Hermes...",
+    "uninstall_complete": "Hermes удалён",
+    "uninstall_failed": "Не удалось удалить Hermes: {error}",
+    "uninstall_keep_config": "Сохранить конфигурацию? (y/N)",
+    "uninstall_keep_data": "Сохранить данные? (y/N)",
+    
+    # AC P / ACP
+    "acp_enabled": "ACP: включен",
+    "acp_disabled": "ACP: отключен",
+    "acp_status": "Статус ACP: {status}",
+    "acp_connected": "ACP подключен",
+    "acp_disconnected": "ACP отключен",
+    
+    # Profile / Профиль
+    "profile_active": "Активный профиль: {name}",
+    "profile_home": "Домашний каталог: {path}",
+    "profile_switched": "Профиль переключен: {name}",
+    "profile_not_found": "Профиль не найден: {name}",
+    "profile_created": "Профиль создан: {name}",
+    "profile_deleted": "Профиль удалён: {name}",
+    
+    # Completion / Автодополнение
+    "completion_enabled": "Автодополнение: включено",
+    "completion_disabled": "Автодополнение: отключено",
+    "completion_status": "Статус автодополнения: {status}",
+}
+
+
+# ============================================================================
+# Documentation headers / Заголовки документации
+# ============================================================================
+
+DOC_HEADERS = {
+    # Main sections / Основные разделы
+    "development_guide": "Руководство разработчика",
+    "development_environment": "Среда разработки",
+    "project_structure": "Структура проекта",
+    "file_dependency_chain": "Цепочка зависимостей файлов",
+    "adding_new_tools": "Добавление новых инструментов",
+    "testing": "Тестирование",
+    "running_tests": "Запуск тестов",
+    "test_coverage": "Покрытие тестами",
+    "contributing": "Вклад в проект",
+    "code_style": "Стиль кода",
+    "pull_requests": "Pull запросы",
+    "code_review": "Ревью кода",
+    "release_process": "Процесс выпуска",
+    "versioning": "Версионирование",
+    "changelog": "Журнал изменений",
+    "breaking_changes": "Критические изменения",
+    "migration_guide": "Руководство по миграции",
+    "upgrade_instructions": "Инструкции по обновлению",
+    "deprecation_notices": "Уведомления об устаревании",
+    "known_issues": "Известные проблемы",
+    "troubleshooting_guide": "Руководство по решению проблем",
+    "faq": "Часто задаваемые вопросы",
+    "getting_help": "Получение помощи",
+    "community": "Сообщество",
+    "support_channels": "Каналы поддержки",
+    "reporting_bugs": "Сообщение об ошибках",
+    "feature_requests": "Запросы функций",
+    "license": "Лицензия",
+    "copyright": "Авторские права",
+    "trademarks": "Товарные знаки",
+    "privacy_policy": "Политика конфиденциальности",
+    "terms_of_service": "Условия обслуживания",
+    
+    # Code sections / Разделы кода
+    "class_definition": "Определение класса",
+    "function_definition": "Определение функции",
+    "method_definition": "Определение метода",
+    "parameters": "Параметры",
+    "return_values": "Возвращаемые значения",
+    "exceptions": "Исключения",
+    "examples": "Примеры",
+    "usage": "Использование",
+    "notes": "Примечания",
+    "warnings": "Предупреждения",
+    "see_also": "См. также",
+    "references": "Ссылки",
+    "external_links": "Внешние ссылки",
+    "related_documents": "Связанные документы",
+    
+    # Development workflow / Рабочий процесс разработки
+    "branching_strategy": "Стратегия ветвления",
+    "commit_messages": "Сообщения коммитов",
+    "code_organization": "Организация кода",
+    "naming_conventions": "Соглашения об именовании",
+    "documentation_standards": "Стандарты документации",
+    "testing_requirements": "Требования к тестированию",
+    "performance_considerations": "Вопросы производительности",
+    "security_considerations": "Вопросы безопасности",
+    "compatibility": "Совместимость",
+    "dependencies": "Зависимости",
+    "build_instructions": "Инструкции по сборке",
+    "deployment": "Развёртывание",
+    "monitoring": "Мониторинг",
+    "logging": "Логирование",
+    "debugging": "Отладка",
+    "profiling": "Профилирование",
+    "optimization": "Оптимизация",
+    "refactoring": "Рефакторинг",
+    "maintenance": "Обслуживание",
+    
+    # Architecture / Архитектура
+    "architecture_overview": "Обзор архитектуры",
+    "components": "Компоненты",
+    "modules": "Модули",
+    "interfaces": "Интерфейсы",
+    "api_reference": "Справка API",
+    "data_models": "Модели данных",
+    "database_schema": "Схема базы данных",
+    "configuration": "Конфигурация",
+    "environment_variables": "Переменные окружения",
+    "secrets_management": "Управление секретами",
+    "authentication": "Аутентификация",
+    "authorization": "Авторизация",
+    "encryption": "Шифрование",
+    "networking": "Сеть",
+    "storage": "Хранилище",
+    "caching": "Кэширование",
+    "messaging": "Обмен сообщениями",
+    "events": "События",
+    "hooks": "Хуки",
+    "middleware": "Промежуточное ПО",
+    "plugins": "Плагины",
+    "extensions": "Расширения",
+    
+    # Release notes / Заметки о выпуске
+    "release_version": "Версия выпуска",
+    "release_date": "Дата выпуска",
+    "new_features": "Новые функции",
+    "improvements": "Улучшения",
+    "bug_fixes": "Исправления ошибок",
+    "performance_improvements": "Улучшения производительности",
+    "security_fixes": "Исправления безопасности",
+    "documentation_updates": "Обновления документации",
+    "dependency_updates": "Обновления зависимостей",
+    "removed_features": "Удалённые функции",
+    "deprecated_features": "Устаревшие функции",
+    "migration_steps": "Шаги миграции",
+    "upgrade_path": "Путь обновления",
+    "rollback_instructions": "Инструкции по откату",
+    
+    # Security / Безопасность
+    "security_policy": "Политика безопасности",
+    "vulnerability_disclosure": "Раскрытие уязвимостей",
+    "security_contacts": "Контакты безопасности",
+    "supported_versions": "Поддерживаемые версии",
+    "security_updates": "Обновления безопасности",
+    "best_practices": "Лучшие практики",
+    "threat_model": "Модель угроз",
+    "attack_vectors": "Векторы атак",
+    "mitigations": "Меры защиты",
+    "audit_log": "Журнал аудита",
+    "compliance": "Соответствие",
+    "certifications": "Сертификации",
+    
+    # Contributing / Вклад
+    "how_to_contribute": "Как внести вклад",
+    "code_of_conduct": "Кодекс поведения",
+    "developer_certificate": "Сертификат разработчика",
+    "signing_commits": "Подписание коммитов",
+    "submitting_patches": "Отправка патчей",
+    "review_process": "Процесс ревью",
+    "approval_requirements": "Требования к одобрению",
+    "merge_strategy": "Стратегия слияния",
+    "release_schedule": "График выпуска",
+    "roadmap": "План развития",
+    "milestones": "Вехи",
+    "goals": "Цели",
+    "objectives": "Задачи",
+}
+
+# ============================================================================
+# AGENTS.md specific / Специфично для AGENTS.md
+# ============================================================================
+
+AGENTS_MD = {
+    "hermes_agent_development_guide": "Hermes Agent — Руководство разработчика",
+    "prefer_venv": "Предпочитайте .venv; используйте venv если это то что есть в репозитории",
+    "user_config": "Конфигурация пользователя",
+    "logs": "Логи",
+    "agent_class": "Класс AIAgent",
+    "agent_loop": "Цикл агента",
+    "cli_architecture": "Архитектура CLI",
+    "tui_architecture": "Архитектура TUI",
+    "process_model": "Модель процесса",
+    "transport": "Транспорт",
+    "key_surfaces": "Ключевые поверхности",
+    "slash_command_flow": "Поток slash команд",
+    "dev_commands": "Команды разработчика",
+    "adding_new_tools": "Добавление новых инструментов",
+    "plugin_route": "Маршрут плагина",
+    "test_wrapper": "Обёртка тестов",
+    "why_the_wrapper": "Зачем нужна обёртка",
+    "running_without_wrapper": "Запуск без обёртки",
+    "change_detector_tests": "Тесты-детекторы изменений",
+    "do_not_write": "Не пишите",
+    "do_write": "Пишите",
+    "the_rule": "Правило",
+    "reviewers_should_reject": "Ревьюеры должны отклонять",
+}
+
+
+# ============================================================================
+# Auth messages / Сообщения аутентификации
+# ============================================================================
+
+AUTH_MESSAGES = {
+    # Copilot / Copilot
+    "copilot_token_validation_failed": "Проверка токена Copilot не удалась: {error}",
+    "copilot_auth_error": "Ошибка аутентификации Copilot: {error}",
+    "copilot_session_expired": "Сессия Copilot истекла",
+    "copilot_session_refreshed": "Сессия Copilot обновлена",
+    "copilot_login_required": "Требуется вход в Copilot",
+    "copilot_login_success": "Вход в Copilot успешен",
+    "copilot_login_failed": "Не удалось войти в Copilot: {error}",
+    
+    # Z.AI / Z.AI
+    "zai_endpoint_probe_ok": "Z.AI endpoint probe: {url} ({model}) OK",
+    "zai_endpoint_probe_error": "Z.AI endpoint probe: {url} model={model} returned {status}",
+    "zai_endpoint_probe_failed": "Z.AI endpoint probe: {url} model={model} failed: {error}",
+    "zai_auto_detected_endpoint": "Z.AI: auto-detected endpoint {url} ({status})",
+    "zai_probe_fallback": "Z.AI: probe failed, falling back to default {url}",
+    "zai_auth_error": "Ошибка аутентификации Z.AI: {error}",
+    "zai_login_success": "Вход в Z.AI успешен",
+    "zai_login_failed": "Не удалось войти в Z.AI: {error}",
+    
+    # General auth / Общая аутентификация
+    "could_not_detect_auth_provider": "Не удалось определить активный провайдер аутентификации: {error}",
+    "auth_provider_switched": "Провайдер аутентификации переключен: {provider}",
+    "auth_token_expired": "Токен аутентификации истек",
+    "auth_token_refreshed": "Токен аутентификации обновлен",
+    "auth_token_invalid": "Неверный токен аутентификации",
+    "auth_session_created": "Сессия аутентификации создана",
+    "auth_session_ended": "Сессия аутентификации завершена",
+    "auth_logout_success": "Выход успешен",
+    "auth_logout_failed": "Не удалось выйти: {error}",
+    
+    # Spotify / Spotify
+    "spotify_requires_app_registration": "Spotify требует регистрации собственного приложения разработчика",
+    "spotify_registration_takes_minutes": "Это занимает около двух минут и делается один раз",
+    "spotify_app_name_hint": "Название приложения: любое (например, hermes-agent)",
+    "spotify_app_description_hint": "Описание: любое",
+    "spotify_api_sdk_hint": "API/SDK: Web API",
+    "spotify_agree_terms_hint": "Согласитесь с условиями, нажмите Save",
+    "spotify_copy_client_id_hint": "Со страницы настроек скопируйте Client ID",
+    "spotify_client_id_saved": "Сохранено HERMES_SPOTIFY_CLIENT_ID в ~/.hermes/.env",
+    "spotify_pkce_login_start": "Запуск входа Spotify PKCE...",
+    "spotify_redirect_uri_hint": "Убедитесь что redirect URI разрешён в настройках приложения Spotify",
+    "spotify_authorize_url": "Откройте этот URL для авторизации Hermes:",
+    "spotify_browser_opened": "Браузер открыт для авторизации Spotify",
+    "spotify_browser_failed": "Не удалось открыть браузер автоматически; используйте URL выше",
+    "spotify_provider_state_saved": "Состояние провайдера сохранено в providers.spotify",
+    "spotify_remote_session_detected": "Обнаружена удалённая сессия. Браузер перенаправится на",
+    "spotify_loopback_hint": "который ожидает loopback listener на ЭТОЙ машине",
+    "spotify_forward_port_hint": "Если браузер на другой машине, пробросьте порт сначала:",
+    "spotify_open_local_hint": "Затем откройте URL авторизации выше в локальном браузере",
+    "spotify_login_success": "Вход Spotify успешен",
+    "spotify_login_failed": "Не удалось войти в Spotify: {error}",
+    "spotify_token_expired": "Токен Spotify истек",
+    "spotify_token_refreshed": "Токен Spotify обновлен",
+    
+    # Nous / Nous
+    "nous_inference_auth_jwt": "Nous inference auth: используется NAS invoke JWT",
+    "nous_inference_auth_cached": "Nous inference auth: используется закэшированный agent_key",
+    "nous_nas_refused_scope": "Nous inference auth: NAS отклонил invoke scope, повторяем legacy scope",
+    "nous_auth_store_write_failed": "Не удалось записать shared Nous auth store: {error}",
+    "nous_auth_store_unreadable": "Shared Nous auth store в {path} не читается: {error}",
+    "nous_auth_store_clear_failed": "Не удалось очистить shared Nous auth store: {error}",
+    "nous_parse_error_failed": "Не удалось разобрать error response JSON: {error}",
+    "nous_credential_sync_failed": "Не удалось синхронизировать Nous credential pool: {error}",
+    "nous_no_active_subscription": "Ваш аккаунт Nous Portal не имеет активной подписки",
+    "nous_subscribe_hint": "После подписки, запустите `hermes model` снова для завершения настройки",
+    "nous_shared_credentials_found": "Найдены существующие общие учётные данные Nous OAuth",
+    "nous_rehydrating_session": "Восстановление сессии Nous из общих учётных данных...",
+    "nous_refresh_failed_fallback": "Не удалось обновить общие учётные данные — переходим к device-code login",
+    "nous_no_free_models": "Нет свободных моделей в данный момент",
+    "nous_no_curated_models": "Нет curated моделей для Nous Portal",
+    "nous_login_success": "Вход в Nous успешен",
+    "nous_login_failed": "Не удалось войти в Nous: {error}",
+    
+    # Codex / Codex
+    "codex_credentials_found": "Найдены существующие учётные данные Codex в хранилище Hermes",
+    "codex_credentials_expired": "Существующие учётные данные Codex истекли. Начинаем новый вход...",
+    "codex_cli_credentials_found": "Найдены существующие учётные данные Codex CLI в ~/.codex/auth.json",
+    "codex_create_own_session": "Hermes создаст собственную сессию чтобы избежать конфликтов с Codex CLI / VS Code",
+    "codex_credentials_imported": "Учётные данные импортированы",
+    "codex_session_independent": "Hermes продолжит работать независимо со своей сессией",
+    "codex_signing_in": "Вход в OpenAI Codex...",
+    "codex_own_session_note": "(Hermes создаёт собственную сессию — не повлияет на Codex CLI / VS Code)",
+    "codex_login_success": "Вход в Codex успешен",
+    "codex_login_failed": "Не удалось войти в Codex: {error}",
+    
+    # xAI / xAI
+    "xai_oauth_credentials_found": "Найдены существующие учётные данные xAI OAuth в хранилище Hermes",
+    "xai_signing_in_oauth": "Вход в xAI Grok OAuth (SuperGrok Subscription)...",
+    "xai_local_oauth_session": "(Hermes создаёт собственную локальную OAuth сессию)",
+    "xai_authorize_url": "Откройте этот URL для авторизации Hermes с xAI:",
+    "xai_browser_opened": "Браузер открыт для авторизации xAI",
+    "xai_browser_failed": "Не удалось открыть браузер автоматически; используйте URL выше",
+    "xai_login_success": "Вход в xAI успешен",
+    "xai_login_failed": "Не удалось войти в xAI: {error}",
+    
+    # MiniMax / MiniMax
+    "minimax_oauth_login_success": "✓ Вход MiniMax OAuth успешен",
+    "minimax_login_failed": "Не удалось войти в MiniMax: {error}",
+    
+    # TLS / TLS
+    "tls_verification_disabled": "TLS проверка: отключена (--insecure)",
+    "tls_verification_enabled": "TLS проверка: включена",
+    "tls_certificate_error": "Ошибка TLS сертификата: {error}",
+    "tls_handshake_failed": "Не удалось установить TLS соединение: {error}",
+    
+    # Browser auth / Браузер аутентификация
+    "browser_opened_for_verification": "(Браузер открыт для проверки)",
+    "browser_auto_open_failed": "Не удалось открыть браузер автоматически — используйте URL выше",
+    "waiting_for_signin": "Ожидание входа... (нажмите Ctrl+C для отмены)",
+    "signin_success": "Вход успешен",
+    "signin_failed": "Не удалось войти: {error}",
+    "signin_cancelled": "Вход отменён",
+    
+    # Device code / Device code
+    "device_code_instructions": "Чтобы продолжить, выполните следующие шаги:",
+    "device_code_open_url": "Откройте этот URL в вашем браузере:",
+    "device_code_enter_code": "Введите код: {code}",
+    "device_code_waiting": "Ожидание подтверждения...",
+    "device_code_expired": "Код устройства истек",
+    "device_code_success": "Устройство подтверждено",
+    
+    # Generic / Общее
+    "auth_required": "Требуется аутентификация",
+    "auth_success": "Аутентификация успешна",
+    "auth_failed": "Аутентификация не удалась: {error}",
+    "auth_expired": "Аутентификация истекла",
+    "auth_refreshed": "Аутентификация обновлена",
+    "auth_token_saved": "Токен сохранён",
+    "auth_token_loaded": "Токен загружен",
+    "auth_token_deleted": "Токен удалён",
+    "auth_session_saved": "Сессия сохранена",
+    "auth_session_loaded": "Сессия загружена",
+    "auth_session_deleted": "Сессия удалена",
+}
+
+
+# ============================================================================
+# Gateway platforms / Платформы шлюза
+# ============================================================================
+
+GATEWAY_PLATFORMS = {
+    # Telegram / Telegram
+    "telegram_starting": "Запуск Telegram бота...",
+    "telegram_started": "Telegram бот запущен",
+    "telegram_stopped": "Telegram бот остановлен",
+    "telegram_message_received": "Получено сообщение Telegram от {user}",
+    "telegram_message_sent": "Сообщение Telegram отправлено {user}",
+    "telegram_message_failed": "Не удалось отправить сообщение Telegram: {error}",
+    "telegram_chat_not_found": "Чат Telegram не найден: {chat_id}",
+    "telegram_user_not_found": "Пользователь Telegram не найден: {user_id}",
+    "telegram_update_processed": "Обновление Telegram обработано",
+    "telegram_update_failed": "Не удалось обработать обновление Telegram: {error}",
+    "telegram_webhook_set": "Webhook Telegram установлен: {url}",
+    "telegram_webhook_deleted": "Webhook Telegram удалён",
+    "telegram_webhook_error": "Ошибка webhook Telegram: {error}",
+    "telegram_polling_started": "Polling Telegram начат",
+    "telegram_polling_stopped": "Polling Telegram остановлен",
+    "telegram_error": "Ошибка Telegram: {error}",
+    "telegram_rate_limit": "Лимит Telegram: ожидаем {seconds}с",
+    "telegram_flood_wait": "Telegram flood wait: {seconds}с",
+    "telegram_connection_lost": "Соединение с Telegram потеряно",
+    "telegram_reconnecting": "Переподключение к Telegram...",
+    "telegram_connected": "Telegram подключён",
+    "telegram_disconnected": "Telegram отключён",
+    "telegram_primary_api_failed": "Telegram Primary api.telegram.org connection failed",
+    "telegram_trying_fallback": "Пытаемся fallback IP",
+    "telegram_using_sticky_fallback": "Используем sticky fallback IP",
+    "telegram_path_unreachable": "Путь недоступен",
+    
+    # Discord / Discord
+    "discord_starting": "Запуск Discord бота...",
+    "discord_started": "Discord бот запущен",
+    "discord_stopped": "Discord бот остановлен",
+    "discord_message_received": "Получено сообщение Discord от {user}",
+    "discord_message_sent": "Сообщение Discord отправлено {user}",
+    "discord_message_failed": "Не удалось отправить сообщение Discord: {error}",
+    "discord_channel_not_found": "Канал Discord не найден: {channel_id}",
+    "discord_server_not_found": "Сервер Discord не найден: {server_id}",
+    "discord_user_not_found": "Пользователь Discord не найден: {user_id}",
+    "discord_reaction_added": "Реакция Discord добавлена",
+    "discord_reaction_removed": "Реакция Discord удалена",
+    "discord_error": "Ошибка Discord: {error}",
+    "discord_rate_limit": "Лимит Discord: ожидаем {seconds}с",
+    "discord_connection_lost": "Соединение с Discord потеряно",
+    "discord_reconnecting": "Переподключение к Discord...",
+    "discord_connected": "Discord подключён",
+    "discord_disconnected": "Discord отключён",
+    "discord_command_sync_state": "Синхронизация команд Discord",
+    "discord_command_registered": "Команда Discord зарегистрирована: {command}",
+    "discord_command_failed": "Не удалось выполнить команду Discord: {error}",
+    
+    # WhatsApp / WhatsApp
+    "whatsapp_starting": "Запуск WhatsApp...",
+    "whatsapp_started": "WhatsApp запущен",
+    "whatsapp_stopped": "WhatsApp остановлен",
+    "whatsapp_message_received": "Получено сообщение WhatsApp от {user}",
+    "whatsapp_message_sent": "Сообщение WhatsApp отправлено {user}",
+    "whatsapp_message_failed": "Не удалось отправить сообщение WhatsApp: {error}",
+    "whatsapp_session_expired": "Сессия WhatsApp истекла",
+    "whatsapp_session_refreshed": "Сессия WhatsApp обновлена",
+    "whatsapp_pairing_started": "Сопряжение WhatsApp начато",
+    "whatsapp_pairing_complete": "Сопряжение WhatsApp завершено",
+    "whatsapp_pairing_failed": "Не удалось сопряжение WhatsApp: {error}",
+    "whatsapp_qr_generated": "QR-код WhatsApp сгенерирован",
+    "whatsapp_qr_expired": "QR-код WhatsApp истёк",
+    "whatsapp_error": "Ошибка WhatsApp: {error}",
+    "whatsapp_connection_lost": "Соединение с WhatsApp потеряно",
+    "whatsapp_reconnecting": "Переподключение к WhatsApp...",
+    "whatsapp_connected": "WhatsApp подключён",
+    "whatsapp_disconnected": "WhatsApp отключён",
+    "whatsapp_bridge_not_found": "Мост WhatsApp не найден: {path}",
+    "whatsapp_bridge_started": "Мост WhatsApp запущен",
+    "whatsapp_bridge_stopped": "Мост WhatsApp остановлен",
+    
+    # Slack / Slack
+    "slack_starting": "Запуск Slack бота...",
+    "slack_started": "Slack бот запущен",
+    "slack_stopped": "Slack бот остановлен",
+    "slack_message_received": "Получено сообщение Slack от {user}",
+    "slack_message_sent": "Сообщение Slack отправлено {user}",
+    "slack_message_failed": "Не удалось отправить сообщение Slack: {error}",
+    "slack_channel_not_found": "Канал Slack не найден: {channel_id}",
+    "slack_workspace_not_found": "Workspace Slack не найден: {workspace_id}",
+    "slack_user_not_found": "Пользователь Slack не найден: {user_id}",
+    "slack_error": "Ошибка Slack: {error}",
+    "slack_rate_limit": "Лимит Slack: ожидаем {seconds}с",
+    "slack_connection_lost": "Соединение с Slack потеряно",
+    "slack_connected": "Slack подключён",
+    "slack_disconnected": "Slack отключён",
+    
+    # API Server / API сервер
+    "api_server_starting": "Запуск API сервера...",
+    "api_server_started": "API сервер запущен: {host}:{port}",
+    "api_server_stopped": "API сервер остановлен",
+    "api_server_request_received": "Получен API запрос: {method} {path}",
+    "api_server_response_sent": "API ответ отправлен: {status}",
+    "api_server_error": "Ошибка API сервера: {error}",
+    "api_server_auth_failed": "Не удалось аутентифицировать API запрос: {error}",
+    "api_server_rate_limit": "Лимит API: ожидаем {seconds}с",
+    "api_server_connection_lost": "Соединение с API потеряно",
+    "api_server_connected": "API подключён",
+    "api_server_disconnected": "API отключён",
+    
+    # BlueBubbles / BlueBubbles
+    "bluebubbles_starting": "Запуск BlueBubbles...",
+    "bluebubbles_started": "BlueBubbles запущен",
+    "bluebubbles_stopped": "BlueBubbles остановлен",
+    "bluebubbles_message_received": "Получено сообщение BlueBubbles от {user}",
+    "bluebubbles_message_sent": "Сообщение BlueBubbles отправлено {user}",
+    "bluebubbles_message_failed": "Не удалось отправить сообщение BlueBubbles: {error}",
+    "bluebubbles_error": "Ошибка BlueBubbles: {error}",
+    "bluebubbles_connection_lost": "Соединение с BlueBubbles потеряно",
+    "bluebubbles_connected": "BlueBubbles подключён",
+    "bluebubbles_disconnected": "BlueBubbles отключён",
+    "bluebubbles_webhook_path": "Webhook путь BlueBubbles: {path}",
+    
+    # DingTalk / DingTalk
+    "dingtalk_starting": "Запуск DingTalk...",
+    "dingtalk_started": "DingTalk запущен",
+    "dingtalk_stopped": "DingTalk остановлен",
+    "dingtalk_message_received": "Получено сообщение DingTalk от {user}",
+    "dingtalk_message_sent": "Сообщение DingTalk отправлено {user}",
+    "dingtalk_message_failed": "Не удалось отправить сообщение DingTalk: {error}",
+    "dingtalk_error": "Ошибка DingTalk: {error}",
+    "dingtalk_connection_lost": "Соединение с DingTalk потеряно",
+    "dingtalk_connected": "DingTalk подключён",
+    "dingtalk_disconnected": "DingTalk отключён",
+    "dingtalk_stream_mode": "DingTalk stream mode: {mode}",
+    
+    # Feishu / Feishu
+    "feishu_starting": "Запуск Feishu...",
+    "feishu_started": "Feishu запущен",
+    "feishu_stopped": "Feishu остановлен",
+    "feishu_message_received": "Получено сообщение Feishu от {user}",
+    "feishu_message_sent": "Сообщение Feishu отправлено {user}",
+    "feishu_message_failed": "Не удалось отправить сообщение Feishu: {error}",
+    "feishu_error": "Ошибка Feishu: {error}",
+    "feishu_connection_lost": "Соединение с Feishu потеряно",
+    "feishu_connected": "Feishu подключён",
+    "feishu_disconnected": "Feishu отключён",
+    
+    # Generic platform errors / Общие ошибки платформ
+    "platform_initialization_failed": "Не удалось инициализировать платформу: {platform}",
+    "platform_shutdown_failed": "Не удалось остановить платформу: {platform}",
+    "platform_message_too_long": "Сообщение слишком длинное для {platform}: {length} символов",
+    "platform_message_truncated": "Сообщение сокращено для {platform} до {max} символов",
+    "platform_media_not_supported": "Медиа не поддерживается {platform}",
+    "platform_file_too_large": "Файл слишком большой для {platform}: {size}MB",
+    "platform_unsupported_message_type": "Неподдерживаемый тип сообщения для {platform}: {type}",
+    "platform_retry_scheduled": "Повтор {platform} запланирован через {seconds}с",
+    "platform_retry_failed": "Повтор {platform} не удался: {error}",
+    "platform_max_retries_exceeded": "Превышено макс. число попыток для {platform}: {max}",
+}
+
+# ============================================================================
+# Plugin messages / Сообщения плагинов
+# ============================================================================
+
+PLUGIN_MESSAGES = {
+    # Plugin loading / Загрузка плагинов
+    "plugin_loading": "Загрузка плагина: {name}",
+    "plugin_loaded": "Плагин загружен: {name}",
+    "plugin_load_failed": "Не удалось загрузить плагин: {name}",
+    "plugin_unloading": "Выгрузка плагина: {name}",
+    "plugin_unloaded": "Плагин выгружен: {name}",
+    "plugin_unload_failed": "Не удалось выгрузить плагин: {name}",
+    "plugin_reload": "Перезагрузка плагина: {name}",
+    "plugin_reloaded": "Плагин перезаряжен: {name}",
+    "plugin_reload_failed": "Не удалось перезарядить плагин: {name}",
+    
+    # Plugin installation / Установка плагинов
+    "plugin_installing": "Установка плагина: {name}",
+    "plugin_installed": "Плагин установлен: {name}",
+    "plugin_install_failed": "Не удалось установить плагин: {name}",
+    "plugin_uninstalling": "Удаление плагина: {name}",
+    "plugin_uninstalled": "Плагин удалён: {name}",
+    "plugin_uninstall_failed": "Не удалось удалить плагин: {name}",
+    "plugin_updating": "Обновление плагина: {name}",
+    "plugin_updated": "Плагин обновлён: {name}",
+    "plugin_update_failed": "Не удалось обновить плагин: {name}",
+    "plugin_update_available": "Доступно обновление плагина: {name}",
+    
+    # Plugin configuration / Конфигурация плагинов
+    "plugin_config_loaded": "Конфигурация плагина загружена: {name}",
+    "plugin_config_saved": "Конфигурация плагина сохранена: {name}",
+    "plugin_config_error": "Ошибка конфигурации плагина: {name}",
+    "plugin_config_invalid": "Неверная конфигурация плагина: {name}",
+    "plugin_config_reset": "Конфигурация плагина сброшена: {name}",
+    
+    # Plugin dependencies / Зависимости плагинов
+    "plugin_dependency_check": "Проверка зависимостей плагина: {name}",
+    "plugin_dependency_installed": "Зависимость плагина установлена: {dep}",
+    "plugin_dependency_missing": "Отсутствует зависимость плагина: {dep}",
+    "plugin_dependency_install_failed": "Не удалось установить зависимость плагина: {dep}",
+    
+    # Plugin errors / Ошибки плагинов
+    "plugin_error": "Ошибка плагина: {name}",
+    "plugin_runtime_error": "Ошибка выполнения плагина: {name}",
+    "plugin_import_error": "Ошибка импорта плагина: {name}",
+    "plugin_version_error": "Ошибка версии плагина: {name}",
+    "plugin_compatibility_error": "Ошибка совместимости плагина: {name}",
+    "plugin_conflict_error": "Конфликт плагинов: {name}",
+    
+    # Plugin tools / Инструменты плагинов
+    "plugin_tool_registered": "Инструмент плагина зарегистрирован: {tool}",
+    "plugin_tool_unregistered": "Инструмент плагина удалён: {tool}",
+    "plugin_tool_executing": "Выполнение инструмента плагина: {tool}",
+    "plugin_tool_completed": "Инструмент плагина выполнен: {tool}",
+    "plugin_tool_failed": "Инструмент плагина не удался: {tool}",
+    
+    # Plugin hooks / Хуки плагинов
+    "plugin_hook_registered": "Хук плагина зарегистрирован: {hook}",
+    "plugin_hook_triggered": "Хук плагина активирован: {hook}",
+    "plugin_hook_failed": "Хук плагина не удался: {hook}",
+    
+    # Plugin memory / Память плагинов
+    "plugin_memory_provider": "Провайдер памяти плагина: {provider}",
+    "plugin_memory_enabled": "Память плагина включена: {name}",
+    "plugin_memory_disabled": "Память плагина отключена: {name}",
+    "plugin_memory_error": "Ошибка памяти плагина: {name}",
+    
+    # Plugin context engine / Контекст движок
+    "plugin_context_engine": "Контекст движок плагина: {engine}",
+    "plugin_context_enabled": "Контекст плагина включён: {name}",
+    "plugin_context_disabled": "Контекст плагина отключён: {name}",
+    "plugin_context_error": "Ошибка контекста плагина: {name}",
+    
+    # Plugin model providers / Провайдеры моделей
+    "plugin_model_provider": "Провайдер модели плагина: {provider}",
+    "plugin_model_registered": "Модель плагина зарегистрирована: {model}",
+    "plugin_model_error": "Ошибка модели плагина: {model}",
+    
+    # Plugin image gen / Генерация изображений
+    "plugin_image_gen": "Генерация изображений плагина: {provider}",
+    "plugin_image_generated": "Изображение плагина создано: {path}",
+    "plugin_image_error": "Ошибка генерации изображения плагина: {error}",
+    
+    # Plugin kanban / Канбан плагинов
+    "plugin_kanban": "Канбан плагина: {board}",
+    "plugin_kanban_task_created": "Задача канбан плагина создана: {id}",
+    "plugin_kanban_task_error": "Ошибка задачи канбан плагина: {error}",
+    
+    # Plugin observability / Наблюдаемость
+    "plugin_observability": "Наблюдаемость плагина: {provider}",
+    "plugin_metrics_enabled": "Метрики плагина включены: {name}",
+    "plugin_metrics_disabled": "Метрики плагина отключены: {name}",
+    "plugin_tracing_enabled": "Трассировка плагина включена: {name}",
+    "plugin_tracing_disabled": "Трассировка плагина отключена: {name}",
+    
+    # Plugin achievements / Достижения
+    "plugin_achievements": "Достижения плагина: {count}",
+    "plugin_achievement_unlocked": "Достижение плагина разблокировано: {name}",
+    "plugin_achievement_error": "Ошибка достижения плагина: {error}",
+    
+    # Plugin dashboard / Дашборд
+    "plugin_dashboard": "Дашборд плагина: {name}",
+    "plugin_dashboard_enabled": "Дашборд плагина включён: {name}",
+    "plugin_dashboard_disabled": "Дашборд плагина отключён: {name}",
+    "plugin_dashboard_error": "Ошибка дашборда плагина: {error}",
+    
+    # Plugin spotify / Spotify
+    "plugin_spotify": "Spotify плагин: {action}",
+    "plugin_spotify_playing": "Spotify воспроизводит: {track}",
+    "plugin_spotify_paused": "Spotify приостановлен",
+    "plugin_spotify_stopped": "Spotify остановлен",
+    "plugin_spotify_error": "Ошибка Spotify плагина: {error}",
+    
+    # Plugin homeassistant / Home Assistant
+    "plugin_homeassistant": "Home Assistant плагин: {action}",
+    "plugin_homeassistant_device_controlled": "Устройство Home Assistant управляется: {device}",
+    "plugin_homeassistant_error": "Ошибка Home Assistant плагина: {error}",
+    
+    # Plugin google workspace / Google Workspace
+    "plugin_google_workspace": "Google Workspace плагин: {service}",
+    "plugin_google_gmail": "Gmail плагин: {action}",
+    "plugin_google_calendar": "Calendar плагин: {action}",
+    "plugin_google_drive": "Drive плагин: {action}",
+    "plugin_google_docs": "Docs плагин: {action}",
+    "plugin_google_sheets": "Sheets плагин: {action}",
+    "plugin_google_error": "Ошибка Google Workspace плагина: {error}",
+    
+    # Plugin notion / Notion
+    "plugin_notion": "Notion плагин: {action}",
+    "plugin_notion_page_created": "Страница Notion создана: {title}",
+    "plugin_notion_page_updated": "Страница Notion обновлена: {title}",
+    "plugin_notion_error": "Ошибка Notion плагина: {error}",
+    
+    # Plugin linear / Linear
+    "plugin_linear": "Linear плагин: {action}",
+    "plugin_linear_issue_created": "Задача Linear создана: {title}",
+    "plugin_linear_issue_updated": "Задача Linear обновлена: {title}",
+    "plugin_linear_error": "Ошибка Linear плагина: {error}",
+    
+    # Plugin airtable / Airtable
+    "plugin_airtable": "Airtable плагин: {action}",
+    "plugin_airtable_record_created": "Запись Airtable создана: {id}",
+    "plugin_airtable_record_updated": "Запись Airtable обновлена: {id}",
+    "plugin_airtable_error": "Ошибка Airtable плагина: {error}",
+    
+    # Plugin maps / Карты
+    "plugin_maps": "Карты плагин: {action}",
+    "plugin_maps_geocode": "Геокодирование: {address}",
+    "plugin_maps_route": "Маршрут: {from} → {to}",
+    "plugin_maps_error": "Ошибка карт плагина: {error}",
+    
+    # Plugin OCR / OCR
+    "plugin_ocr": "OCR плагин: {action}",
+    "plugin_ocr_text_extracted": "Текст извлечён OCR: {chars} символов",
+    "plugin_ocr_error": "Ошибка OCR плагина: {error}",
+    
+    # Plugin powerpoint / PowerPoint
+    "plugin_powerpoint": "PowerPoint плагин: {action}",
+    "plugin_powerpoint_created": "Презентация PowerPoint создана: {path}",
+    "plugin_powerpoint_error": "Ошибка PowerPoint плагина: {error}",
+    
+    # Plugin nano-pdf / Nano-PDF
+    "plugin_nano_pdf": "Nano-PDF плагин: {action}",
+    "plugin_nano_pdf_edited": "PDF отредактирован: {path}",
+    "plugin_nano_pdf_error": "Ошибка Nano-PDF плагина: {error}",
+    
+    # Plugin teams meeting / Teams Meeting
+    "plugin_teams_meeting": "Teams Meeting плагин: {action}",
+    "plugin_teams_meeting_summary": "Саммит Teams Meeting создан: {id}",
+    "plugin_teams_meeting_error": "Ошибка Teams Meeting плагина: {error}",
+    
+    # Plugin youtube / YouTube
+    "plugin_youtube": "YouTube плагин: {action}",
+    "plugin_youtube_transcript": "Транскрипт YouTube получен: {video_id}",
+    "plugin_youtube_summary": "Саммит YouTube создан: {video_id}",
+    "plugin_youtube_error": "Ошибка YouTube плагина: {error}",
+    
+    # Plugin blogwatcher / Blogwatcher
+    "plugin_blogwatcher": "Blogwatcher плагин: {action}",
+    "plugin_blogwatcher_feed_checked": "Лента Blogwatcher проверена: {feed}",
+    "plugin_blogwatcher_new_posts": "Новые посты Blogwatcher: {count}",
+    "plugin_blogwatcher_error": "Ошибка Blogwatcher плагина: {error}",
+    
+    # Plugin llm-wiki / LLM Wiki
+    "plugin_llm_wiki": "LLM Wiki плагин: {action}",
+    "plugin_llm_wiki_kb_updated": "База знаний LLM Wiki обновлена: {entries}",
+    "plugin_llm_wiki_error": "Ошибка LLM Wiki плагина: {error}",
+    
+    # Plugin polymarket / Polymarket
+    "plugin_polymarket": "Polymarket плагин: {action}",
+    "plugin_polymarket_market_queried": "Рынок Polymarket запрошен: {market}",
+    "plugin_polymarket_error": "Ошибка Polymarket плагина: {error}",
+    
+    # Plugin songsee / Songsee
+    "plugin_songsee": "Songsee плагин: {action}",
+    "plugin_songsee_audio_analyzed": "Аудио проанализировано Songsee: {file}",
+    "plugin_songsee_error": "Ошибка Songsee плагина: {error}",
+    
+    # Plugin heartmula / Heartmula
+    "plugin_heartmula": "Heartmula плагин: {action}",
+    "plugin_heartmula_song_generated": "Песня сгенерирована Heartmula: {path}",
+    "plugin_heartmula_error": "Ошибка Heartmula плагина: {error}",
+    
+    # Plugin comfyui / ComfyUI
+    "plugin_comfyui": "ComfyUI плагин: {action}",
+    "plugin_comfyui_image_generated": "Изображение сгенерировано ComfyUI: {path}",
+    "plugin_comfyui_error": "Ошибка ComfyUI плагина: {error}",
+    
+    # Plugin ascii art / ASCII Art
+    "plugin_ascii_art": "ASCII Art плагин: {action}",
+    "plugin_ascii_art_generated": "ASCII Art создано: {path}",
+    "plugin_ascii_art_error": "Ошибка ASCII Art плагина: {error}",
+    
+    # Plugin architecture diagram / Architecture Diagram
+    "plugin_architecture_diagram": "Architecture Diagram плагин: {action}",
+    "plugin_architecture_diagram_generated": "Диаграмма архитектуры создана: {path}",
+    "plugin_architecture_diagram_error": "Ошибка Architecture Diagram плагина: {error}",
+}
+
+
+# ============================================================================
+# Remaining CLI messages / Оставшиеся сообщения CLI
+# ============================================================================
+
+REMAINING_CLI = {
+    # Auth commands / Команды аутентификации
+    "get_custom_provider_names": "Получить список пользовательских провайдеров",
+    "custom_provider_display_name": "Отображаемое имя провайдера",
+    "custom_provider_pool_key": "Ключ пула провайдера",
+    "custom_provider_provider_key": "Ключ провайдера",
+    
+    # Azure / Azure
+    "azure_available_models": "Доступные модели Azure",
+    "azure_user_models": "Модели пользователя",
+    "azure_model_discovery": "Обнаружение моделей Azure",
+    
+    # Backup / Резервное копирование
+    "backup_codebase_repo": "Резервное копирование репозитория кода",
+    "backup_reclone_instead": "Переклонировать вместо",
+    "backup_created": "Резервная копия создана: {path}",
+    "backup_restored": "Резервная копия восстановлена: {path}",
+    "backup_failed": "Не удалось создать резервную копию: {error}",
+    
+    # Banner / Баннер
+    "banner_print_ansi": "Печать ANSI-цветного текста через prompt_toolkit",
+    "banner_colored_output": "Цветной вывод баннера",
+    "banner_version_info": "Информация о версии баннера",
+    
+    # Browser connect / Подключение браузера
+    "browser_connect_helpers": "Общие помощники для подключения Hermes к локальному порту Chrome CDP",
+    "browser_chrome_path_mac": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "browser_cdp_connection": "CDP подключение браузера",
+    "browser_debugging_port": "Порт отладки браузера",
+    "browser_connect_success": "Браузер подключён успешно",
+    "browser_connect_failed": "Не удалось подключить браузер: {error}",
+    
+    # Callbacks / Обратные вызовы
+    "interactive_prompt_callbacks": "Интерактивные обратные вызовы подсказок для интеграции terminal_tool",
+    "callbacks_bridge_terminal": "Мост между terminal_tool и event loop Hermes",
+    "callbacks_hermes_cli_instance": "Экземпляр HermesCLI как первый аргумент",
+    "callbacks_state_queue": "Состояние и очередь callbacks",
+    
+    # Checkpoints / Чекпоинты
+    "checkpoints_module": "Модуль чекпоинтов",
+    "checkpoints_datetime": "Чекпоинты: дата и время",
+    "checkpoints_size_format": "Формат размера чекпоинтов",
+    "checkpoints_units": "Единицы измерения чекпоинтов",
+    "checkpoint_created": "Чекпоинт создан: {id}",
+    "checkpoint_restored": "Чекпоинт восстановлен: {id}",
+    "checkpoint_deleted": "Чекпоинт удалён: {id}",
+    
+    # Claw / Claw
+    "claw_script_installed": "Скрипт claw установлен",
+    "claw_script_from_hub": "Скрипт claw из Hub",
+    "claw_openclaw_installed": "OpenClaw установлен",
+    "claw_not_found": "Claw не найден",
+    
+    # Clipboard / Буфер обмена
+    "clipboard_module": "Модуль буфера обмена",
+    "clipboard_save_image": "Сохранить изображение из буфера обмена",
+    "clipboard_image_saved": "Изображение из буфера обмена сохранено: {path}",
+    "clipboard_no_image": "Нет изображения в буфере обмена",
+    "clipboard_copy_text": "Копировать текст в буфер обмена",
+    "clipboard_paste_text": "Вставить текст из буфера обмена",
+    "clipboard_success": "Буфер обмена: успешно",
+    "clipboard_failed": "Буфер обмена: не удалось",
+    
+    # CLI output / Вывод CLI
+    "cli_output_module": "Модуль вывода CLI",
+    "cli_print_ansi": "Печать ANSI-цветного текста через prompt_toolkit",
+    "cli_print_success": "Печать успешного сообщения",
+    "cli_print_error": "Печать сообщения об ошибке",
+    "cli_print_warning": "Печать предупреждения",
+    "cli_print_info": "Печать информации",
+    "cli_getpass": "Ввод пароля (getpass)",
+    "cli_color_output": "Цветной вывод CLI",
+    
+    # Codex / Codex
+    "codex_model_discovery": "Обнаружение моделей Codex из API, локального кэша и конфигурации",
+    "codex_available_models": "Доступные модели Codex",
+    "codex_local_cache": "Локальный кэш Codex",
+    "codex_config": "Конфигурация Codex",
+    "codex_runtime_plugin_migration": "Миграция плагина codex runtime",
+    "codex_yaml_to_toml": "Конвертация YAML в TOML для Codex",
+    "codex_mcp_servers": "MCP серверы Codex",
+    "codex_plugin_installed": "Плагин Codex установлен",
+    "codex_runtime_switch": "Переключение codex runtime",
+    "codex_runtime_toggle": "Переключение model.openai_runtime",
+    "codex_runtime_shared_logic": "Общая логика для slash команды /codex-runtime",
+    
+    # Colors / Цвета
+    "colors_module": "Модуль цветов",
+    "colors_ansi_utilities": "Общие ANSI цветные утилиты для Hermes CLI модулей",
+    "colors_should_use": "Использовать ли цвет",
+    "colors_no_color_env": "Уважает переменную окружения NO_COLOR",
+    "colors_terminal_detection": "Определение терминала",
+    "colors_enabled": "Цвета включены",
+    "colors_disabled": "Цвета отключены",
+    
+    # Commands / Команды
+    "commands_def": "Определение команд",
+    "commands_canonical_name": "Каноническое имя команды без слэша",
+    "commands_description": "Описание команды",
+    "commands_category": "Категория команды",
+    "commands_aliases": "Алиасы команды",
+    "commands_args_hint": "Подсказка аргументов команды",
+    
+    # Completion / Автодополнение
+    "completion_module": "Модуль автодополнения",
+    "completion_walk_parser": "Рекурсивное извлечение подкоманд и флагов из парсера",
+    "completion_subparsers_action": "Использует _SubParsersAction._choices_action",
+    "completion_extract_commands": "Извлечь команды",
+    "completion_extract_flags": "Извлечь флаги",
+    
+    # Copilot / Copilot
+    "copilot_auth": "Аутентификация Copilot",
+    "copilot_token_type_prefixes": "Префиксы типов токенов",
+    "copilot_classic_pat": "Классический PAT",
+    "copilot_oauth_token": "OAuth токен Copilot",
+    
+    # Cron / Cron
+    "cron_subcommand": "Cron подкоманда для hermes CLI",
+    "cron_standalone_management": "Автономное управление cron",
+    "cron_list_create_edit": "Список, создание, редактирование, пауза, возобновление, запуск, удаление",
+    "cron_job_scheduled": "Задача запланирована",
+    "cron_job_executed": "Задача выполнена",
+    
+    # Curses UI / Curses UI
+    "curses_ui_module": "Модуль Curses UI",
+    "curses_ui_imports": "Импорты Curses UI",
+    "curses_ui_callable_list": "Список вызываемых объектов",
+    "curses_ui_optional_set": "Опциональный набор",
+    
+    # Misc helpers / Разные помощники
+    "helpers_module": "Модуль помощников",
+    "helpers_shared_functions": "Общие функции",
+    "helpers_utility_functions": "Утилитные функции",
+    "helpers_formatting": "Форматирование",
+    "helpers_validation": "Проверка",
+    "helpers_conversion": "Конвертация",
+    
+    # Error handling / Обработка ошибок
+    "error_handler": "Обработчик ошибок",
+    "error_catch": "Перехват ошибки",
+    "error_log": "Логирование ошибки",
+    "error_display": "Отображение ошибки",
+    "error_recovery": "Восстановление после ошибки",
+    "error_retry": "Повтор после ошибки",
+    
+    # Logging / Логирование
+    "logging_module": "Модуль логирования",
+    "logging_setup": "Настройка логирования",
+    "logging_config": "Конфигурация логирования",
+    "logging_level": "Уровень логирования",
+    "logging_format": "Формат логирования",
+    "logging_file": "Файл логирования",
+    "logging_console": "Консоль логирования",
+    
+    # Config management / Управление конфигурацией
+    "config_management": "Управление конфигурацией",
+    "config_load": "Загрузка конфигурации",
+    "config_save": "Сохранение конфигурации",
+    "config_validate": "Проверка конфигурации",
+    "config_merge": "Слияние конфигураций",
+    "config_diff": "Разница конфигураций",
+    
+    # Session management / Управление сессиями
+    "session_management": "Управление сессиями",
+    "session_create": "Создание сессии",
+    "session_delete": "Удаление сессии",
+    "session_list": "Список сессий",
+    "session_export": "Экспорт сессии",
+    "session_import": "Импорт сессии",
+    
+    # File helpers / Помощники файлов
+    "file_helpers": "Помощники файлов",
+    "file_read": "Чтение файла",
+    "file_write": "Запись файла",
+    "file_delete": "Удаление файла",
+    "file_copy": "Копирование файла",
+    "file_move": "Перемещение файла",
+    "file_exists": "Файл существует",
+    "file_create_dir": "Создание директории",
+    
+    # Network helpers / Сетевые помощники
+    "network_helpers": "Сетевые помощники",
+    "network_request": "Сетевой запрос",
+    "network_response": "Сетевой ответ",
+    "network_timeout": "Сетевой таймаут",
+    "network_retry": "Сетевой повтор",
+    "network_error": "Сетевая ошибка",
+    
+    # Security helpers / Помощники безопасности
+    "security_helpers": "Помощники безопасности",
+    "security_validate": "Проверка безопасности",
+    "security_encrypt": "Шифрование",
+    "security_decrypt": "Дешифрование",
+    "security_hash": "Хеширование",
+    "security_verify": "Верификация",
+    
+    # Performance / Производительность
+    "performance_monitor": "Монитор производительности",
+    "performance_metrics": "Метрики производительности",
+    "performance_optimize": "Оптимизация производительности",
+    "performance_profiling": "Профилирование производительности",
+    "performance_benchmark": "Бенчмарк производительности",
+}
+
+# ============================================================================
+# Main command outputs / Вывод команд main.py
+# ============================================================================
+
+MAIN_COMMANDS = {
+    # Sessions / Сессии
+    "sessions_not_found": "Сессии не найдены.",
+    "browse_sessions_prompt": "Просмотр сессий (введите номер для возобновления, q для отмены)",
+    "invalid_selection": "Неверный выбор. Введите 1-{max} или q для отмены.",
+    "invalid_input": "Неверный ввод. Введите число или q для отмены.",
+    "resume_session_hint": "Возобновить эту сессию:",
+    "session_not_found": "Сессия не найдена: {target}",
+    "no_previous_session": "Предыдущая сессия {kind} не найдена для продолжения.",
+    
+    # TUI / TUI
+    "nodejs_not_found": "{bin} не найден — установите Node.js для использования TUI.",
+    "installing_tui_deps": "Установка зависимостей TUI…",
+    "npm_install_failed": "npm install не удался.",
+    "tui_dev_prebuild_failed": "Сборка TUI dev не удалась.",
+    "tui_build_failed": "Сборка TUI не удалась.",
+    "tui_worktree_failed": "Не удалось создать TUI worktree: {error}",
+    
+    # Setup / Настройка
+    "run_hermes_setup": "Запустите: hermes setup",
+    "configure_anytime": "в любое время для настройки.",
+    
+    # WhatsApp / WhatsApp
+    "whatsapp_setup_title": "⚕ Настройка WhatsApp",
+    "whatsapp_how_use": "Как вы будете использовать WhatsApp с Hermes?",
+    "whatsapp_separate_bot": "Отдельный номер бота (рекомендуется)",
+    "whatsapp_personal": "Личный номер (сам с собой)",
+    "whatsapp_people_message_bot": "Люди пишут боту",
+    "whatsapp_self_chat_hint": "Вы пишете себе чтобы общаться с агентом.",
+    "whatsapp_quick_but_ux": "Быстро настраивается, но менее интуитивно.",
+    "setup_cancelled": "Настройка отменена.",
+    "whatsapp_mode_bot": "Режим: отдельный номер бота",
+    "whatsapp_mode_personal": "Режим: личный номер (сам с собой)",
+    "whatsapp_second_number_hint": "Получение второго номера для бота:",
+    "whatsapp_easiest_way": "Проще всего: установить WhatsApp Business (бесплатно)",
+    "whatsapp_on_phone": "на телефон со вторым номером:",
+    "whatsapp_dual_sim": "Dual-SIM: используйте второй слот SIM",
+    "whatsapp_google_voice": "Google Voice: бесплатный номер США",
+    "whatsapp_prepaid_sim": "Предоплаченная SIM: $3-10, подтвердить один раз",
+    "whatsapp_business_parallel": "WhatsApp Business работает параллельно с личным",
+    "whatsapp_no_second_phone": "WhatsApp — второй телефон не нужен.",
+    "whatsapp_mode_label": "Режим: {mode}",
+    "whatsapp_already_enabled": "✓ WhatsApp уже включён",
+    "whatsapp_allowed_users": "Разрешённые пользователи: {users}",
+    "whatsapp_updated_to": "Обновлено на: {phone}",
+    "whatsapp_who_allowed": "Кому разрешить писать боту?",
+    "whatsapp_users_set": "Разрешённые пользователи: {phone}",
+    "whatsapp_no_allowlist_warn": "⚠ Нет списка разрешённых — агент будет отвечать ВСЕМ",
+    "whatsapp_bridge_not_found": "✗ Скрипт моста не найден: {path}",
+    "whatsapp_npm_not_found": "✗ npm не найден — сначала установите Node.js",
+    "whatsapp_install_cancelled": "✗ Установка отменена",
+    "whatsapp_npm_failed": "✗ npm install не удался:",
+    "whatsapp_deps_installed": "✓ Зависимости установлены",
+    "whatsapp_deps_already": "✓ Зависимости моста уже установлены",
+    "whatsapp_session_found": "✓ Существующая сессия WhatsApp найдена",
+    "whatsapp_session_cleared": "✓ Сессия очищена",
+    "whatsapp_configured_paired": "✓ WhatsApp настроен и сопряжён!",
+    
+    # General command outputs / Вывод команд
+    "config_saved": "Конфигурация сохранена",
+    "config_loaded": "Конфигурация загружена",
+    "model_switched": "Модель переключена на {model}",
+    "provider_switched": "Провайдер переключен на {provider}",
+    "skills_installed": "Навыки установлены: {skills}",
+    "skills_updated": "Навыки обновлены: {skills}",
+    "tools_enabled": "Инструменты включены: {tools}",
+    "tools_disabled": "Инструменты отключены: {tools}",
+    "no_tools_available": "Нет доступных инструментов",
+    "no_skills_installed": "Нет установленных навыков",
+    "no_cron_jobs": "Нет запланированных задач",
+    "job_created": "Задача создана: {job_id}",
+    "job_updated": "Задача обновлена: {job_id}",
+    "job_deleted": "Задача удалена: {job_id}",
+    "job_paused": "Задача приостановлена: {job_id}",
+    "job_resumed": "Задача возобновлена: {job_id}",
+    "job_executed": "Задача выполнена: {job_id}",
+    
+    # Errors / Ошибки
+    "permission_denied": "Отказано в доступе",
+    "file_not_found": "Файл не найден: {path}",
+    "directory_not_found": "Директория не найдена: {path}",
+    "invalid_command": "Неверная команда: {cmd}",
+    "invalid_argument": "Неверный аргумент: {arg}",
+    "invalid_value": "Неверное значение: {value}",
+    "missing_required_arg": "Отсутствует обязательный аргумент: {arg}",
+    "too_many_args": "Слишком много аргументов",
+    "command_not_found": "Команда не найдена: {cmd}",
+    "feature_not_available": "Функция недоступна: {feature}",
+    "not_implemented": "Не реализовано",
+    "not_supported": "Не поддерживается",
+    "deprecated_warning": "⚠️  Устарело: {item}",
+    
+    # Prompts / Подсказки
+    "are_you_sure": "Вы уверены?",
+    "want_to_continue": "Хотите продолжить?",
+    "enter_choice": "Введите ваш выбор",
+    "enter_number": "Введите номер",
+    "enter_value": "Введите значение",
+    "enter_name": "Введите имя",
+    "enter_path": "Введите путь",
+    "enter_url": "Введите URL",
+    "enter_api_key": "Введите API ключ",
+    "press_enter_continue": "Нажмите Enter для продолжения",
+    "press_ctrlc_cancel": "Нажмите Ctrl+C для отмены",
+    
+    # Progress / Прогресс
+    "loading": "Загрузка...",
+    "saving": "Сохранение...",
+    "processing": "Обработка...",
+    "installing": "Установка...",
+    "uninstalling": "Удаление...",
+    "updating": "Обновление...",
+    "downloading": "Загрузка...",
+    "uploading": "Выгрузка...",
+    "building": "Сборка...",
+    "testing": "Тестирование...",
+    "checking": "Проверка...",
+    "waiting": "Ожидание...",
+    "connecting": "Подключение...",
+    "disconnecting": "Отключение...",
+    
+    # Status / Статус
+    "ready": "Готово",
+    "done": "Готово",
+    "finished": "Завершено",
+    "complete": "Завершено",
+    "incomplete": "Не завершено",
+    "pending": "Ожидает",
+    "running": "Выполняется",
+    "stopped": "Остановлено",
+    "paused": "Приостановлено",
+    "active": "Активно",
+    "inactive": "Неактивно",
+    "online": "В сети",
+    "offline": "Не в сети",
+    "available": "Доступно",
+    "unavailable": "Недоступно",
+}
+# ============================================================================
+# CLI messages / Сообщения CLI
+# ============================================================================
+CLI_MESSAGES = {
+    # Worktree / Worktree
+    "worktree_requires_repo": "\033[31m✗ --worktree требует нахождения внутри git-репозитория.\033[0m",
+    "cd_into_repo_first": "  Сначала cd в репозиторий, затем запустите hermes -w",
+    "worktree_created": "\033[32m✓ Worktree создан:\033[0m {path}",
+    "1_set_environment_variables": "    1. Set environment variables:",
+    "__cannot_start_background_task_no_valid_credential": "  (>_<) Не удалось запустить фоновую задачу: нет действительных учётных данных.",
+    "__compression_is_disabled_in_config": "(._.) Сжатие отключено в конфиге.",
+    "__fast_is_only_available_for_models_that_support_f": "  (._.) /fast доступен только для моделей с поддержкой fast mode (OpenAI Priority Processing или Anthropic Fast Mode).",
+    "__no_active_agent_send_a_message_first": "(._.) Нет активного агента — сначала отправьте сообщение.",
+    "__no_api_calls_made_yet_in_this_session": "(._.) API-запросов в этой сессии пока не было.",
+    "__no_conversation_history_yet": "(._.) История разговора пока пуста.",
+    "__no_conversation_to_save": "(._.) Нечего сохранять.",
+    "__no_messages_in_the_current_chat_yet_here_are_rec": "(._.) В текущем чате пока нет сообщений — вот недавние сессии для возобновления:",
+    "__no_messages_to_retry": "(._.) Нечего повторять.",
+    "__no_messages_to_undo": "(._.) Нечего отменять.",
+    "__no_previous_sessions_yet": "  (._.) Предыдущих сессий пока нет.",
+    "__no_scheduled_jobs": "(._.) Нет запланированных задач.",
+    "__no_tools_available": "(;_;) Нет доступных инструментов",
+    "__no_user_message_found_to_retry": "(._.) Сообщение пользователя не найдено to retry.",
+    "__no_user_message_found_to_undo": "(._.) Сообщение пользователя не найдено to undo.",
+    "__not_enough_conversation_to_compress_need_at_leas": "(._.) Недостаточно разговора для сжатия (нужно как минимум 4 сообщений).",
+    "__personality_cleared_session_only": "(^_^) Личность сброшена (сессия only)",
+    "__please_provide_a_prompt_or_at_least_one_skill": "(._.) Укажите запрос или хотя бы один навык",
+    "__repeat_must_be_an_integer": "(._.) --repeat должно быть числом",
+    "__usage_cron_add_schedule_prompt": "(._.) Использование: /cron add <schedule> <prompt>",
+    "__usage_cron_edit_job_id_schedule_prompt_skill": "(._.) Использование: /cron edit <job_id> [--schedule ...] [--prompt ...] [--skill ...]",
+    "_b_personality_cleared_saved_to_config": "(^_^)b Личность сброшена (сохранено в конфиг)",
+    "_v_new_session_started": "(^_^)v Новая сессия начата!",
+    "a_prerollback_snapshot_was_saved_automatically": "  Предоткатный снимок сохранён автоматически.",
+    "added_skills": "  ➕ Added Skills:",
+    "agent": "  -- Agent --",
+    "agent_is_busy_wait_for_the_current_turn_to_finish_": "  Агент занят. Дождитесь завершения текущего хода, затем повторите /handoff.",
+    "already_on_that_session": "  Уже в этой сессии.",
+    "automatic_chrome_fallback_for_screenshots_and_fail": "   Автоматический резервный режим Chrome для скриншотов и неудачных команд",
+    "available_list_add_edit_pause_resume_run_remove": "  Available: list, add, edit, pause, resume, run, remove",
+    "available_skins": "  Доступные скины:",
+    "bold_redquick_command_timed_out_30s": "[bold red]Быстрая команда превысила время (30с)[/]",
+    "browser_connect_connect_to_your_live_chrome": "   /browser connect      — подключиться к вашему активному Chrome",
+    "browser_connected_to_live_chrome_via_cdp": "🌐 Браузер подключён к живому Chrome через CDP",
+    "browser_disconnect_revert_to_default": "   /browser disconnect   — revert to default",
+    "browser_disconnected_from_live_chrome": "🌐 Браузер отключён от живого Chrome",
+    "browser_is_not_connected_to_live_chrome_already_us": "Браузер не подключён to live Chrome (already using default mode)",
+    "browser_local_headless_chrome_agentbrowser_engine_": "🌐 Browser: local headless Chrome (agent-browser --engine chrome)",
+    "browser_local_headless_chromium_agentbrowser": "🌐 Browser: local headless Chromium (agent-browser)",
+    "browser_local_lightpanda_agentbrowser_engine_light": "🌐 Browser: local Lightpanda (agent-browser --engine lightpanda)",
+    "browser_not_connected_start_chrome_with_remote_deb": "Браузер не подключён — запустите Chrome с отладкой и повторите /browser connect",
+    "browser_tools_reverted_to_default_mode_local_headl": "   Браузерные инструменты возвращены к режиму по умолчанию (локальный headless или облачный провайдер)",
+    "chat_turn_undone_to_match_restored_file_state": "  Ход чата отменён для соответствия восстановленному состоянию.",
+    "checkpoints_are_not_enabled": "  Чекпоинты не включены.",
+    "chrome_isnt_running_with_remote_debugging_attempti": "   Chrome не запущен с отладкой — попытка запуска...",
+    "commands": "  Commands:",
+    "connect_connect_browser_tools_to_your_live_chrome_": "   connect      Connect browser tools to your live Chrome сессия",
+    "could_not_autolaunch_chrome": "   ⚠ Не удалось автозапустить Chrome",
+    "couldnt_persist_optout_proceeding_once": "⚠️  Couldn't persist opt-out — proceeding once.",
+    "couldnt_persist_optout_reloading_once": "⚠️  Couldn't persist opt-out — reloading once.",
+    "create_one_snapshot_create_label": "  Создайте: /snapshot create [label]",
+    "cron_edit_job_id_clearskills": "    /cron edit <job_id> --clear-skills",
+    "cron_edit_job_id_removeskill_blogwatcher": "    /cron edit <job_id> --remove-skill blogwatcher",
+    "cron_edit_job_id_skill_blogwatcher_skill_maps": "    /cron edit <job_id> --skill blogwatcher --skill maps",
+    "cron_list": "    /cron list",
+    "cron_pause_job_id": "    /cron pause <job_id>",
+    "cron_remove_job_id": "    /cron remove <job_id>",
+    "cron_resume_job_id": "    /cron resume <job_id>",
+    "cron_run_job_id": "    /cron run <job_id>",
+    "current_jobs": "  Current Jobs:",
+    "currently_enabled": "  (*) = currently enabled",
+    "dim_run_hermes_setup_to_configure": "[dim]   Run 'hermes setup' to configure[/]",
+    "dimcommand_returned_no_output": "[dim]Command returned no output[/]",
+    "dimno_quota_buckets_reported_account_may_be_on_leg": "  [dim]No quota buckets reported (account may be on legacy/unmetered tier).[/]",
+    "disconnect_revert_to_default_browser_backend": "   disconnect   Revert to default browser backend",
+    "discord_bot_tokenyour_token": "       DISCORD_BOT_TOKEN=your_token",
+    "enable_with_hermes_checkpoints": "  Enable with: hermes --checkpoints",
+    "example_background_summarize_the_top_hn_stories_to": "  Example: /background Summarize the top HN stories today",
+    "example_python_clipy_toolsets_webterminal": "  Example: python cli.py --toolsets web,terminal",
+    "failed_to_save_runtime_footer_setting_to_configyam": "  Failed to save runtime_footer setting to config.yaml",
+    "fresh_start_screen_cleared_and_conversation_resetn": "  ✨ (◕‿◕)✨ Fresh start! Screen cleared and conversation reset.\\\\n",
+    "future_clear_new_reset_and_undo_will_run_without_c": "🔒 Future /clear, /new, /reset, and /undo will run without confirmation.",
+    "future_reloadmcp_calls_will_run_without_confirmati": "🔒 Future /reload-mcp calls will run without confirmation.",
+    "gateway_picked_it_up_transferring": "  Gateway picked it up; transferring...",
+    "goal_cleared": "  ✓ Goal cleared.",
+    "hands_the_current_session_off_to_that_platforms_ho": "  Hands the current сессия off to that platform's home channel.",
+    "it_will_run_on_the_next_scheduler_tick": "  It will run on the next scheduler tick.",
+    "lightpanda_faster_navigation_no_screenshot_support": "   ⚡ Lightpanda: faster navigation, no screenshot support",
+    "mcp_reload_timed_out_30s_some_servers_may_not_have": "  ⚠️  MCP reload timed out (30с). Some servers may not have reconnected.",
+    "mcp_server_config_changed_reloading_connections": "🔄 MCP server config changed — reloading connections...",
+    "messaging_platform_configuration": "  Messaging Platform Configuration:",
+    "model": "  -- Model --",
+    "model_name_switch_model": "  /model <name>                        switch model",
+    "model_provider_slug_switch_provider": "  /model --provider <slug>             switch provider",
+    "n_force_exiting": "\\\\n⚡ Force exiting...",
+    "n_interrupting_agent": "\\\\n⚡ Interrupting agent...",
+    "n_interrupting_agent_press_ctrlc_again_to_force_ex": "\\\\n⚡ Interrupting agent... (press Ctrl+C again to force exit)",
+    "n_new_message_detected_interrupting": "\\\\n⚡ New message detected, interrupting...",
+    "n_tools": "\\\\n  [Tools]",
+    "n_usage_skin_name": "\\\\n  Использование: /skin <name>",
+    "no_active_agent_session": "  Нет активного агента сессия.",
+    "no_authenticated_providers_found": "  No authenticated providers found.",
+    "no_changes_since_this_checkpoint": "  No changes since this checkpoint.",
+    "no_chromechromium_executable_found_in_this_environ": "     No Chrome/Chromium executable found in this environment",
+    "no_conversation_to_branch_send_a_message_first": "  No conversation to branch — send a message first.",
+    "no_mcp_servers_connected": "  No MCP servers connected.",
+    "no_new_skills_detected": "  No new skills detected.",
+    "no_personality_overlay_using_base_agent_behavior": "  No personality overlay — using base agent behavior.",
+    "no_plugins_installed": "No plugins installed.",
+    "no_response_generated": "  (No response generated)",
+    "no_running_background_processes": "  No running background processes.",
+    "no_scheduled_jobs_use_cron_add_to_create_one": "  Нет запланированных задач. Use '/cron add' to create one.",
+    "no_state_files_found_to_snapshot": "  Файлов состояния для снимка не найдено.",
+    "no_state_snapshots_yet": "  Снимков состояния пока нет.",
+    "no_title_set_usage_title_your_session_title": "  No title set. Использование: /title <your сессия title>",
+    "note_banner_colors_will_update_on_next_session_sta": "  Note: banner colors will update on next сессия start.",
+    "nothing_to_copy_in_assistant_responses_yet": "  Nothing to copy in assistant responses yet.",
+    "nothing_to_copy_in_that_assistant_response": "  Nothing to copy in that assistant response.",
+    "nothing_to_copy_yet": "  Nothing to copy yet.",
+    "or_in_configyaml_checkpoints_enabled_true": "  Or in config.yaml: checkpoints: { enabled: true }",
+    "prompt_caching_enabled": "    Prompt caching: enabled",
+    "prompt_tui_colors_updated": "  Prompt + TUI colors updated.",
+    "python_clipy_gateway": "    python cli.py --gateway",
+    "recent_sessions": "  Recent сессияs:",
+    "reenable_via_approvalsdestructive_slash_confirm_tr": "   Re-enable via `approvals.destructive_slash_confirm: true` in config.yaml.",
+    "reenable_via_approvalsmcp_reload_confirm_true_in_c": "   Re-enable via `approvals.mcp_reload_confirm: true` in config.yaml.",
+    "reloading_mcp_servers": "🔄 Reloading MCP servers...",
+    "reloading_skills": "🔄 Reloading skills...",
+    "reloadmcp_cancelled_mcp_tools_unchanged": "🟡 /reload-mcp cancelled. MCP tools unchanged.",
+    "reloadmcp_cancelled_no_input": "🟡 /reload-mcp cancelled (no input).",
+    "removed_skills": "  ➖ Removed Skills:",
+    "restart_recommended_for_statedb_changes_to_take_ef": "  Рекомендуется перезапуск для применения изменений state.db.",
+    "resume_this_session_with": "Resume this сессия with:",
+    "run_boldmodel_and_pick_google_gemini_oauth_to_sign": "  Run [bold]/model[/] and pick 'Google Gemini (OAuth)' to sign in.",
+    "saved_to_configyaml_global": "    Saved to config.yaml (--global)",
+    "scheduled_jobs": "Scheduled Jobs:",
+    "session": "  -- Session --",
+    "session_is_already_in_flight_for_handoff_wait_for_": "  Session is already in flight for handoff. Wait for it to settle, затем повторите.",
+    "session_not_found_in_database": "  Session not found in database.",
+    "session_only_add_global_to_persist": "    (сессия only — add --global to persist)",
+    "session_reset_policy": "  Session Reset Policy:",
+    "session_token_usage": "  📊 Session Token Использование",
+    "skills_none": "  Skills: none",
+    "skin_engine_not_available": "Skin engine not available.",
+    "starting_hermes_gateway_messaging_platforms": "Starting Hermes Gateway (messaging platforms)...",
+    "status_not_reachable_chrome_may_not_be_running": "   Status: ⚠ not reachable (Chrome may not be running)",
+    "status_reachable": "   Status: ✓ reachable",
+    "status_show_current_browser_mode": "   status       Show current browser mode",
+    "steer_rejected_empty_payload": "  Steer rejected (empty payload).",
+    "subgoal_remove_n_must_be_an_integer_1based_index": "  /subgoal remove: <n> must be an integer (1-based index).",
+    "telegram_bot_tokenyour_token": "       TELEGRAM_BOT_TOKEN=your_token",
+    "terminal": "  -- Terminal --",
+    "the_cli_session_ends_here_resume_it_later_with_res": "  The CLI сессия ends here; resume it later with /resume.",
+    "the_task_runs_in_a_separate_session_and_results_di": "  The task runs in a separate сессия and results display here when done.",
+    "timed_out_waiting_for_the_gateway_is_hermes_gatewa": "  Timed out waiting for the gateway. Is `hermes gateway` running?",
+    "tip_reset_starts_a_new_session_immediately": "    Tip: `/reset` starts a new сессия immediately.",
+    "tip_use_all_or_to_enable_all_toolsets": "  Tip: Use 'all' or '*' to enable all toolsets",
+    "tip_use_history_or_hermes_sessions_list_to_find_se": "  Tip:   Use /history or `hermes сессияs list` to find сессияs.",
+    "title_is_empty_after_cleanup_please_use_printable_": "  Title is empty after cleanup. Please use printable characters.",
+    "title_is_empty_after_cleanup_session_started_untit": "  Title is empty after cleanup — сессия started untitled.",
+    "to_configure_the_gateway": "  To configure the gateway:",
+    "to_start_the_gateway": "  To start the gateway:",
+    "try_again_in_a_few_seconds_the_debug_instance_may_": "     Try again in a few seconds — the debug instance may still be starting",
+    "usage_background_prompt": "  Использование: /background <prompt>",
+    "usage_browser_connectdisconnectstatus": "Использование: /browser connect|disconnect|status",
+    "usage_copy_number": "  Использование: /copy [number]",
+    "usage_footer_onoffstatus": "  Использование: /footer [on|off|status]",
+    "usage_handoff_platform": "  Использование: /handoff <platform>",
+    "usage_personality_name": "  Использование: /personality <name>",
+    "usage_queue_prompt": "  Использование: /queue <prompt>",
+    "usage_resume_session_id_or_title": "  Использование: /resume <сессия_id_or_title>",
+    "usage_rollback_diff_n": "  Использование: /rollback diff <N>",
+    "usage_snapshot_listcreate_labelrestore_idprune_n": "  Использование: /snapshot [list|create [label]|restore <id>|prune [N]]",
+    "usage_snapshot_prune_keepcount": "  Использование: /snapshot prune [keep-count]",
+    "usage_snapshot_restore_snapshotid": "  Использование: /snapshot restore <snapshot-id>",
+    "usage_steer_prompt": "  Использование: /steer <prompt>",
+    "usage_subgoal_remove_n": "  Использование: /subgoal remove <n>",
+    "usage_title_your_session_title": "  Использование: /title <your сессия title>",
+    "usage_voice_onoffttsstatus": "Использование: /voice [on|off|tts|status]",
+    "use_history_or_hermes_sessions_list_to_see_availab": "  Use /history or `hermes сессияs list` to see available сессияs.",
+    "use_resume_session_id_or_title_to_continue_where_y": "  Use /resume <сессия id or title> to continue where you left off.",
+    "worktree_branch": "  Ветка: {branch}",
+    "worktree_cleaned": "✓ Worktree очищен: {path}",
+    "worktree_failed": "✗ Не удалось создать worktree: {error}",
+    "yellow_some_tools_disabled_missing_api_keys": "[yellow]⚠️  Some tools disabled (missing API keys):[/]",
+    "you_can_continue_chatting_results_will_appear_when": "  You can continue chatting — results will appear when done.\\n",
+    "your_cli_session_is_intact": "  Your CLI сессия is intact.",
+    "your_cli_session_is_intact_try_handoff_again_or_re": "  Your CLI сессия is intact. Try /handoff again, or /resume on the platform manually.",
+    "worktree_branch": "  Ветка: {branch}",
+    "worktree_unpushed": "\033[33m⚠ Worktree имеет неподтверждённые коммиты, сохраняем: {path}\033[0m",
+    "worktree_cleanup_manual": "  Для ручной очистки: git worktree remove --force {path}",
+    "worktree_cleaned": "\033[32m✓ Worktree очищен: {path}\033[0m",
+    "worktree_failed": "\033[31m✗ Не удалось создать worktree: {error}\033[0m",
+    # Checkpoints / Чекпоинты
+    "checkpoints_not_enabled": "  Чекпоинты не включены.",
+    "checkpoints_enable_with": "  Включите: hermes --checkpoints",
+    "rollback_usage": "  Использование: /rollback diff <N>",
+    "no_changes_since_checkpoint": "  Нет изменений с этого чекпоинта.",
+    "pre_rollback_snapshot_saved": "  Предоткатный снимок состояния сохранён автоматически.",
+    "chat_turn_undone": "  Ход чата отменён для соответствия восстановленному состоянию файлов.",
+    "no_state_snapshots": "  Пока нет снимков состояния.",
+    "create_snapshot_hint": "  Создайте: /snapshot create [метка]",
+    "no_state_files_found": "  Нет файлов состояния для снимка.",
+    "snapshot_restore_usage": "  Использование: /snapshot restore <id-снимка>",
+    "restart_recommended": "  Рекомендуется перезапуск для применения изменений state.db.",
+    "snapshot_prune_usage": "  Использование: /snapshot prune [кол-во]",
+    # Copy/Paste / Копировать/Вставить
+    "nothing_to_copy_yet": "  Нечего копировать пока.",
+    "copy_usage": "  Использование: /copy [номер]",
+    "nothing_to_copy_responses": "  Нечего копировать в ответах ассистента пока.",
+    "nothing_to_copy_response": "  Нечего копировать в этом ответе ассистента.",
+    # Session / Сессия
+    "no_active_session": "  Нет активной сессии агента.",
+    "no_messages_yet": "(._.) В текущем чате пока нет сообщений — вот недавние сессии для возобновления:",
+    "recent_sessions": "  Недавние сессии:",
+    "resume_hint": "  Используйте /resume <id или название сессии> для продолжения.",
+    "no_history_yet": "(._.) История разговора пока пуста.",
+    "conversation_history_title": "(^_^) История разговора",
+    "title_empty_untitled": "  Заголовок пуст после очистки — сессия начата без названия.",
+    "new_session_started": "(^_^)v Новая сессия начата!",
+    "handoff_usage": "  Использование: /handoff <платформа>",
+    "handoff_session_ends": "  CLI-сессия завершается здесь; возобновите позже через /resume.",
+    "sethome_first": "  Сначала установите через /sethome в целевом чате.",
+    "session_in_flight": "  Сессия уже передаётся. Дождитесь завершения, затем повторите.",
+    "session_intact_retry": "  Ваша CLI-сессия сохранена. Попробуйте /handoff снова, или /resume на платформе.",
+    "session_intact": "  Ваша CLI-сессия сохранена.",
+    "resume_usage": "  Использование: /resume <id_или_название_сессии>",
+    # Tools / Инструменты
+    "tools_disabled_missing_keys": "[yellow]⚠️ Некоторые инструменты отключены (нет API-ключей):[/]",
+    "no_tools_available": "(;_;) Нет доступных инструментов",
+    "currently_enabled": "  (*) = сейчас включено",
+    "enable_all_toolsets": " для включения всех наборов инструментов",
+    "example_toolsets": "  Пример: python cli.py --toolsets web,terminal",
+    "tools_section": "\n  [Инструменты]",
+    "compression_disabled": "(._.) Сжатие отключено в конфиге.",
+    "mcp_reload_cancelled": "🟡 /reload-mcp отменён. MCP-инструменты без изменений.",
+    "mcp_reload_timeout": "  ⚠️ Перезагрузка MCP превысила время (30с). Некоторые серверы могли не переподключиться.",
+    # Errors / Ошибки
+    "provider_empty_api_key": "\n⚠️ Resolver провайдера вернул пустой API-ключ.",
+    "provider_empty_base_url": "\n⚠️ Resolver провайдера вернул пустой base URL.",
+    "failed_to_create_job": "(x_x) Не удалось создать задачу: {error}",
+    "failed_to_update_job": "(x_x) Не удалось обновить задачу: {error}",
+    "chrome_not_reachable": "   Статус: ⚠ недоступен (Chrome может быть не запущен)",
+    "chrome_auto_fallback": "   Автоматический резервный режим Chrome для скриншотов и неудачных команд",
+    "config_save_failed": "  Не удалось сохранить настройку runtime_footer в config.yaml",
+    # Success / Успех
+    "saved_to_config_global": "    Сохранено в config.yaml (--global)",
+    "personality_cleared": "(^_^)b Личность сброшена (сохранено в конфиг)",
+    "job_created": "(^_^)b Задача создана: {job}",
+    "chrome_reachable": "   Статус: ✓ доступен",
+    "goal_cleared": "  ✓ Цель сброшена.",
+    # Usage hints / Подсказки использования
+    "handoff_cmd": "  Использование: /handoff <платформа>",
+    "personality_cmd": "  Использование: /personality <название>",
+    "cron_add_usage": "(._.) Использование: /cron add <расписание> <запрос>",
+    "cron_edit_usage": "(._.) Использование: /cron edit <id_задачи> [--schedule ...] [--prompt ...] [--skill ...]",
+    "queue_usage": "  Использование: /queue <запрос>",
+    "steer_usage": "  Использование: /steer <запрос>",
+    "background_usage": "  Использование: /background <запрос>",
+    "background_example": "  Пример: /background Резюмируй топ истории HN сегодня",
+    "subgoal_remove_usage": "  Использование: /subgoal remove <n>",
+    "skin_usage": "\n  Использование: /skin <название>",
+    # Misc / Разное
+    "no_running_bg_processes": "  Нет запущенных фоновых процессов.",
+    "model_section": "  -- Модель --",
+    "terminal_section": "  -- Терминал --",
+    "agent_section": "  -- Агент --",
+    "session_section": "  -- Сессия --",
+    "prompt_caching_enabled": "    Кэширование промптов: включено",
+    "browser_reverted": "   Браузерные инструменты возвращены к режиму по умолчанию (локальный headless или облачный провайдер)",
+    "browser_connect_desc": "   connect      Подключить инструменты браузера к вашей активной сессии Chrome",
 }

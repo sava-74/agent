@@ -97,7 +97,7 @@ if _loaded_env_paths:
     for _env_path in _loaded_env_paths:
         logger.info("Loaded environment variables from %s", _env_path)
 else:
-    logger.info("No .env file found. Using system environment variables.")
+    logger.info("Файл .env не найден. Используются системные переменные окружения.")
 
 
 # Import our tool system
@@ -499,7 +499,7 @@ class AIAgent:
             self._session_db = SessionDB()
             return self._session_db
         except Exception as exc:
-            logger.debug("SessionDB unavailable for recall", exc_info=True)
+            logger.debug("SessionDB недоступна для воспроизведения", exc_info=True)
             return None
 
     def _ensure_db_session(self) -> None:
@@ -594,7 +594,7 @@ class AIAgent:
                         api_mode=self.api_mode,
                     )
         except Exception as err:
-            logger.debug("LM Studio preload skipped: %s", err)
+            logger.debug("Предзагрузка LM Studio пропущена: %s", err)
 
     def switch_model(self, new_model, new_provider, api_key='', base_url='', api_mode=''):
         """Forwarder — see ``agent.agent_runtime_helpers.switch_model``."""
@@ -697,7 +697,7 @@ class AIAgent:
             try:
                 self.status_callback("lifecycle", message)
             except Exception:
-                logger.debug("status_callback error in _emit_status", exc_info=True)
+                logger.debug("Ошибка status_callback в _emit_status", exc_info=True)
 
     def _emit_warning(self, message: str) -> None:
         """Emit a user-visible warning through the same status plumbing.
@@ -714,7 +714,7 @@ class AIAgent:
             try:
                 self.status_callback("warn", message)
             except Exception:
-                logger.debug("status_callback error in _emit_warning", exc_info=True)
+                logger.debug("Ошибка status_callback в _emit_warning", exc_info=True)
 
     # Stream-diagnostic class header preserved for backward compat —
     # actual list lives in ``agent.stream_diag.STREAM_DIAG_HEADERS``.
@@ -1286,7 +1286,7 @@ class AIAgent:
                 )
             self._last_flushed_db_idx = len(messages)
         except Exception as e:
-            logger.warning("Session DB append_message failed: %s", e)
+            logger.warning("Не удалось добавить сообщение в Session DB: %s", e)
 
     def _get_messages_up_to_last_assistant(self, messages: List[Dict]) -> List[Dict]:
         """
@@ -1634,7 +1634,7 @@ class AIAgent:
             try:
                 child.interrupt(message)
             except Exception as e:
-                logger.debug("Failed to propagate interrupt to child agent: %s", e)
+                logger.debug("Не удалось передать прерывание дочернему агенту: %s", e)
         if not self.quiet_mode:
             print("\n⚡ Interrupt requested" + (f": '{message[:40]}...'" if message and len(message) > 40 else f": '{message}'" if message else ""))
 
@@ -1870,9 +1870,9 @@ class AIAgent:
                 return
             if status.upper() == "HIT":
                 self._or_cache_hits += 1
-                logger.info("OpenRouter response cache HIT (total: %d)", self._or_cache_hits)
+                logger.info("Кэш ответов OpenRouter: попадание (всего: %d)", self._or_cache_hits)
             else:
-                logger.debug("OpenRouter response cache %s", status.upper())
+                logger.debug("Кэш ответов OpenRouter: %s", status.upper())
         except Exception:
             pass  # Never let header parsing break the agent loop
 
@@ -2294,7 +2294,7 @@ class AIAgent:
                 seen.add(key)
                 unique.append(tc)
             else:
-                logger.warning("Removed duplicate tool call: %s", tc.function.name)
+                logger.warning("Удалён дубликат вызова инструмента: %s", tc.function.name)
         return unique if len(unique) < len(tool_calls) else tool_calls
 
     def _repair_tool_call(self, tool_name: str) -> str | None:
@@ -2644,7 +2644,7 @@ class AIAgent:
                 ),
             )
         except Exception as exc:
-            logger.debug("Nous credential refresh failed: %s", exc)
+            logger.debug("Обновление учётных данных Nous не удалось: %s", exc)
             return False
 
         api_key = creds.get("api_key")
@@ -2682,7 +2682,7 @@ class AIAgent:
 
             new_token, token_source = resolve_copilot_token()
         except Exception as exc:
-            logger.debug("Copilot credential refresh failed: %s", exc)
+            logger.debug("Обновление учётных данных Copilot не удалось: %s", exc)
             return False
 
         if not isinstance(new_token, str) or not new_token.strip():
@@ -2719,7 +2719,7 @@ class AIAgent:
 
             new_token = resolve_anthropic_token()
         except Exception as exc:
-            logger.debug("Anthropic credential refresh failed: %s", exc)
+            logger.debug("Обновление учётных данных Anthropic не удалось: %s", exc)
             return False
 
         if not isinstance(new_token, str) or not new_token.strip():
@@ -2740,7 +2740,7 @@ class AIAgent:
                 timeout=get_provider_request_timeout(self.provider, self.model),
             )
         except Exception as exc:
-            logger.warning("Failed to rebuild Anthropic client after credential refresh: %s", exc)
+            logger.warning("Не удалось пересоздать клиент Anthropic после обновления учётных данных: %s", exc)
             return False
 
         self._anthropic_api_key = new_token
@@ -2968,7 +2968,7 @@ class AIAgent:
         try:
             cb(visible, already_streamed=already_streamed)
         except Exception:
-            logger.debug("interim_assistant_callback error", exc_info=True)
+            logger.debug("Ошибка interim_assistant_callback", exc_info=True)
 
     def _fire_stream_delta(self, text: str) -> None:
         """Fire all registered stream delta callbacks (display + TTS)."""
@@ -3921,7 +3921,7 @@ def main(
     Toolset Examples:
         - "research": Web search, extract, crawl + vision tools
     """
-    print("🤖 AI Agent with Tool Calling")
+    print("🤖 AI Агент с вызовом инструментов")
     print("=" * 50)
     
     # Handle tool listing
@@ -3929,7 +3929,7 @@ def main(
         from model_tools import get_all_tool_names, get_available_toolsets
         from toolsets import get_all_toolsets, get_toolset_info
         
-        print("📋 Available Tools & Toolsets:")
+        print("📋 Доступные инструменты и наборы:")
         print("-" * 50)
         
         # Show new toolsets system
@@ -3992,18 +3992,18 @@ def main(
             print(f"  📌 {tool_name} (from {toolset})")
         
         print("\n💡 Usage Examples:")
-        print("  # Use predefined toolsets")
+        print("  # Использовать предопределённые наборы")
         print("  python run_agent.py --enabled_toolsets=research --query='search for Python news'")
         print("  python run_agent.py --enabled_toolsets=development --query='debug this code'")
         print("  python run_agent.py --enabled_toolsets=safe --query='analyze without terminal'")
         print("  ")
-        print("  # Combine multiple toolsets")
+        print("  # Комбинировать несколько наборов")
         print("  python run_agent.py --enabled_toolsets=web,vision --query='analyze website'")
         print("  ")
-        print("  # Disable toolsets")
+        print("  # Отключить наборы")
         print("  python run_agent.py --disabled_toolsets=terminal --query='no command execution'")
         print("  ")
-        print("  # Run with trajectory saving enabled")
+        print("  # Запустить с сохранением траекторий")
         print("  python run_agent.py --save_trajectories --query='your question here'")
         return
     
@@ -4013,15 +4013,15 @@ def main(
     
     if enabled_toolsets:
         enabled_toolsets_list = [t.strip() for t in enabled_toolsets.split(",")]
-        print(f"🎯 Enabled toolsets: {enabled_toolsets_list}")
+        print(f"🎯 Включённые наборы: {enabled_toolsets_list}")
     
     if disabled_toolsets:
         disabled_toolsets_list = [t.strip() for t in disabled_toolsets.split(",")]
-        print(f"🚫 Disabled toolsets: {disabled_toolsets_list}")
+        print(f"🚫 Отключённые наборы: {disabled_toolsets_list}")
     
     if save_trajectories:
-        print("💾 Trajectory saving: ENABLED")
-        print("   - Successful conversations → trajectory_samples.jsonl")
+        print("💾 Сохранение траекторий: ВКЛЮЧЕНО")
+        print("   - Успешные диалоги → trajectory_samples.jsonl")
         print("   - Failed conversations → failed_trajectories.jsonl")
     
     # Initialize agent with provided parameters
